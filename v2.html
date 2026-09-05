@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="A Mukutu cria sites, landing pages, hotsites e portais para times de marketing, com Discovery, UX/UI e CMS que o time opera sozinho. Peça seu orçamento.">
 <style>*{box-sizing:border-box}body{margin:0}img{max-width:100%}</style>
 </head>
 <body>
@@ -1223,7 +1222,7 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
   function enviar(identificador){
     if(PROTOTIPO){ console.log('[protótipo] conversão "'+identificador+'" seria enviada ao RD', resp); return; }
     var f = $('rdform');
-    var fd = new FormData();
+    var fd = new URLSearchParams();
     fd.append('token_rdstation', f.token_rdstation.value);
     fd.append('conversion_identifier', TESTE ? IDENT_QA : identificador);
     fd.append('name', resp.nome || '');
@@ -1241,7 +1240,9 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     fd.append('cf_utm_source', $('utm_source').value);
     fd.append('cf_utm_medium', $('utm_medium').value);
     fd.append('cf_utm_campaing', $('utm_campaign').value);
-    fetch(f.action, {method:'POST', body:fd, mode:'no-cors'});
+    /* o RD so aceita GET com query string; POST devolve 404 */
+    fd.append('privacy_data[consent_privacy_policy]', 'true');
+    fetch(f.action + '?' + fd.toString(), {method:'GET', mode:'no-cors', cache:'no-store'});
   }
 
   function avancar(passo){

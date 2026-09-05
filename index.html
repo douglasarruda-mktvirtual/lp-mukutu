@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="A Mukutu cria sites, landing pages, hotsites e portais para times de marketing, com Discovery, UX/UI e CMS que o time opera sozinho. Peça seu orçamento.">
 <style>*{box-sizing:border-box}body{margin:0}img{max-width:100%}</style>
 </head>
 <body>
@@ -925,16 +924,25 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     }
   }
 
+  /* O endpoint do RD aceita GET com query string. POST devolve 404. */
+  function enviarRD(pares){
+    var p = new URLSearchParams();
+    pares.forEach(function(par){ if(par[1]) p.append(par[0], par[1]); });
+    return fetch(form.action + '?' + p.toString(), {method:'GET', mode:'no-cors', cache:'no-store'});
+  }
+
   function enviarParcial(){
     if(PROTOTIPO){ console.log('[protótipo] conversão da etapa 1 seria enviada ao RD agora'); return; }
-    var fd = new FormData();
-    fd.append('token_rdstation', form.token_rdstation.value);
-    fd.append('conversion_identifier', TESTE ? IDENT_QA : 'mukutu-sites-v1-etapa-1');
-    fd.append('name', $('f-nome').value); fd.append('email', $('f-email').value);
-    fd.append('personal_phone', $('f-tel').value); fd.append('cf_nome_da_empresa_0', $('f-empresa').value);
-    fd.append('cf_utm_source', $('utm_source').value); fd.append('cf_utm_medium', $('utm_medium').value);
-    fd.append('cf_utm_campaing', $('utm_campaign').value);
-    fetch(form.action, {method:'POST', body:fd, mode:'no-cors'});
+    enviarRD([
+      ['token_rdstation', form.token_rdstation.value],
+      ['conversion_identifier', TESTE ? IDENT_QA : 'mukutu-sites-v1-etapa-1'],
+      ['internal_source', 'lp-mukutu-sites-v1'],
+      ['name', $('f-nome').value], ['email', $('f-email').value],
+      ['personal_phone', $('f-tel').value], ['cf_nome_da_empresa_0', $('f-empresa').value],
+      ['cf_utm_source', $('utm_source').value], ['cf_utm_medium', $('utm_medium').value],
+      ['cf_utm_campaing', $('utm_campaign').value], ['cf_utm_content', $('utm_content').value],
+      ['privacy_data[consent_privacy_policy]', 'true']
+    ]);
   }
 
   $('toStep2').addEventListener('click', function(){
@@ -960,7 +968,13 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     };
     if(PROTOTIPO){ setTimeout(fim, 550); return; }
     if(TESTE) form.conversion_identifier.value = IDENT_QA;
-    fetch(form.action, {method:'POST', body:new FormData(form), mode:'no-cors'}).then(fim).catch(fim);
+    var pares = [];
+    Array.prototype.forEach.call(form.querySelectorAll('input,select,textarea'), function(e){
+      if(!e.name) return;
+      if((e.type === 'checkbox' || e.type === 'radio') && !e.checked) return;
+      pares.push([e.name, e.value]);
+    });
+    enviarRD(pares).then(fim).catch(fim);
   });
 
   function resumo(){
