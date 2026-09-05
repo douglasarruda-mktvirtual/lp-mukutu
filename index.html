@@ -923,6 +923,16 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     var f = formDoWidget();
     if(!f){ console.warn('[RD] widget indisponível'); return false; }
 
+    /* O formulário do RD não tem os campos de UTM. Injeto como oculto, já que
+       os campos existem na conta. Se o RD ignorar, nada quebra. */
+    ['cf_utm_source','cf_utm_medium','cf_utm_campaing','cf_utm_content'].forEach(function(n){
+      if(!f.querySelector('[name="'+n+'"]')){
+        var i = document.createElement('input');
+        i.type = 'hidden'; i.name = n;
+        f.appendChild(i);
+      }
+    });
+
     Object.keys(dados).forEach(function(nome){
       var valor = dados[nome];
       if(valor === undefined || valor === null || valor === '') return;

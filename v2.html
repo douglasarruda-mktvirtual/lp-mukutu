@@ -806,9 +806,10 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
   };
 
   /* o RD so aceita estes valores em cf_o_que_voce_deseja_2 */
+  /* o formulário do RD hoje só tem estas opções; o que não bate vai para o
+     campo aberto, até as opções serem acrescentadas lá */
   var MAPA_PRODUTO = {
-    'Site':'Site', 'Landing Page':'Landing Page', 'Hotsite':'Hotsite', 'Blog':'Blog',
-    'Portal':'Portal', 'One Page':'Website One Page', 'Evolução do site atual':'Outro (Other)'
+    'Site':'Site', 'Blog':'Blog', 'Portal':'Portal'
   };
 
   var PASSOS = [
@@ -889,6 +890,16 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
   function enviarPeloRD(dados){
     var f = formDoWidget();
     if(!f){ console.warn('[RD] widget indisponível'); return false; }
+
+    /* O formulário do RD não tem os campos de UTM. Injeto como oculto, já que
+       os campos existem na conta. Se o RD ignorar, nada quebra. */
+    ['cf_utm_source','cf_utm_medium','cf_utm_campaing','cf_utm_content'].forEach(function(n){
+      if(!f.querySelector('[name="'+n+'"]')){
+        var i = document.createElement('input');
+        i.type = 'hidden'; i.name = n;
+        f.appendChild(i);
+      }
+    });
 
     Object.keys(dados).forEach(function(nome){
       var valor = dados[nome];
@@ -1137,17 +1148,12 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
   function telaPerfil(){
     var box = el('div','fields');
     box.appendChild(seletor('cargo','Seu cargo', ['Selecione',
-      ['Analista / Assistente de Marketing','Analista / Assistente de Marketing (Analyst / Marketing Assistant)'],
-      ['Gerente de Marketing','Gerente de Marketing (Marketing Manager)'],
-      ['Sócio / Diretor / CEO','Sócio / Diretor / CEO (Partner / Director / CEO)'],
-      ['Gerente de Tecnologia','Gerente de Tecnologia (Technology Manager)'],
-      ['Marketing / Assistente de Tecnologia','Marketing / Assistente de Tecnologia (Marketing / Technology Assistant)'],
-      ['Compras / Suprimentos / Procurement','Compras / Suprimentos / Procurement (Purchases / Supplies / Procurement)'],
+      'Analista / Assistente de Marketing','Gerente de Marketing','Sócio / Diretor / CEO',
+      'Analista de Tecnologia','Gerente de Tecnologia','Compras / Suprimentos / Procurement',
       'Outros cargos']));
     box.appendChild(seletor('investimento','Investimento previsto', ['Selecione',
-      ['De R$ 50.000 a R$ 150.000','De R$ 50.000 a R$ 150.000 (From $9,709 to $29,126)'],
-      ['De R$ 150.000 a R$ 300.000','De R$ 150.000 a R$ 300.000 (From $29,126 to $58,252)'],
-      ['Acima de R$ 300.000','Acima de R$ 300.000 (Above $58,252)']]));
+      'Até R$9.500','De R$9.500 a R$20.000','De R$20.000 a R$45.000',
+      'De R$45.000 a R$80.000','De R$80.000 a R$150.000','A partir de R$150.000']));
     var h = el('span','hint','Não é obrigatório. Se ainda não sabe, siga sem marcar que a gente dimensiona junto.');
     box.appendChild(h);
 
@@ -1300,17 +1306,22 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
 
   function enviar(identificador){
     if(PROTOTIPO){ console.log('[protótipo] conversão "' + identificador + '" seria enviada ao RD', resp); return; }
+    /* nomes conforme o formulário real do RD (lidos do widget em 05/09) */
+    var produtos = (resp.produto || []).map(function(p){ return MAPA_PRODUTO[p] || p; });
+    var semOpcao = (resp.produto || []).filter(function(p){ return !MAPA_PRODUTO[p]; });
+    var texto = resp.desafio || '';
+    if(semOpcao.length) texto = (texto ? texto + ' ' : '') + '[Também pediu: ' + semOpcao.join(', ') + ']';
     enviarPeloRD({
       name: resp.nome, email: resp.email,
-      personal_phone: resp.telefone, cf_nome_da_empresa_0: resp.empresa,
-      'cf_o_que_voce_deseja_2[]': (resp.produto || []).map(function(p){ return MAPA_PRODUTO[p] || 'Outro (Other)'; }),
-      cf_qual_seu_cargo_2: resp.cargo,
-      cf_investimento_4: resp.investimento,
+      personal_phone: resp.telefone, company: resp.empresa,
+      'cf_o_que_voce_deseja_software_house[]': produtos.filter(Boolean),
+      job_title: resp.cargo,
+      cf_investimento_software_house: resp.investimento,
       cf_quando_pretende_comecar: resp.prazo,
       cf_situacao_do_site: resp.situacao,
       cf_quem_publica_conteudo: resp.publica,
       cf_integracao_necessaria: resp.integra,
-      cf_descreva_o_que_voce_busca_em_um_fornecedor_especialista_1: resp.desafio,
+      cf_descreva_o_que_voce_busca_em_um_fornecedor_especialista_1: texto,
       cf_utm_source: $('utm_source').value, cf_utm_medium: $('utm_medium').value,
       cf_utm_campaing: $('utm_campaign').value, cf_utm_content: $('utm_content').value
     });
