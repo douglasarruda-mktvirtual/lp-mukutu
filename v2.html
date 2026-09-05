@@ -702,9 +702,16 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
 <script>
 (function(){
   "use strict";
-  /* PROTOTIPO = true -> envio simulado (o preview bloqueia requisição externa).
-     Na publicação: trocar para false e preencher token_rdstation. */
-  var PROTOTIPO = true;
+  /* ENVIO AO RD STATION
+     Por padrão o envio é SIMULADO, para nenhum aprovador criar lead sem querer.
+     Com ?teste=1 na URL o envio é REAL, porém num ativo de QA separado
+     (conversion_identifier "mukutu-sites-qa"), para não sujar a métrica das
+     páginas de verdade. Recomendação da própria planilha do levantamento.
+     Em produção: trocar ENVIO_REAL_SEMPRE para true. */
+  var ENVIO_REAL_SEMPRE = false;
+  var TESTE = new URLSearchParams(location.search).get('teste') === '1';
+  var PROTOTIPO = !(ENVIO_REAL_SEMPRE || TESTE);
+  var IDENT_QA = 'mukutu-sites-qa';
 
   var $ = function(id){ return document.getElementById(id); };
   var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1186,7 +1193,7 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     var f = $('rdform');
     var fd = new FormData();
     fd.append('token_rdstation', f.token_rdstation.value);
-    fd.append('conversion_identifier', identificador);
+    fd.append('conversion_identifier', TESTE ? IDENT_QA : identificador);
     fd.append('name', resp.nome || '');
     fd.append('email', resp.email || '');
     fd.append('personal_phone', resp.telefone || '');

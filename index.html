@@ -719,9 +719,16 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
 <script>
 (function(){
   "use strict";
-  /* PROTOTIPO = true -> envio simulado (o preview bloqueia requisição externa).
-     Na publicação: trocar para false e preencher token_rdstation. Nada mais muda. */
-  var PROTOTIPO = true;
+  /* ENVIO AO RD STATION
+     Por padrão o envio é SIMULADO, para nenhum aprovador criar lead sem querer.
+     Com ?teste=1 na URL o envio é REAL, porém num ativo de QA separado
+     (conversion_identifier "mukutu-sites-qa"), para não sujar a métrica das
+     páginas de verdade. Recomendação da própria planilha do levantamento.
+     Em produção: trocar ENVIO_REAL_SEMPRE para true. */
+  var ENVIO_REAL_SEMPRE = false;
+  var TESTE = new URLSearchParams(location.search).get('teste') === '1';
+  var PROTOTIPO = !(ENVIO_REAL_SEMPRE || TESTE);
+  var IDENT_QA = 'mukutu-sites-qa';
 
   var $ = function(id){ return document.getElementById(id); };
   var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -919,7 +926,7 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     if(PROTOTIPO){ console.log('[protótipo] conversão da etapa 1 seria enviada ao RD agora'); return; }
     var fd = new FormData();
     fd.append('token_rdstation', form.token_rdstation.value);
-    fd.append('conversion_identifier', 'mukutu-sites-v1-etapa-1');
+    fd.append('conversion_identifier', TESTE ? IDENT_QA : 'mukutu-sites-v1-etapa-1');
     fd.append('name', $('f-nome').value); fd.append('email', $('f-email').value);
     fd.append('personal_phone', $('f-tel').value); fd.append('cf_nome_da_empresa_0', $('f-empresa').value);
     fd.append('cf_utm_source', $('utm_source').value); fd.append('cf_utm_medium', $('utm_medium').value);
@@ -949,6 +956,7 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
       done.scrollIntoView({behavior: reduz ? 'auto':'smooth', block:'center'});
     };
     if(PROTOTIPO){ setTimeout(fim, 550); return; }
+    if(TESTE) form.conversion_identifier.value = IDENT_QA;
     fetch(form.action, {method:'POST', body:new FormData(form), mode:'no-cors'}).then(fim).catch(fim);
   });
 
