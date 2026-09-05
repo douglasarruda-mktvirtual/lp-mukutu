@@ -831,7 +831,7 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     {id:'contato',  tipo:'contato',
      h:'Para onde mandamos o escopo?', p:'A partir daqui os projetos desta página também abrem.'},
     {id:'perfil',   tipo:'perfil',
-     h:'Só mais duas coisas', p:'São elas que permitem chegar num número honesto.'},
+     h:'Falta pouco', p:'Estas respostas é que permitem chegar num número honesto.'},
     {id:'fim',      tipo:'fim'}
   ];
   var TOTAL = PASSOS.length - 1;
@@ -1072,6 +1072,18 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
       ['Acima de R$ 300.000','Acima de R$ 300.000 (Above $58,252)']]));
     var h = el('span','hint','Não é obrigatório. Se ainda não sabe, siga sem marcar que a gente dimensiona junto.');
     box.appendChild(h);
+
+    /* campo aberto: quem preenche converte 4,8x mais (dado dos 407 leads da base) */
+    var f = el('div','field');
+    var l = el('label', null, 'Quer contar mais alguma coisa?'); l.setAttribute('for','desafio');
+    f.appendChild(l);
+    var ta = document.createElement('textarea');
+    ta.id = 'desafio';
+    ta.placeholder = 'Ex: nosso site não é atualizável pelo time e cada landing page depende da TI.';
+    ta.value = resp.desafio || '';
+    ta.addEventListener('input', function(){ resp.desafio = ta.value.trim(); });
+    f.appendChild(ta);
+    box.appendChild(f);
     return box;
   }
 
@@ -1221,11 +1233,11 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     (resp.produto || []).forEach(function(p){ fd.append('cf_o_que_voce_deseja_2[]', MAPA_PRODUTO[p] || 'Outro (Other)'); });
     if(resp.cargo)        fd.append('cf_qual_seu_cargo_2', resp.cargo);
     if(resp.investimento) fd.append('cf_investimento_4', resp.investimento);
-    if(resp.prazo)        fd.append('cf_quando_comecar', resp.prazo);
-    if(resp.situacao || resp.publica || resp.integra){
-      fd.append('cf_descreva_o_que_voce_busca_em_um_fornecedor_especialista_1',
-        'Situação: ' + (resp.situacao||'n/d') + '. Publica: ' + (resp.publica||'n/d') + '. Integração: ' + (resp.integra||'n/d') + '.');
-    }
+    if(resp.prazo)    fd.append('cf_quando_pretende_comecar', resp.prazo);
+    if(resp.situacao) fd.append('cf_situacao_do_site', resp.situacao);
+    if(resp.publica)  fd.append('cf_quem_publica_conteudo', resp.publica);
+    if(resp.integra)  fd.append('cf_integracao_necessaria', resp.integra);
+    if(resp.desafio)  fd.append('cf_descreva_o_que_voce_busca_em_um_fornecedor_especialista_1', resp.desafio);
     fd.append('cf_utm_source', $('utm_source').value);
     fd.append('cf_utm_medium', $('utm_medium').value);
     fd.append('cf_utm_campaing', $('utm_campaign').value);
