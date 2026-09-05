@@ -442,9 +442,12 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
                 <label for="f-cargo">Seu cargo</label>
                 <select id="f-cargo" name="cf_qual_seu_cargo_2">
                   <option value="">Selecione</option>
-                  <option>Analista / Assistente de Marketing</option><option>Gerente de Marketing</option>
-                  <option>Sócio / Diretor / CEO</option><option>Analista de Tecnologia</option>
-                  <option>Gerente de Tecnologia</option><option>Compras / Suprimentos / Procurement</option>
+                  <option value="Analista / Assistente de Marketing (Analyst / Marketing Assistant)">Analista / Assistente de Marketing</option>
+                  <option value="Gerente de Marketing (Marketing Manager)">Gerente de Marketing</option>
+                  <option value="Sócio / Diretor / CEO (Partner / Director / CEO)">Sócio / Diretor / CEO</option>
+                  <option value="Gerente de Tecnologia (Technology Manager)">Gerente de Tecnologia</option>
+                  <option value="Marketing / Assistente de Tecnologia (Marketing / Technology Assistant)">Marketing / Assistente de Tecnologia</option>
+                  <option value="Compras / Suprimentos / Procurement (Purchases / Supplies / Procurement)">Compras / Suprimentos / Procurement</option>
                   <option>Outros cargos</option>
                 </select>
                 <span class="err" data-err="f-cargo"></span>
@@ -457,8 +460,8 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
                   <label class="chip"><input type="checkbox" name="cf_o_que_voce_deseja_2[]" value="Hotsite"><span>Hotsite</span></label>
                   <label class="chip"><input type="checkbox" name="cf_o_que_voce_deseja_2[]" value="Blog"><span>Blog</span></label>
                   <label class="chip"><input type="checkbox" name="cf_o_que_voce_deseja_2[]" value="Portal"><span>Portal</span></label>
-                  <label class="chip"><input type="checkbox" name="cf_o_que_voce_deseja_2[]" value="One Page"><span>One Page</span></label>
-                  <label class="chip"><input type="checkbox" name="cf_o_que_voce_deseja_2[]" value="Evolução de site atual"><span>Evolução do site atual</span></label>
+                  <label class="chip"><input type="checkbox" name="cf_o_que_voce_deseja_2[]" value="Website One Page"><span>One Page</span></label>
+                  <label class="chip"><input type="checkbox" name="cf_o_que_voce_deseja_2[]" value="Outro (Other)"><span>Evolução do site atual</span></label>
                 </div>
                 <span class="err" data-err="chips"></span>
               </div>
@@ -466,11 +469,11 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
                 <label for="f-inv">Investimento previsto</label>
                 <select id="f-inv" name="cf_investimento_4">
                   <option value="">Selecione</option>
-                  <option>Até R$ 15.000</option><option>De R$ 15.000 a R$ 50.000</option>
-                  <option>De R$ 50.000 a R$ 150.000</option><option>Acima de R$ 150.000</option>
-                  <option>Ainda não sei</option>
+                  <option value="De R$ 50.000 a R$ 150.000 (From $9,709 to $29,126)">De R$ 50.000 a R$ 150.000</option>
+                  <option value="De R$ 150.000 a R$ 300.000 (From $29,126 to $58,252)">De R$ 150.000 a R$ 300.000</option>
+                  <option value="Acima de R$ 300.000 (Above $58,252)">Acima de R$ 300.000</option>
                 </select>
-                <span class="hint">Se ainda não sabe, marque a última. A gente ajuda a dimensionar.</span>
+                <span class="hint">Não é obrigatório. Se ainda não sabe, siga sem marcar que a gente dimensiona junto.</span>
               </div>
               <div class="field">
                 <label for="f-prazo">Quando pretende começar</label>

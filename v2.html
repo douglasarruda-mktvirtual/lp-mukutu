@@ -806,6 +806,12 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     'Em 1 a 3 meses':              {t:'É a janela em que dá para fazer Discovery, protótipo e desenvolvimento sem atropelar nenhuma etapa.', c:'Nita Produtos'}
   };
 
+  /* o RD so aceita estes valores em cf_o_que_voce_deseja_2 */
+  var MAPA_PRODUTO = {
+    'Site':'Site', 'Landing Page':'Landing Page', 'Hotsite':'Hotsite', 'Blog':'Blog',
+    'Portal':'Portal', 'One Page':'Website One Page', 'Evolução do site atual':'Outro (Other)'
+  };
+
   var PASSOS = [
     {id:'produto',  tipo:'multi', max:4, col:false,
      h:'O que você precisa construir?', p:'Escolha até quatro.',
@@ -1037,8 +1043,12 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     var l = el('label', null, rot); l.setAttribute('for', id); f.appendChild(l);
     var s = document.createElement('select'); s.id = id;
     ops.forEach(function(o){
+      var rotulo = Array.isArray(o) ? o[0] : o;
+      var valor  = Array.isArray(o) ? o[1] : o;
       var op = document.createElement('option');
-      op.value = (o === 'Selecione') ? '' : o; op.textContent = o; s.appendChild(op);
+      op.value = (rotulo === 'Selecione') ? '' : valor;
+      op.textContent = rotulo;
+      s.appendChild(op);
     });
     if(resp[id]) s.value = resp[id];
     s.addEventListener('change', function(){ resp[id] = s.value; });
@@ -1048,9 +1058,19 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
 
   function telaPerfil(){
     var box = el('div','fields');
-    box.appendChild(seletor('cargo','Seu cargo', ['Selecione','Analista / Assistente de Marketing','Gerente de Marketing','Sócio / Diretor / CEO','Analista de Tecnologia','Gerente de Tecnologia','Compras / Suprimentos / Procurement','Outros cargos']));
-    box.appendChild(seletor('investimento','Investimento previsto', ['Selecione','Até R$ 15.000','De R$ 15.000 a R$ 50.000','De R$ 50.000 a R$ 150.000','Acima de R$ 150.000','Ainda não sei']));
-    var h = el('span','hint','Se ainda não sabe, marque a última. A gente ajuda a dimensionar.');
+    box.appendChild(seletor('cargo','Seu cargo', ['Selecione',
+      ['Analista / Assistente de Marketing','Analista / Assistente de Marketing (Analyst / Marketing Assistant)'],
+      ['Gerente de Marketing','Gerente de Marketing (Marketing Manager)'],
+      ['Sócio / Diretor / CEO','Sócio / Diretor / CEO (Partner / Director / CEO)'],
+      ['Gerente de Tecnologia','Gerente de Tecnologia (Technology Manager)'],
+      ['Marketing / Assistente de Tecnologia','Marketing / Assistente de Tecnologia (Marketing / Technology Assistant)'],
+      ['Compras / Suprimentos / Procurement','Compras / Suprimentos / Procurement (Purchases / Supplies / Procurement)'],
+      'Outros cargos']));
+    box.appendChild(seletor('investimento','Investimento previsto', ['Selecione',
+      ['De R$ 50.000 a R$ 150.000','De R$ 50.000 a R$ 150.000 (From $9,709 to $29,126)'],
+      ['De R$ 150.000 a R$ 300.000','De R$ 150.000 a R$ 300.000 (From $29,126 to $58,252)'],
+      ['Acima de R$ 300.000','Acima de R$ 300.000 (Above $58,252)']]));
+    var h = el('span','hint','Não é obrigatório. Se ainda não sabe, siga sem marcar que a gente dimensiona junto.');
     box.appendChild(h);
     return box;
   }
@@ -1198,7 +1218,7 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     fd.append('email', resp.email || '');
     fd.append('personal_phone', resp.telefone || '');
     fd.append('cf_nome_da_empresa_0', resp.empresa || '');
-    (resp.produto || []).forEach(function(p){ fd.append('cf_o_que_voce_deseja_2[]', p); });
+    (resp.produto || []).forEach(function(p){ fd.append('cf_o_que_voce_deseja_2[]', MAPA_PRODUTO[p] || 'Outro (Other)'); });
     if(resp.cargo)        fd.append('cf_qual_seu_cargo_2', resp.cargo);
     if(resp.investimento) fd.append('cf_investimento_4', resp.investimento);
     if(resp.prazo)        fd.append('cf_quando_comecar', resp.prazo);
