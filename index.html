@@ -872,6 +872,85 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     });
   })();
 
+
+  /* =========================================================
+     PONTE COM O WIDGET OFICIAL DO RD STATION
+     Nosso formulário é o da tela. Quem faz a chamada ao RD é o
+     código do próprio RD, num formulário invisível. Assim não
+     dependemos de engenharia reversa do protocolo deles, e ainda
+     herdamos o reCAPTCHA e o rastreio do RD.
+     Para trocar de ativo, basta trocar RD_FORM_ID pelo id que o
+     RD dá em Formulários > Ver código.
+     ========================================================= */
+  var RD_FORM_ID = 'mukutu-sites-qa-d20286274c7dc8f285ac';
+  var RD_GA_ID   = 'UA-235377-3';
+
+  function formDoWidget(){
+    var c = document.getElementById(RD_FORM_ID);
+    return c ? c.querySelector('form') : null;
+  }
+
+  (function carregarWidget(){
+    if(document.getElementById('rd-oculto')) return;
+    var caixa = document.createElement('div');
+    caixa.id = 'rd-oculto';
+    caixa.setAttribute('aria-hidden', 'true');
+    caixa.style.cssText = 'position:absolute;left:-9999px;top:0;width:640px;height:1px;overflow:hidden;';
+    var alvo = document.createElement('div');
+    alvo.setAttribute('role', 'main');
+    alvo.id = RD_FORM_ID;
+    caixa.appendChild(alvo);
+
+    /* o envio do widget cai neste iframe, então a nossa página não navega */
+    var saco = document.createElement('iframe');
+    saco.name = 'rd-sink'; saco.id = 'rd-sink';
+    saco.style.cssText = 'width:1px;height:1px;border:0;';
+    caixa.appendChild(saco);
+    document.body.appendChild(caixa);
+
+    var s = document.createElement('script');
+    s.src = 'https://d335luupugsy2.cloudfront.net/js/rdstation-forms/stable/rdstation-forms.min.js';
+    s.onload = function(){
+      try { new RDStationForms(RD_FORM_ID, RD_GA_ID).createForm(); }
+      catch(e){ console.warn('[RD] createForm falhou', e); }
+    };
+    s.onerror = function(){ console.warn('[RD] script do widget não carregou'); };
+    document.head.appendChild(s);
+  })();
+
+  /* Preenche o formulário do RD com os nossos valores e manda ELE enviar. */
+  function enviarPeloRD(dados){
+    var f = formDoWidget();
+    if(!f){ console.warn('[RD] widget indisponível'); return false; }
+
+    Object.keys(dados).forEach(function(nome){
+      var valor = dados[nome];
+      if(valor === undefined || valor === null || valor === '') return;
+      var campos = f.querySelectorAll('[name="' + nome + '"]');
+      if(!campos.length) return;
+      if(campos[0].type === 'checkbox'){
+        var lista = [].concat(valor);
+        Array.prototype.forEach.call(campos, function(c){
+          if(lista.indexOf(c.value) > -1){ c.checked = true; c.dispatchEvent(new Event('change', {bubbles:true})); }
+        });
+      } else {
+        campos[0].value = valor;
+        campos[0].dispatchEvent(new Event('input', {bubbles:true}));
+        campos[0].dispatchEvent(new Event('change', {bubbles:true}));
+      }
+    });
+
+    var consent = f.querySelector('[name="privacy_data[consent]"]');
+    if(consent && !consent.checked){ consent.checked = true; consent.dispatchEvent(new Event('change', {bubbles:true})); }
+
+    f.target = 'rd-sink';
+    var botao = f.querySelector('button[type=submit], input[type=submit]');
+    if(!botao){ var bs = f.querySelectorAll('button'); botao = bs[bs.length - 1]; }
+    if(botao){ botao.click(); return true; }
+    f.submit();
+    return true;
+  }
+
   /* ---------- formulário ---------- */
   var form = $('lpform'), step1 = $('step1'), step2 = $('step2'), done = $('done');
   var GRATUITOS = ['gmail.com','hotmail.com','outlook.com','yahoo.com','yahoo.com.br','icloud.com','bol.com.br','uol.com.br','live.com'];
@@ -933,6 +1012,14 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
 
   function enviarParcial(){
     if(PROTOTIPO){ console.log('[protótipo] conversão da etapa 1 seria enviada ao RD agora'); return; }
+    enviarPeloRD({
+      name: $('f-nome').value, email: $('f-email').value,
+      personal_phone: $('f-tel').value, cf_nome_da_empresa_0: $('f-empresa').value,
+      cf_utm_source: $('utm_source').value, cf_utm_medium: $('utm_medium').value,
+      cf_utm_campaing: $('utm_campaign').value, cf_utm_content: $('utm_content').value
+    });
+    return;
+    /* fallback antigo, mantido desativado para referência */
     enviarRD([
       ['token_rdstation', form.token_rdstation.value],
       ['conversion_identifier', TESTE ? IDENT_QA : 'mukutu-sites-v1-etapa-1'],
@@ -968,13 +1055,16 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     };
     if(PROTOTIPO){ setTimeout(fim, 550); return; }
     if(TESTE) form.conversion_identifier.value = IDENT_QA;
-    var pares = [];
+    var dados = {};
     Array.prototype.forEach.call(form.querySelectorAll('input,select,textarea'), function(e){
-      if(!e.name) return;
+      if(!e.name || e.name.indexOf('emP7y') === 0) return;
       if((e.type === 'checkbox' || e.type === 'radio') && !e.checked) return;
-      pares.push([e.name, e.value]);
+      if(e.name === 'cf_o_que_voce_deseja_2[]'){
+        dados[e.name] = (dados[e.name] || []).concat(e.value);
+      } else { dados[e.name] = e.value; }
     });
-    enviarRD(pares).then(fim).catch(fim);
+    enviarPeloRD(dados);
+    setTimeout(fim, 900);
   });
 
   function resumo(){
