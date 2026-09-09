@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<style>*{box-sizing:border-box}body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+<title>Mukutu Monte Seu Projeto Digital</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap">
+
+<style>
+/* ==========================================================================
+   LP Mukutu · criação de sites, landing pages e hotsites
+   Pele oficial: metodo/marcas/mukutu/tokens.json (KV V2 2026)
+   Tema único escuro por decisão de marca. Logos, imagens de case e links
+   vieram de mukutu.com.br. Nenhum KPI inventado.
+   ========================================================================== */
+:root{
+  --bg:#19191E; --bg-alt:#1D1E20; --surface:#24252C; --surface-2:#2B2C34;
+  --fg:#FFFFFF; --bone:#EAE5D3; --dim:#9DA1AA;
+  --primary:#386167; --verde:#108F8C; --verde-claro:#6CC2BA;
+  --accent:#F5DD71; --border:#3A3C40; --hair:#43444E;
+  --r:24px; --pill:9999px; --maxw:1200px;
+  --e:cubic-bezier(.16,.68,.32,1);
+}
+*,*::before,*::after{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--bone);
+  font-family:"Raleway","Helvetica Neue",Arial,sans-serif;
+  font-size:17px; line-height:1.5; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img{max-width:100%; display:block;}
+a{color:inherit; text-decoration:none;}
+::selection{background:var(--accent); color:var(--bg);}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px;}
+
+.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:24px; position:relative; z-index:2;}
+.band{padding-block:104px; position:relative;}
+.band--alt{background:var(--bg-alt);}
+
+h1,h2,h3,h4{margin:0; text-wrap:balance; font-weight:700; letter-spacing:-.045em; line-height:1.04;}
+h1{font-size:clamp(34px,4.9vw,58px);}
+h2{font-size:clamp(30px,4.4vw,50px);}
+h3{font-size:clamp(19px,2.1vw,24px); letter-spacing:-.03em;}
+p{margin:0;}
+.tese{
+  font-size:clamp(17px,1.75vw,21px); line-height:1.45; font-weight:600;
+  color:var(--fg); letter-spacing:-.02em; max-width:32ch;
+  border-left:2px solid var(--accent); padding-left:18px;
+}
+.lead{font-size:clamp(16.5px,1.5vw,19px); line-height:1.55; color:var(--bone); font-weight:400; max-width:56ch;}
+.body{font-size:16px; line-height:1.62; color:var(--dim); max-width:64ch;}
+.eyebrow{font-size:12px; font-weight:600; letter-spacing:.17em; text-transform:uppercase; color:var(--verde-claro); margin:0;}
+.sec-head{display:flex; flex-direction:column; gap:16px; max-width:66ch; margin-bottom:56px;}
+
+.lz{width:9px; height:9px; flex:0 0 9px; rotate:45deg; background:var(--accent); margin-top:8px;}
+.lz--v{background:var(--verde-claro);}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:inherit; font-size:16px; font-weight:600;
+  padding:15px 28px; border-radius:var(--pill); border:1px solid transparent; cursor:pointer;
+  transition:transform .24s var(--e), background-color .24s var(--e), border-color .24s var(--e);
+}
+.btn--accent{background:var(--accent); color:var(--bg);}
+.btn--accent:hover{background:#F9E894; transform:translateY(-2px);}
+.btn--ghost{background:transparent; color:var(--bone); border-color:var(--hair);}
+.btn--ghost:hover{border-color:var(--bone); transform:translateY(-2px);}
+.btn--full{width:100%;}
+.btn[disabled]{opacity:.45; cursor:not-allowed; transform:none;}
+
+/* ========================= NAV ========================= */
+.nav{position:sticky; top:0; z-index:60; background:rgba(25,25,30,.82); backdrop-filter:blur(14px); border-bottom:1px solid transparent; transition:border-color .3s var(--e);}
+.nav.stuck{border-bottom-color:var(--border);}
+.nav-in{max-width:var(--maxw); margin-inline:auto; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:20px;}
+.wordmark{display:flex; align-items:center; gap:11px; font-weight:800; font-size:20px; letter-spacing:-.035em; color:var(--fg);}
+.wordmark .dot{width:15px; height:15px; border-radius:50%; background:var(--accent);}
+.nav-links{display:flex; align-items:center; gap:30px;}
+.nav-links a{font-size:14.5px; color:var(--dim); transition:color .2s var(--e);}
+.nav-links a:hover{color:var(--bone);}
+.nav .btn{padding:11px 22px; font-size:14.5px;}
+
+/* ========================= HERÓI ========================= */
+.hero{padding-block:64px 88px; position:relative; overflow:hidden;}
+.orbit{position:absolute; inset:0; pointer-events:none; z-index:0;}
+.orbit i{position:absolute; border-radius:50%; display:block;}
+.orbit .o1{width:660px; height:660px; border:1px solid var(--bone); opacity:.09; left:-300px; top:-230px;}
+.orbit .o2{width:420px; height:420px; border:1px solid var(--verde-claro); opacity:.14; right:-170px; top:120px;}
+.orbit .o3{width:150px; height:150px; background:var(--primary); opacity:.30; left:41%; top:-80px;}
+@media (prefers-reduced-motion:no-preference){
+  .orbit .o1{animation:drift 26s ease-in-out infinite alternate;}
+  .orbit .o2{animation:drift 19s ease-in-out infinite alternate-reverse;}
+  .orbit .o3{animation:drift 23s ease-in-out infinite alternate;}
+  }
+@keyframes drift{from{transform:translate3d(0,0,0);} to{transform:translate3d(38px,-30px,0);}}
+@keyframes bob{from{transform:translateY(0);} to{transform:translateY(-24px);}}
+
+.hero-grid{display:grid; grid-template-columns:1.02fr .98fr; gap:60px; align-items:center;}
+.hero-copy{display:flex; flex-direction:column; gap:26px; padding-top:12px; min-width:0;}
+.hero-top,.hero-bottom{display:flex; flex-direction:column; gap:26px; min-width:0;}
+/* no celular o formulário sobe: título, tese, formulário, e só depois o resto */
+@media (max-width:1040px){
+  .hero-copy{display:contents;}
+  .hero-top{order:1;} .hero-form{order:2;} .hero-bottom{order:3;}
+}
+
+.hero h1 em{font-style:normal; color:var(--accent);}
+.hero h1 .ln{display:block; overflow:hidden;}
+.hero h1 .ln > span{display:block;}
+@media (prefers-reduced-motion:no-preference){
+  .hero h1 .ln > span{animation:up .72s var(--e) both;}
+  .hero h1 .ln:nth-child(2) > span{animation-delay:.09s;}
+  .hero h1 .ln:nth-child(3) > span{animation-delay:.18s;}
+  .hero .anim{animation:fade .7s var(--e) .3s both;}
+  .hero .card{animation:fade .8s var(--e) .16s both;}
+}
+@keyframes up{from{transform:translateY(105%);} to{transform:translateY(0);}}
+@keyframes fade{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;}}
+
+.hero-points{display:flex; flex-direction:column; gap:12px; margin:0; padding:0; list-style:none;}
+.hero-points li{display:flex; gap:13px; font-size:16px; color:var(--bone);}
+
+.hero-proof{display:flex; flex-direction:column; gap:16px; border-top:1px solid var(--border); padding-top:22px;}
+.hero-proof .cap{font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); font-weight:600;}
+.hero-logos{width:100%; max-width:100%;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);
+}
+.track{display:flex; align-items:center; gap:52px; width:max-content;}
+@media (prefers-reduced-motion:no-preference){ .track{animation:slide 38s linear infinite;} }
+.hero-logos:hover .track{animation-play-state:paused;}
+@keyframes slide{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+.track img{height:27px; width:auto; opacity:.5; filter:brightness(0) invert(1); transition:opacity .3s var(--e); flex:0 0 auto;}
+.track img:hover{opacity:1;}
+
+/* ========================= DESAFIO ========================= */
+.pains{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r); overflow:hidden;}
+.pain{background:var(--bg-alt); padding:34px 30px; display:flex; flex-direction:column; gap:12px; transition:background-color .3s var(--e);}
+.pain:hover{background:var(--surface);}
+.pain h3{font-size:19px; color:var(--fg); line-height:1.25;}
+.pain p{font-size:15px; color:var(--dim); line-height:1.55;}
+
+/* ========================= O PADRÃO (extensão do trabalho) ========================= */
+.padrao{display:grid; grid-template-columns:.92fr 1.08fr; gap:60px; align-items:start;}
+.padrao-tese{display:flex; flex-direction:column; gap:18px; position:sticky; top:96px;}
+.caps{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r); overflow:hidden;}
+.capc{background:var(--bg); padding:28px 26px; display:flex; flex-direction:column; gap:11px; transition:background-color .3s var(--e);}
+.capc:hover{background:var(--surface);}
+.capc h3{font-size:17.5px; color:var(--fg); line-height:1.25;}
+.capc p{font-size:14px; color:var(--dim); line-height:1.55; flex:1;}
+.capc .quem{
+  display:flex; align-items:center; gap:9px; margin-top:5px; padding-top:13px;
+  border-top:1px solid var(--border);
+  font-size:12px; letter-spacing:.11em; text-transform:uppercase; font-weight:600; color:var(--verde-claro);
+}
+@media (max-width:1040px){
+  .padrao{grid-template-columns:1fr; gap:44px;}
+  .padrao-tese{position:static;}
+}
+@media (max-width:720px){ .caps{grid-template-columns:1fr;} }
+
+/* ========================= CASES ========================= */
+.grid-cases{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.pcard{position:relative; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--hair); border-radius:var(--r); overflow:hidden; transition:border-color .3s var(--e), transform .3s var(--e);}
+.pcard:hover{border-color:var(--verde-claro); transform:translateY(-4px);}
+.pcard .shot{position:relative; aspect-ratio:1000/620; overflow:hidden; background:var(--bg); border-bottom:1px solid var(--hair);}
+.pcard .shot img{width:100%; height:100%; object-fit:cover; transition:transform .6s var(--e);}
+.pcard:hover .shot img{transform:scale(1.045);}
+
+/* ---- trava: libera depois do cadastro ---- */
+.pcard .shot::after{
+  content:""; position:absolute; inset:0; background:rgba(25,25,30,.52);
+  transition:opacity .45s var(--e); z-index:1;
+}
+.lockpill{
+  position:absolute; left:50%; top:50%; translate:-50% -50%; z-index:2;
+  display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+  background:var(--bg); border:1px solid var(--hair); border-radius:var(--pill);
+  padding:9px 16px; font-size:12.5px; font-weight:600; color:var(--bone);
+  transition:opacity .35s var(--e), border-color .3s var(--e);
+}
+.pcard:hover .lockpill{border-color:var(--accent);}
+.lockpill svg{flex:0 0 auto;}
+body.unlocked .pcard .shot::after,
+body.unlocked .lockpill{opacity:0; pointer-events:none;}
+.pcard.aponta{border-color:var(--accent);}
+.pcard[data-url]{cursor:pointer;}
+
+/* ---- pop-up do formulário ---- */
+.modal[hidden]{display:none;}
+.modal{
+  position:fixed; inset:0; z-index:90; display:flex; align-items:flex-start; justify-content:center;
+  padding:28px 20px; overflow-y:auto; background:rgba(12,12,15,.78); backdrop-filter:blur(6px);
+}
+.modal-box{
+  width:100%; max-width:520px; margin:auto; position:relative;
+  animation:pop .34s var(--e) both;
+}
+@keyframes pop{from{opacity:0; transform:translateY(16px) scale(.985);} to{opacity:1; transform:none;}}
+.modal-top{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:14px;}
+.modal-top .ttl{display:flex; flex-direction:column; gap:5px;}
+.modal-top .ttl span{font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); font-weight:700;}
+.modal-top .ttl b{font-size:19px; color:var(--fg); font-weight:700; letter-spacing:-.03em;}
+.xbtn{
+  flex:0 0 auto; width:36px; height:36px; border-radius:50%; cursor:pointer;
+  background:var(--surface); border:1px solid var(--hair); color:var(--bone);
+  display:flex; align-items:center; justify-content:center; transition:border-color .2s var(--e);
+}
+.xbtn:hover{border-color:var(--bone);}
+body.modal-open{overflow:hidden;}
+.gate-note{
+  display:none; align-items:center; gap:11px; margin-bottom:20px; padding:13px 16px;
+  border:1px solid var(--hair); border-left:3px solid var(--accent); border-radius:12px;
+  background:var(--bg); font-size:13.5px; color:var(--bone); line-height:1.45;
+}
+.gate-note.on{display:flex;}
+.liberado{
+  display:none; align-items:center; gap:10px; justify-content:center; margin-top:26px;
+  font-size:13.5px; font-weight:600; color:var(--verde-claro);
+}
+body.unlocked .liberado{display:flex;}
+.pcard .txt{padding:24px; display:flex; flex-direction:column; gap:11px; flex:1;}
+.pcard .sector{font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--verde-claro); font-weight:600;}
+.pcard h3{font-size:21px; color:var(--fg);}
+.pcard p{font-size:14.5px; color:var(--dim); line-height:1.55; flex:1;}
+.pcard .go{display:inline-flex; align-items:center; gap:8px; font-size:13.5px; font-weight:600; color:var(--accent); padding-top:4px;}
+.pcard .go svg{transition:transform .24s var(--e);}
+.pcard:hover .go svg{transform:translate(3px,-3px);}
+
+/* ========================= PROCESSO ========================= */
+.flow{position:relative; display:grid; grid-template-columns:repeat(5,1fr); gap:26px;}
+.flow::before{content:""; position:absolute; left:0; right:0; top:19px; height:1px; background:var(--border);}
+.flow::after{content:""; position:absolute; left:0; top:19px; height:1px; background:var(--accent); width:0; transition:width 1.5s var(--e);}
+.flow.in::after{width:100%;}
+.fstep{position:relative; display:flex; flex-direction:column; gap:12px;}
+.fstep .bead{width:38px; height:38px; border-radius:50%; background:var(--bg-alt); border:1px solid var(--hair); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--accent); position:relative; z-index:2;}
+.fstep h3{font-size:17px; color:var(--fg);}
+.fstep p{font-size:14px; color:var(--dim); line-height:1.5;}
+
+/* ========================= FORMULÁRIO ========================= */
+.card{background:var(--surface); border:1px solid var(--hair); border-radius:var(--r); padding:32px;}
+.card-head{display:flex; flex-direction:column; gap:8px; margin-bottom:22px;}
+.card-head h3{color:var(--fg);}
+.card-head p{font-size:14px; color:var(--dim);}
+.steps{display:flex; align-items:center; gap:12px; margin-bottom:22px;}
+.steps .bar{height:3px; flex:1; background:var(--border); border-radius:2px; overflow:hidden;}
+.steps .bar i{display:block; height:100%; width:0%; background:var(--accent); transition:width .42s var(--e);}
+.steps .n{font-size:11.5px; font-weight:600; letter-spacing:.11em; text-transform:uppercase; color:var(--dim); white-space:nowrap;}
+.fields{display:flex; flex-direction:column; gap:15px;}
+.field{display:flex; flex-direction:column; gap:7px;}
+.field > label{font-size:13px; font-weight:600; color:var(--bone);}
+.field .hint{font-size:12px; color:var(--dim);}
+input[type=text],input[type=email],input[type=tel],select,textarea{
+  font-family:inherit; font-size:15px; color:var(--fg);
+  background:var(--bg); border:1px solid var(--hair); border-radius:12px;
+  padding:13px 14px; width:100%; transition:border-color .2s var(--e);
+}
+textarea{resize:vertical; min-height:78px;}
+select{appearance:none; background-image:linear-gradient(45deg,transparent 50%,var(--dim) 50%),linear-gradient(135deg,var(--dim) 50%,transparent 50%); background-position:calc(100% - 19px) 21px,calc(100% - 14px) 21px; background-size:5px 5px,5px 5px; background-repeat:no-repeat; padding-right:40px;}
+input::placeholder,textarea::placeholder{color:#6C707A;}
+input:focus,select:focus,textarea:focus{border-color:var(--verde-claro); outline:none;}
+input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#E8846B;}
+.err{font-size:12px; color:#E8846B;}
+.chips{display:flex; flex-wrap:wrap; gap:9px;}
+.chip{position:relative;}
+.chip input{position:absolute; opacity:0; inset:0; width:100%; height:100%; margin:0; cursor:pointer;}
+.chip span{display:block; padding:9px 16px; border-radius:var(--pill); border:1px solid var(--hair); font-size:14px; font-weight:500; color:var(--dim); transition:all .2s var(--e); user-select:none;}
+.chip input:checked + span{background:var(--primary); border-color:var(--primary); color:var(--bone);}
+.chip input:focus-visible + span{outline:2px solid var(--accent); outline-offset:2px;}
+.chip input:disabled + span{opacity:.35;}
+.consent{display:flex; gap:11px; align-items:flex-start; font-size:12.5px; color:var(--dim); line-height:1.45;}
+.consent input{margin-top:2px; accent-color:var(--accent); width:15px; height:15px; flex:0 0 15px;}
+.consent a{color:var(--bone); text-decoration:underline;}
+.card-foot{margin-top:22px; display:flex; flex-direction:column; gap:12px;}
+.backlink{background:none; border:none; font-family:inherit; font-size:13px; color:var(--dim); cursor:pointer; padding:4px; align-self:center;}
+.backlink:hover{color:var(--bone);}
+.microcopy{font-size:12px; color:var(--dim); text-align:center;}
+.step[hidden]{display:none;}
+.done{display:flex; flex-direction:column; gap:16px;}
+.done .mark{width:44px; height:44px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center;}
+.done h3{color:var(--fg);}
+.scope{border:1px solid var(--hair); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:9px; margin:0;}
+.scope .line{display:flex; justify-content:space-between; gap:16px; font-size:13.5px;}
+.scope .line dt{color:var(--dim);} .scope .line dd{margin:0; color:var(--bone); font-weight:600; text-align:right;}
+
+/* ========================= FECHO ========================= */
+.close-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center;}
+.close-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:12px;}
+footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; color:var(--dim);}
+.foot-row{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;}
+.sticky{position:fixed; left:0; right:0; bottom:0; z-index:70; display:none; padding:12px 16px calc(12px + env(safe-area-inset-bottom)); background:rgba(25,25,30,.95); backdrop-filter:blur(12px); border-top:1px solid var(--hair);}
+.sticky .btn{width:100%;}
+
+/* ========================= REVEAL ========================= */
+.js .reveal{opacity:0; transform:translateY(20px); transition:opacity .55s var(--e), transform .55s var(--e);}
+.js .reveal.in{opacity:1; transform:none;}
+.js .stagger > *{opacity:0; transform:translateY(18px); transition:opacity .5s var(--e), transform .5s var(--e);}
+.js .stagger.in > *{opacity:1; transform:none;}
+.js .stagger.in > *:nth-child(2){transition-delay:.07s;}
+.js .stagger.in > *:nth-child(3){transition-delay:.14s;}
+.js .stagger.in > *:nth-child(4){transition-delay:.21s;}
+.js .stagger.in > *:nth-child(5){transition-delay:.28s;}
+.js .stagger.in > *:nth-child(6){transition-delay:.35s;}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  .js .reveal,.js .stagger > *{opacity:1 !important; transform:none !important;}
+  .flow::after{width:100% !important;}
+}
+
+/* ========================= RESPONSIVO ========================= */
+@media (max-width:1040px){
+  .hero-grid{grid-template-columns:1fr; gap:48px;}
+  .grid-cases{grid-template-columns:repeat(2,1fr);}
+  .close-grid{grid-template-columns:1fr; gap:36px;}
+  .flow{grid-template-columns:repeat(3,1fr); gap:32px 26px;}
+  .flow::before,.flow::after{display:none;}
+}
+@media (max-width:720px){
+  .band{padding-block:72px;}
+  .hero{padding-block:40px 68px;}
+  .nav-links{display:none;}
+  .pains{grid-template-columns:1fr;}
+  .grid-cases{grid-template-columns:1fr;}
+  .flow{grid-template-columns:1fr; gap:26px;}
+  .card{padding:26px 22px;}
+  .sticky{display:block;}
+  body{padding-bottom:76px;}
+  .orbit .o1{width:380px; height:380px; left:-190px; top:-130px;}
+  .orbit .o2,.orbit .o3,  .track{gap:38px;} .track img{height:23px;}
+}
+
+/* ========================= QUIZ (V3) ========================= */
+.quiz{background:var(--surface); border:1px solid var(--hair); border-radius:var(--r); padding:32px;}
+.quiz-topo{display:flex; align-items:center; gap:12px; margin-bottom:22px;}
+.quiz-topo .passo{font-size:11.5px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--accent); white-space:nowrap;}
+.quiz-topo .rot{font-size:11.5px; font-weight:600; letter-spacing:.11em; text-transform:uppercase; color:var(--dim); white-space:nowrap;}
+.quiz-topo .trilho{flex:1; height:3px; background:var(--border); border-radius:2px; overflow:hidden;}
+.quiz-topo .trilho i{display:block; height:100%; width:25%; background:var(--accent); transition:width .45s var(--e);}
+.quiz-head{display:flex; flex-direction:column; gap:8px; margin-bottom:20px;}
+.quiz-head h3{color:var(--fg); font-size:clamp(20px,2.3vw,25px);}
+.quiz-head p{font-size:14px; color:var(--dim);}
+.quiz-tela{animation:qin .34s var(--e) both;}
+@keyframes qin{from{opacity:0; transform:translateX(14px);} to{opacity:1; transform:none;}}
+
+.cenarios{display:flex; flex-direction:column; gap:10px;}
+.cenario{
+  display:flex; flex-direction:column; gap:4px; text-align:left; cursor:pointer;
+  font-family:inherit; background:var(--bg); border:1px solid var(--hair);
+  border-radius:16px; padding:16px 18px; transition:all .2s var(--e);
+}
+.cenario:hover{border-color:var(--verde-claro); transform:translateY(-1px);}
+.cenario[aria-pressed="true"]{background:var(--primary); border-color:var(--primary);}
+.cenario b{font-size:16px; font-weight:700; color:var(--fg); letter-spacing:-.02em;}
+.cenario span{font-size:13.5px; color:var(--dim);}
+.cenario[aria-pressed="true"] span{color:var(--bone);}
+
+.dupla{display:grid; grid-template-columns:1fr 1fr; gap:15px;}
+@media (max-width:520px){ .dupla{grid-template-columns:1fr;} }
+.quiz-pe{margin-top:24px; display:flex; align-items:center; gap:12px;}
+.quiz-pe .btn{flex:1;}
+.quiz-voltar{background:none; border:none; font-family:inherit; font-size:13.5px; color:var(--dim); cursor:pointer; padding:10px 6px;}
+.quiz-voltar:hover{color:var(--bone);}
+.quiz-micro{font-size:12px; color:var(--dim); text-align:center; margin-top:12px;}
+.quiz-ok{display:flex; flex-direction:column; gap:16px;}
+.quiz-ok .selo{width:44px; height:44px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center;}
+
+/* ========================= ANCORAGEM QUE TROCA (V4) ========================= */
+.anc-troca{animation:ancIn .42s var(--e) both;}
+@keyframes ancIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.anc-lista{display:flex; flex-direction:column; gap:12px; margin:0; padding:0; list-style:none;}
+.anc-lista li{display:flex; gap:13px; font-size:15.5px; color:var(--bone);}
+.anc-nomes{display:flex; flex-wrap:wrap; gap:8px 20px;}
+.anc-nomes span{font-size:15px; font-weight:600; color:var(--dim); letter-spacing:-.015em;}
+.anc-cap{font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); font-weight:600; margin-bottom:12px; display:block;}
+</style>
+
+<script>document.documentElement.classList.add('js');</script>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="wordmark" href="#topo"><span class="dot"></span>mukutu</a>
+    <a class="btn btn--accent" href="#orcamento">Pedir orçamento</a>
+  </div>
+</header>
+
+<!-- ===================== HERÓI ===================== -->
+<section class="hero" id="topo">
+  <div class="orbit" id="orbit"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <div class="hero-copy">
+        <div class="hero-top">
+          <p class="eyebrow anim" id="ancEyebrow">Sites, landing pages, hotsites e portais</p>
+          <h1 id="h1">
+            <span class="ln"><span>Criação de sites,</span></span>
+            <span class="ln"><span><em>landing pages e hotsites.</em></span></span>
+          </h1>
+          <p class="tese anim" id="ancTese">
+            Somos a opção certa para o objetivo da sua empresa, e a que o seu time
+            consegue operar depois que o site sobe.
+          </p>
+        </div>
+
+        <div class="hero-bottom" id="ancProva"></div>
+
+      <!-- ============ QUIZ DE 4 PASSOS ============ -->
+      <div class="hero-form" id="orcamento">
+        <div class="quiz">
+          <div class="quiz-topo" id="quizTopo">
+            <span class="passo" id="quizPasso">Passo 1 de 4</span>
+            <span class="rot" id="quizRot">Cenário atual</span>
+            <span class="trilho"><i id="quizTrilho"></i></span>
+          </div>
+          <div id="quizSlot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="https://www.mukutu.com.br" target="_blank" rel="noopener">Mukutu · Criação e desenvolvimento de produtos digitais</a>
+    <a href="https://www.mukutu.com.br/politicas-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
+  </div>
+</footer>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTtl">
+  <div class="modal-box">
+    <div class="modal-top">
+      <span class="ttl"><span id="modalEyebrow">Projeto travado</span><b id="modalTtl">Preencha para abrir</b></span>
+      <button class="xbtn" id="modalX" type="button" aria-label="Fechar">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div id="modalSlot"></div>
+  </div>
+</div>
+
+
+<div hidden aria-hidden="true">
+  <input type="hidden" id="utm_source"><input type="hidden" id="utm_medium">
+  <input type="hidden" id="utm_campaign"><input type="hidden" id="utm_content">
+</div>
+
+<div class="sticky"><a class="btn btn--accent" href="#orcamento">Pedir orçamento</a></div>
+
+<script>
+(function(){
+  "use strict";
+  /* ENVIO AO RD STATION
+     Padrão simulado. Com ?teste=1 na URL o envio é REAL, no ativo de QA.
+     Em produção: ENVIO_REAL_SEMPRE = true. */
+  var ENVIO_REAL_SEMPRE = false;
+  var TESTE = new URLSearchParams(location.search).get('teste') === '1';
+  var PROTOTIPO = !(ENVIO_REAL_SEMPRE || TESTE);
+
+  var $ = function(id){ return document.getElementById(id); };
+  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var qs = new URLSearchParams(location.search);
+
+  /* ---------- nav ---------- */
+  var nav = $('nav');
+  var onScroll = function(){ nav.classList.toggle('stuck', window.scrollY > 8); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* ---------- parallax das formas ---------- */
+  var orbit = $('orbit');
+  if(orbit && !reduz && window.matchMedia('(pointer:fine)').matches){
+    var tx=0, ty=0, raf=null;
+    window.addEventListener('mousemove', function(e){
+      tx = (e.clientX / window.innerWidth - .5) * 16;
+      ty = (e.clientY / window.innerHeight - .5) * 16;
+      if(!raf) raf = requestAnimationFrame(function(){
+        orbit.style.transform = 'translate3d('+tx+'px,'+ty+'px,0)'; raf = null;
+      });
+    }, {passive:true});
+  }
+
+  /* ---------- marquee ---------- */
+  var track = $('track');
+  track.innerHTML = track.innerHTML + track.innerHTML;
+
+  /* ---------- UTM da URL ---------- */
+  ['source','medium','campaign','content'].forEach(function(k){
+    var el = $('utm_' + k); if(el) el.value = qs.get('utm_' + k) || '';
+  });
+  function utm(k){ var e = $('utm_' + k); return e ? e.value : ''; }
+
+  /* ---------- H1 espelha o grupo de anúncio ---------- */
+  var H1 = {
+    'empresa-de-criacao-de-site':      ['Empresa de criação de sites,','landing pages e hotsites.'],
+    'criacao-de-site':                 ['Criação de sites,','landing pages e hotsites.'],
+    'desenvolvimento-de-website':      ['Desenvolvimento de websites,','landing pages e hotsites.'],
+    'criacao-de-landing-page':         ['Criação de landing pages','no ritmo da sua campanha.'],
+    'desenvolvimento-de-landing-page': ['Desenvolvimento de landing pages','no ritmo da sua campanha.'],
+    'no-code':                         ['Desenvolvimento em No-Code','e Low-Code, publicado mais rápido.'],
+    'hotsite':                         ['Criação de hotsites','para a sua campanha.'],
+    'portal':                          ['Desenvolvimento de portais','e áreas logadas.']
+  };
+  /* =========================================================
+     PONTE COM O WIDGET OFICIAL DO RD STATION
+     Nossa interface é a da tela. Quem chama o RD é o código do
+     próprio RD, num formulário invisível. Troque RD_FORM_ID pelo
+     id que o RD dá em Formulários > Ver código.
+     ========================================================= */
+  var RD_FORM_ID = 'mukutu-sites-qa-d20286274c7dc8f285ac';
+  var RD_GA_ID   = 'UA-235377-3';
+
+  function formDoWidget(){
+    var c = document.getElementById(RD_FORM_ID);
+    return c ? c.querySelector('form') : null;
+  }
+
+  (function carregarWidget(){
+    var caixa = document.createElement('div');
+    caixa.id = 'rd-oculto';
+    caixa.setAttribute('aria-hidden', 'true');
+    caixa.style.cssText = 'position:absolute;left:-9999px;top:0;width:640px;height:1px;overflow:hidden;';
+    var alvo = document.createElement('div');
+    alvo.setAttribute('role', 'main'); alvo.id = RD_FORM_ID;
+    caixa.appendChild(alvo);
+    var saco = document.createElement('iframe');
+    saco.name = 'rd-sink'; saco.id = 'rd-sink';
+    saco.style.cssText = 'width:1px;height:1px;border:0;';
+    caixa.appendChild(saco);
+    document.body.appendChild(caixa);
+
+    var s = document.createElement('script');
+    s.src = 'https://d335luupugsy2.cloudfront.net/js/rdstation-forms/stable/rdstation-forms.min.js';
+    s.onload = function(){
+      try { new RDStationForms(RD_FORM_ID, RD_GA_ID).createForm(); }
+      catch(e){ console.warn('[RD] createForm falhou', e); }
+    };
+    s.onerror = function(){ console.warn('[RD] script do widget não carregou'); };
+    document.head.appendChild(s);
+  })();
+
+  function enviarPeloRD(dados){
+    var f = formDoWidget();
+    if(!f){ console.warn('[RD] widget indisponível'); return false; }
+
+    /* o formulário do RD não traz os campos de UTM; injeto como oculto */
+    ['cf_utm_source','cf_utm_medium','cf_utm_campaing','cf_utm_content'].forEach(function(n){
+      if(!f.querySelector('[name="'+n+'"]')){
+        var i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.appendChild(i);
+      }
+    });
+
+    Object.keys(dados).forEach(function(nome){
+      var valor = dados[nome];
+      if(valor === undefined || valor === null || valor === '') return;
+      var campos = f.querySelectorAll('[name="' + nome + '"]');
+      if(!campos.length) return;
+      if(campos[0].type === 'checkbox'){
+        var lista = [].concat(valor);
+        Array.prototype.forEach.call(campos, function(c){
+          if(lista.indexOf(c.value) > -1){ c.checked = true; c.dispatchEvent(new Event('change', {bubbles:true})); }
+        });
+      } else {
+        campos[0].value = valor;
+        campos[0].dispatchEvent(new Event('input', {bubbles:true}));
+        campos[0].dispatchEvent(new Event('change', {bubbles:true}));
+      }
+    });
+
+    var consent = f.querySelector('[name="privacy_data[consent]"]');
+    if(consent && !consent.checked){ consent.checked = true; consent.dispatchEvent(new Event('change', {bubbles:true})); }
+
+    f.target = 'rd-sink';
+    var botao = f.querySelector('button[type=submit], input[type=submit]');
+    if(!botao){ var bs = f.querySelectorAll('button'); botao = bs[bs.length - 1]; }
+    if(botao){ botao.click(); return true; }
+    f.submit(); return true;
+  }
+
+  function enviar(parcial){
+    if(PROTOTIPO){ console.log('[protótipo] conversão' + (parcial ? ' parcial' : ' completa') + ' iria ao RD', resp); return; }
+    enviarPeloRD({
+      name: [resp.nome, resp.sobrenome].filter(Boolean).join(' '),
+      email: resp.email,
+      company: resp.empresa,
+      personal_phone: resp.whatsapp,
+      cf_situacao_do_site: resp.cenario,
+      cf_descreva_o_que_voce_busca_em_um_fornecedor_especialista_1: resp.projeto,
+      cf_utm_source: utm('source'), cf_utm_medium: utm('medium'),
+      cf_utm_campaing: utm('campaign'), cf_utm_content: utm('content')
+    });
+  }
+
+
+  /* =========================================================
+     ANCORAGEM: a coluna da esquerda muda a cada passo.
+     Toda prova aqui é real (clientes e projetos da Mukutu).
+     Nenhum depoimento inventado: a casa não tem depoimento
+     registrado da Mukutu, então não existe aspas fabricada.
+     ========================================================= */
+  var LOGOS_HTML = $('track') ? $('track').parentNode.parentNode.innerHTML : '';
+
+  var ANCORAS = [
+    {
+      eyebrow: 'Sites, landing pages, hotsites e portais',
+      h1: ['Criação de sites,', 'landing pages e hotsites.'],
+      tese: 'Somos a opção certa para o objetivo da sua empresa, e a que o seu time consegue operar depois que o site sobe.',
+      prova: 'logos'
+    },
+    {
+      eyebrow: 'Quem já construiu com a gente',
+      h1: ['Times de marketing', 'que não podem errar.'],
+      tese: 'Albert Einstein, Inteli, Mercosul Line, Box Delivery, Nita e WAAW by Alok confiaram na Mukutu o produto digital deles.',
+      prova: 'logos'
+    },
+    {
+      eyebrow: 'Como o projeto nasce',
+      h1: ['Nenhuma tela', 'nasce de chute.'],
+      tese: 'O projeto começa no problema de negócio, não no layout. Por isso a gente pergunta antes de propor.',
+      prova: ['Discovery e arquitetura de informação antes de qualquer decisão visual.',
+              'Protótipo navegável aprovado antes da primeira linha de código.',
+              'CMS que o marketing publica sozinho, sem depender de fila de TI.']
+    },
+    {
+      eyebrow: 'O que acontece agora',
+      h1: ['Um especialista responde', 'em até um dia útil.'],
+      tese: 'A conversa começa pelo escopo, não pelo preço. Sem proposta genérica e sem robô no meio.',
+      prova: ['O que precisa ser construído, e se substitui algo que já existe.',
+              'Quem vai publicar conteúdo depois que o site subir.',
+              'Que sistemas precisam conversar com a página.',
+              'Qual a data que não pode ser furada.']
+    },
+    {
+      eyebrow: 'Recebido',
+      h1: ['Seu projeto', 'está com a gente.'],
+      tese: 'Enquanto isso, dá para ver o que a Mukutu já construiu, tudo no ar e aberto para você abrir agora.',
+      prova: 'projetos'
+    }
+  ];
+
+  var PROJETOS = [
+    {n:'Nita Produtos',   u:'https://nita.com.br'},
+    {n:'Mercosul Line',   u:'https://www.mercosul-line.com.br'},
+    {n:'Albert Einstein', u:'https://www.einstein.br/saudemental'},
+    {n:'WAAW by Alok',    u:'https://caixasdesom.waaw.com.br/'},
+    {n:'Box Delivery',    u:'https://boxdelivery.com.br/'},
+    {n:'Inteli',          u:'https://www.inteli.edu.br/'}
+  ];
+
+  /* o H1 do passo 1 pode ser trocado pelo grupo de anúncio */
+  (function(){
+    var linhas = H1[(qs.get('utm_content') || '').trim().toLowerCase()];
+    if(linhas) ANCORAS[0].h1 = linhas;
+  })();
+
+  function pintarH1(linhas){
+    var h = $('h1'); h.innerHTML = '';
+    linhas.forEach(function(txt, n){
+      var fora = document.createElement('span'); fora.className = 'ln';
+      var dentro = document.createElement('span');
+      if(n === linhas.length - 1){ var em = document.createElement('em'); em.textContent = txt; dentro.appendChild(em); }
+      else { dentro.textContent = txt; }
+      fora.appendChild(dentro); h.appendChild(fora);
+    });
+  }
+
+  function ancorar(n){
+    var a = ANCORAS[Math.max(0, Math.min(n, ANCORAS.length - 1))];
+    var topo = $('ancEyebrow').parentNode;
+    var prova = $('ancProva');
+
+    $('ancEyebrow').textContent = a.eyebrow;
+    pintarH1(a.h1);
+    var tese = a.tese;
+    if(n === 4 && resp.nome) tese = resp.nome + ', ' + tese.charAt(0).toLowerCase() + tese.slice(1);
+    $('ancTese').textContent = tese;
+
+    prova.innerHTML = '';
+    if(a.prova === 'logos'){
+      prova.innerHTML = LOGOS_HTML;
+      var t = prova.querySelector('.track');
+      if(t) t.id = 'track';
+    } else if(a.prova === 'projetos'){
+      var cap = document.createElement('span'); cap.className = 'anc-cap';
+      cap.textContent = 'Projetos no ar, abra e veja';
+      prova.appendChild(cap);
+      var box = document.createElement('div'); box.className = 'anc-nomes';
+      PROJETOS.forEach(function(p){
+        var link = document.createElement('a');
+        link.href = p.u; link.target = '_blank'; link.rel = 'noopener';
+        link.style.cssText = 'font-size:15px;font-weight:600;color:var(--accent);letter-spacing:-.015em;';
+        link.textContent = p.n;
+        box.appendChild(link);
+      });
+      prova.appendChild(box);
+    } else {
+      var ul = document.createElement('ul'); ul.className = 'anc-lista';
+      a.prova.forEach(function(txt){
+        var li = document.createElement('li');
+        var lz = document.createElement('span'); lz.className = 'lz';
+        var sp = document.createElement('span'); sp.textContent = txt;
+        li.appendChild(lz); li.appendChild(sp); ul.appendChild(li);
+      });
+      prova.appendChild(ul);
+    }
+
+    topo.classList.remove('anc-troca'); prova.classList.remove('anc-troca');
+    void topo.offsetWidth;
+    if(!reduz){ topo.classList.add('anc-troca'); prova.classList.add('anc-troca'); }
+  }
+
+  /* =========================================================
+     O QUIZ, quatro passos
+     ========================================================= */
+  var CENARIOS = [
+    {v:'É do zero',                  t:'Criar um site ou página novo',    d:'Da estratégia ao site no ar'},
+    {v:'Existe, e quero refazer',    t:'Refazer o que já existe',         d:'Estrutura, performance e indexação do zero'},
+    {v:'Existe, e quero evoluir',    t:'Evoluir o site continuamente',    d:'Backlog, SEO e páginas novas com o seu time'}
+  ];
+  var ROTULOS = ['Cenário atual', 'Vamos te conhecer', 'Seu projeto', 'Contato'];
+  var resp = {};
+  var passo = 0;
+  var slot = $('quizSlot');
+
+  function el(tag, cls, txt){
+    var e = document.createElement(tag);
+    if(cls) e.className = cls;
+    if(txt != null) e.textContent = txt;
+    return e;
+  }
+  function campo(id, rotulo, tipo, ph, auto){
+    var f = el('div','field');
+    var l = el('label', null, rotulo); l.setAttribute('for', id); f.appendChild(l);
+    var i = document.createElement('input');
+    i.type = tipo; i.id = id; i.placeholder = ph || '';
+    if(auto) i.autocomplete = auto;
+    if(tipo === 'tel') i.inputMode = 'tel';
+    if(resp[id]) i.value = resp[id];
+    f.appendChild(i);
+    var e = el('span','err'); e.setAttribute('data-err', id); f.appendChild(e);
+    return f;
+  }
+
+  function ir(n){
+    passo = Math.max(0, Math.min(n, 4));
+    ancorar(passo);
+    var fim = passo === 4;
+    $('quizPasso').textContent = fim ? 'Pronto' : ('Passo ' + (passo + 1) + ' de 4');
+    $('quizRot').textContent = fim ? 'Recebido' : ROTULOS[passo];
+    $('quizTrilho').style.width = (fim ? 100 : (passo + 1) * 25) + '%';
+    slot.innerHTML = '';
+    var tela = el('div','quiz-tela');
+
+    if(passo === 0){
+      tela.appendChild(cabeca('O parceiro certo para o seu projeto digital',
+        'A Mukutu constrói sites, landing pages, hotsites e portais com Discovery, UX/UI e desenvolvimento próprio.'));
+      var box = el('div','cenarios');
+      CENARIOS.forEach(function(c){
+        var b = el('button','cenario'); b.type = 'button';
+        b.setAttribute('aria-pressed', resp.cenario === c.v ? 'true' : 'false');
+        b.appendChild(el('b', null, c.t));
+        b.appendChild(el('span', null, c.d));
+        b.addEventListener('click', function(){ resp.cenario = c.v; ir(1); });
+        box.appendChild(b);
+      });
+      tela.appendChild(box);
+      slot.appendChild(tela);
+      return;
+    }
+
+    if(passo === 1){
+      tela.appendChild(cabeca('Vamos te conhecer melhor', null));
+      var fs = el('div','fields');
+      var dupla = el('div','dupla');
+      dupla.appendChild(campo('q-nome','Nome','text','Informe seu nome','given-name'));
+      dupla.appendChild(campo('q-sobrenome','Sobrenome','text','Informe seu sobrenome','family-name'));
+      fs.appendChild(dupla);
+      fs.appendChild(campo('q-email','E-mail corporativo','email','voce@suaempresa.com.br','email'));
+      tela.appendChild(fs);
+      slot.appendChild(tela);
+      rodape('Continuar');
+      return;
+    }
+
+    if(passo === 2){
+      tela.appendChild(cabeca('Conte sobre o seu projeto', 'Quanto mais contexto, melhor preparamos a conversa.'));
+      var f2 = el('div','field');
+      var l2 = el('label', null, 'Sobre o que vamos conversar?'); l2.setAttribute('for','q-projeto');
+      f2.appendChild(l2);
+      var ta = document.createElement('textarea');
+      ta.id = 'q-projeto';
+      ta.placeholder = 'Conte um pouco mais (mín. 10 caracteres)';
+      ta.value = resp.projeto || '';
+      f2.appendChild(ta);
+      var e2 = el('span','err'); e2.setAttribute('data-err','q-projeto'); f2.appendChild(e2);
+      tela.appendChild(f2);
+      slot.appendChild(tela);
+      rodape('Continuar');
+      return;
+    }
+
+    if(passo === 3){
+      tela.appendChild(cabeca('Onde a gente te encontra', null));
+      var fs3 = el('div','fields');
+      fs3.appendChild(campo('q-empresa','Empresa','text','Nome da sua empresa','organization'));
+      fs3.appendChild(campo('q-whatsapp','WhatsApp','tel','(11) 11111-1111','tel'));
+      var c3 = el('label','consent');
+      var chk = document.createElement('input'); chk.type = 'checkbox'; chk.id = 'q-optin';
+      var sp = document.createElement('span');
+      sp.innerHTML = 'Concordo com a <a href="https://www.mukutu.com.br/politicas-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a> e em receber contato da Mukutu sobre este projeto.';
+      c3.appendChild(chk); c3.appendChild(sp); fs3.appendChild(c3);
+      var e3 = el('span','err'); e3.setAttribute('data-err','q-optin'); fs3.appendChild(e3);
+      tela.appendChild(fs3);
+      slot.appendChild(tela);
+      rodape('Pedir orçamento');
+      mascaraTel();
+      return;
+    }
+
+    /* passo 4: recebido */
+    var nome = (resp.nome || '').trim();
+    var ok = el('div','quiz-ok');
+    var selo = el('span','selo');
+    selo.innerHTML = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#19191E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    ok.appendChild(selo);
+    ok.appendChild(el('h3', null, nome ? (nome + ', recebemos seu projeto') : 'Recebemos seu projeto'));
+    ok.appendChild(el('p','body', 'Um especialista da Mukutu responde em até um dia útil, com as perguntas certas para dimensionar. Nada de proposta genérica.'));
+    var cta = document.createElement('a');
+    cta.className = 'btn btn--accent';
+    cta.textContent = 'Conhecer os projetos da Mukutu';
+    cta.href = 'https://www.mukutu.com.br/#cases';
+    cta.target = '_blank'; cta.rel = 'noopener';
+    ok.appendChild(cta);
+    tela.appendChild(ok);
+    slot.appendChild(tela);
+  }
+
+  function cabeca(titulo, sub){
+    var h = el('div','quiz-head');
+    h.appendChild(el('h3', null, titulo));
+    if(sub) h.appendChild(el('p', null, sub));
+    return h;
+  }
+
+  function rodape(rotulo){
+    var pe = el('div','quiz-pe');
+    var v = el('button','quiz-voltar','Voltar'); v.type = 'button';
+    v.addEventListener('click', function(){ ir(passo - 1); });
+    pe.appendChild(v);
+    var a = document.createElement('button');
+    a.type = 'button'; a.className = 'btn btn--accent'; a.textContent = rotulo;
+    a.addEventListener('click', avancar);
+    pe.appendChild(a);
+    slot.querySelector('.quiz-tela').appendChild(pe);
+    if(passo === 3){
+      var m = el('p','quiz-micro','Sem spam. O contato é sobre o seu projeto.');
+      slot.querySelector('.quiz-tela').appendChild(m);
+    }
+  }
+
+  function mascaraTel(){
+    var t = $('q-whatsapp');
+    if(!t) return;
+    t.addEventListener('input', function(e){
+      var d = e.target.value.replace(/\D/g,'').slice(0,11), o = d;
+      if(d.length > 2) o = '('+d.slice(0,2)+') '+d.slice(2);
+      if(d.length > 7) o = '('+d.slice(0,2)+') '+d.slice(2, d.length>10?7:6)+'-'+d.slice(d.length>10?7:6);
+      e.target.value = o;
+    });
+  }
+
+  var GRATUITOS = ['gmail.com','hotmail.com','outlook.com','yahoo.com','yahoo.com.br','icloud.com','bol.com.br','uol.com.br','live.com'];
+  function setErr(id, msg){
+    var e = $(id), slotErr = slot.querySelector('[data-err="'+id+'"]');
+    if(slotErr) slotErr.textContent = msg || '';
+    if(e) e.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+
+  function avancar(){
+    if(passo === 1){
+      var ok = true;
+      if($('q-nome').value.trim().length < 2){ setErr('q-nome','Informe seu nome.'); ok = false; } else setErr('q-nome');
+      if($('q-sobrenome').value.trim().length < 2){ setErr('q-sobrenome','Informe seu sobrenome.'); ok = false; } else setErr('q-sobrenome');
+      var v = $('q-email').value.trim().toLowerCase();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ setErr('q-email','Informe um e-mail válido.'); ok = false; }
+      else if(GRATUITOS.indexOf(v.split('@')[1]) > -1){ setErr('q-email','Use o e-mail da sua empresa. É por ele que a gente responde.'); ok = false; }
+      else setErr('q-email');
+      if(!ok){ var bad = slot.querySelector('[aria-invalid="true"]'); if(bad) bad.focus(); return; }
+      resp.nome = $('q-nome').value.trim();
+      resp.sobrenome = $('q-sobrenome').value.trim();
+      resp.email = $('q-email').value.trim();
+      enviar(true);   /* já temos nome e e-mail: o lead entra aqui */
+      ir(2); return;
+    }
+
+    if(passo === 2){
+      var t = $('q-projeto').value.trim();
+      if(t.length < 10){ setErr('q-projeto','Escreva pelo menos 10 caracteres.'); $('q-projeto').focus(); return; }
+      setErr('q-projeto');
+      resp.projeto = t;
+      ir(3); return;
+    }
+
+    if(passo === 3){
+      var ok3 = true;
+      if($('q-empresa').value.trim().length < 2){ setErr('q-empresa','Informe o nome da empresa.'); ok3 = false; } else setErr('q-empresa');
+      if($('q-whatsapp').value.replace(/\D/g,'').length < 10){ setErr('q-whatsapp','WhatsApp com DDD.'); ok3 = false; } else setErr('q-whatsapp');
+      if(!$('q-optin').checked){ setErr('q-optin','Precisamos do seu aceite para entrar em contato.'); ok3 = false; } else setErr('q-optin');
+      if(!ok3){ var b3 = slot.querySelector('[aria-invalid="true"]'); if(b3) b3.focus(); return; }
+      resp.empresa = $('q-empresa').value.trim();
+      resp.whatsapp = $('q-whatsapp').value.trim();
+      enviar(false);
+      ir(4); return;
+    }
+  }
+
+  ir(0);
+
+  /* ---------- reveal ---------- */
+  var alvos = document.querySelectorAll('.reveal, .stagger, .flow');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(en){
+      en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.05});
+    Array.prototype.forEach.call(alvos, function(a){ io.observe(a); });
+  } else {
+    Array.prototype.forEach.call(alvos, function(a){ a.classList.add('in'); });
+  }
+})();
+</script>
+
+
+</body>
+</html>
