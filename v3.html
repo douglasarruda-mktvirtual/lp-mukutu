@@ -805,7 +805,6 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
       resp.sobrenome = $('q-sobrenome').value.trim();
       resp.email = $('q-email').value.trim();
       enviar(true);   /* já temos nome e e-mail: o lead entra aqui */
-      liberar();
       ir(2); return;
     }
 
@@ -826,7 +825,6 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
       resp.empresa = $('q-empresa').value.trim();
       resp.whatsapp = $('q-whatsapp').value.trim();
       enviar(false);
-      liberar();
       ir(4); return;
     }
   }
