@@ -402,6 +402,11 @@ button:focus-visible{outline:.15cqw solid var(--rosa);outline-offset:.2cqw}
   border-top:1px solid var(--linha);padding-top:1.1cqw}
 
 .slide.direita .cena img,.slide.direita .cena video{transform:scaleX(-1) scale(1.08)}
+/* a animação de entrada anima transform e ganharia do espelho: o lado invertido
+   precisa do keyframe dele, senão a imagem volta a sangrar pelo lado errado */
+@keyframes deriva-espelho{to{transform:scaleX(-1) scale(1)}}
+.slide.direita.on .cena img{animation-name:deriva-espelho}
+.slide.direita.on .cena video{animation:none;transform:scaleX(-1)}
 .slide.direita .veu.esq{background:linear-gradient(270deg,var(--veu) 0%,var(--veu) 44%,
   color-mix(in srgb,var(--veu) 55%,transparent) 60%,transparent 80%)}
 .slide.direita .conteudo{justify-items:end;text-align:right}
