@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>
+html{color-scheme:dark}
+body{margin:0;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Conteúdo 2.0 V2 sem SAC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Raleway:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  /* canon da casa */
+  --rosa:#EB4D87; --vinho:#B22D52; --grifo:#FCD567; --ciano:#52C6DA;
+  --ink:#1F1F1F; --offwhite:#F6F3EC;
+  --display:'Manrope','Segoe UI',system-ui,sans-serif;
+  --corpo:'Raleway','Segoe UI',system-ui,sans-serif;
+}
+/* o deck manda na própria temperatura: o leitor escolhe na barra */
+:root,[data-temp="escuro"]{
+  --fundo:#0B0B0C; --veu:#0B0B0C; --texto:#F6F3EC; --texto-2:#A29D97;
+  --texto-3:#CFC9C3; --linha:#2B2826; --rosa2:#EB4D87;
+  --sup1:rgba(246,243,236,.06); --sup2:rgba(246,243,236,.035);
+  --borda:#35312E; --borda2:#4A4340; --tip:#171617;
+  --barra-bg:rgba(11,11,12,.92); --trilho-bg:#211F1E; --veu-op:.52; --veu-op2:.72;
+  --img-brilho:1;
+}
+:root[data-temp="claro"]{
+  --fundo:#F6F3EC; --veu:#F6F3EC; --texto:#1F1F1F; --texto-2:#6B665E;
+  --texto-3:#46423C; --linha:#DED8CD; --rosa2:#B22D52;
+  --sup1:rgba(31,31,31,.05); --sup2:rgba(31,31,31,.03);
+  --borda:#D8D1C5; --borda2:#B8AFA1; --tip:#FFFFFF;
+  --barra-bg:rgba(246,243,236,.93); --trilho-bg:#E4DED3; --veu-op:.62; --veu-op2:.8;
+  --img-brilho:.92;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--fundo);transition:background .45s ease,color .45s ease;color:var(--texto);font-family:var(--corpo);overflow:hidden}
+
+#deck{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;
+  container-type:size;
+  padding:calc(2px + env(safe-area-inset-top,0px)) 0 calc(2px + env(safe-area-inset-bottom,0px))}
+.stage{position:relative;transition:background .45s ease;
+  width:min(100cqw, calc(100cqh * 16 / 9));
+  height:min(100cqh, calc(100cqw * 9 / 16));
+  container-type:size;overflow:hidden;background:var(--fundo)}
+@media (max-aspect-ratio:1/1){
+  .stage{width:min(100cqw, calc(100cqh * 3 / 4));height:min(100cqh, calc(100cqw * 4 / 3))}
+}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity .5s ease,visibility .5s;pointer-events:none}
+.slide.on{opacity:1;visibility:visible;pointer-events:auto}
+
+/* ---------- a imagem é o slide ---------- */
+.cena{position:absolute;inset:0;overflow:hidden}
+.cena img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.08)}
+.on .cena img{animation:deriva 16s linear forwards}
+@keyframes deriva{to{transform:scale(1)}}
+.veu{position:absolute;inset:0}
+.veu.esq{background:linear-gradient(90deg,var(--veu) 4%,color-mix(in srgb,var(--veu) 93%,transparent) 32%,color-mix(in srgb,var(--veu) 30%,transparent) 64%,transparent 88%)}
+.veu.pe{background:linear-gradient(0deg,var(--veu) 2%,transparent 36%)}
+
+.conteudo{position:absolute;inset:0;display:grid;padding:5.4cqw 6cqw 8.6cqw}
+
+/* ---------- tipografia ---------- */
+.kicker{font-family:var(--display);font-weight:700;font-size:1.25cqw;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--rosa2)}
+.mega{font-family:var(--display);font-weight:800;line-height:.92;
+  letter-spacing:-.04em;font-size:8.6cqw;margin:0}
+.grande{font-family:var(--display);font-weight:800;line-height:.98;
+  letter-spacing:-.035em;font-size:4.6cqw;margin:0;text-wrap:balance}
+.grande.longo{font-size:3.7cqw;line-height:1.02}
+.media{font-family:var(--display);font-weight:700;line-height:1.14;
+  letter-spacing:-.02em;font-size:2.5cqw;margin:0;max-width:26ch}
+.corpo{font-size:1.6cqw;line-height:1.52;color:var(--texto-3);max-width:40ch;margin:0}
+.nota{font-size:1.05cqw;line-height:1.4;color:var(--texto-2);margin:0}
+
+/* ---------- grifo: duas camadas, revelam juntas ---------- */
+.grifo{position:relative;display:inline-block;white-space:nowrap;padding-inline:.1em}
+.grifo .cima{position:absolute;left:0;top:0;width:100%;height:100%;
+  color:var(--ink);background:var(--grifo);padding-inline:.1em;clip-path:inset(0 100% 0 0)}
+.on .grifo .cima{animation:revela .7s cubic-bezier(.16,.84,.3,1) .75s forwards}
+@keyframes revela{to{clip-path:inset(0 0 0 0)}}
+
+.sobe{opacity:0;transform:translateY(.4em)}
+.on .sobe{animation:sobe .7s cubic-bezier(.16,.84,.3,1) forwards}
+.on .d1{animation-delay:.08s}.on .d2{animation-delay:.2s}
+.on .d3{animation-delay:.34s}.on .d4{animation-delay:.5s}
+.on .d5{animation-delay:.66s}
+@keyframes sobe{to{opacity:1;transform:none}}
+
+.risco{display:block;width:5.2cqw;height:.28cqw;background:var(--rosa2);border-radius:2px;
+  transform-origin:left;transform:scaleX(0)}
+.on .risco{animation:estica .6s cubic-bezier(.16,.84,.3,1) .1s forwards}
+@keyframes estica{to{transform:scaleX(1)}}
+
+.trevo{width:3.4cqw;height:3.4cqw;display:block}
+.trevo path{fill:none;stroke:var(--rosa2);stroke-width:5.5;stroke-linecap:round}
+
+/* ---------- 1 · capa ---------- */
+.capa{grid-template-rows:auto 1fr auto}
+.capa-topo{display:flex;align-items:center;justify-content:space-between;gap:2cqw}
+.capa-meio{display:flex;flex-direction:column;justify-content:center;gap:2.6cqw}
+.capa .mega em{font-style:normal;color:var(--rosa2)}
+.capa-pe{display:flex;align-items:flex-end;justify-content:space-between;gap:2cqw;
+  border-top:1px solid var(--linha);padding-top:1.8cqw}
+.pilares{display:flex;gap:2.4cqw;font-family:var(--display);font-weight:600;
+  font-size:1.5cqw;letter-spacing:.04em;color:var(--texto-2)}
+.pilares span:nth-child(2){color:var(--rosa2)}
+
+/* ---------- 2 · diagnóstico ---------- */
+.diag{grid-template-rows:auto 1fr auto;gap:1.6cqw}
+.diag-meio{display:flex;flex-direction:column;justify-content:center;gap:1.9cqw;max-width:64%}
+.colunas{display:flex;gap:4cqw;border-top:1px solid var(--linha);padding-top:1.4cqw;max-width:72%}
+.colunas section{flex:1;display:flex;flex-direction:column;gap:.7cqw}
+.colunas h3{margin:0;font-family:var(--display);font-weight:700;font-size:1.3cqw;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--texto-2)}
+.colunas p{margin:0;font-family:var(--display);font-weight:600;font-size:1.5cqw;
+  line-height:1.3;color:var(--texto-3)}
+.colunas .agora h3{color:var(--rosa2)}
+.colunas .agora p{color:var(--texto)}
+
+/* ---------- 3 · visão ---------- */
+.visao{grid-template-rows:auto 1fr auto;gap:1.6cqw}
+.visao-meio{display:flex;flex-direction:column;justify-content:center;gap:1.8cqw;max-width:72%}
+.vira{font-family:var(--display);font-weight:800;line-height:1.02;
+  letter-spacing:-.035em;font-size:4.5cqw;margin:0}
+.vira b{display:block;font-weight:800;color:var(--texto-2)}
+.vira i{display:block;font-style:normal;color:var(--rosa2)}
+.trio{display:flex;gap:3.2cqw;border-top:1px solid var(--linha);padding-top:1.5cqw}
+.trio section{flex:1;display:flex;flex-direction:column;gap:.6cqw}
+.trio h3{margin:0;font-family:var(--display);font-weight:800;font-size:1.85cqw;
+  letter-spacing:-.01em;color:var(--texto)}
+.trio p{margin:0;font-size:1.3cqw;line-height:1.38;color:var(--texto-2)}
+
+
+/* ---------- o padrão único da faixa de baixo: rótulo, nome, descrição ---------- */
+.itens{display:flex;gap:2.6cqw;border-top:1px solid var(--linha);padding-top:1.4cqw}
+.itens > section{flex:1;display:flex;flex-direction:column;gap:.42cqw;position:relative}
+.itens b{font-family:var(--display);font-weight:700;font-size:.98cqw;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--rosa2)}
+.itens h3{margin:0;font-family:var(--display);font-weight:800;font-size:1.45cqw;
+  letter-spacing:-.015em;line-height:1.14;color:var(--texto)}
+.itens p{margin:0;font-size:1.06cqw;line-height:1.4;color:var(--texto-2)}
+.itens.fluxo > section + section{padding-left:1.9cqw}
+.itens.fluxo > section + section::before{content:"";position:absolute;left:0;top:.2cqw;
+  bottom:.2cqw;width:1px;background:var(--linha)}
+.itens.fluxo > section:last-child h3{color:var(--rosa2)}
+.frio .itens b{color:var(--ciano)}
+
+/* ---------- comandos ---------- */
+.trilho{position:absolute;top:0;left:0;right:0;height:.28cqw;background:var(--trilho-bg);z-index:7}
+.trilho b{display:block;height:100%;background:var(--rosa2);width:33.33%;transition:width .5s ease}
+.barra{position:absolute;left:0;right:0;bottom:0;z-index:7;display:flex;
+  align-items:center;justify-content:space-between;gap:1.2cqw;padding:1.1cqw 3cqw;
+  font-family:var(--display);font-size:.95cqw;color:var(--texto-2);
+  background:linear-gradient(transparent,var(--barra-bg) 58%)}
+.barra .grupo{display:flex;align-items:center;gap:.7cqw}
+.passo{font-variant-numeric:tabular-nums;letter-spacing:.14em}
+.passo b{color:var(--texto)}
+button{font:inherit;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--texto-2);background:var(--sup2);border:.09cqw solid var(--linha);
+  border-radius:999px;padding:.65cqw 1.25cqw;cursor:pointer;line-height:1;
+  transition:color .2s,border-color .2s,background .2s}
+button:hover{color:var(--texto);border-color:var(--texto-2)}
+button:focus-visible{outline:.15cqw solid var(--rosa);outline-offset:.2cqw}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .sobe{opacity:1;transform:none}.risco{transform:none}
+  .grifo .cima{clip-path:inset(0 0 0 0)}.cena img{transform:none}
+}
+
+/* ---------- 4 · escuta (circuito em quatro tempos) ---------- */
+.escuta{grid-template-rows:auto 1fr auto;gap:1.6cqw}
+.escuta-meio{display:flex;flex-direction:column;justify-content:center;gap:1.8cqw;max-width:62%}
+.circuito{display:flex;align-items:stretch;gap:0;border-top:1px solid var(--linha);padding-top:1.6cqw}
+.circuito section{flex:1;display:flex;flex-direction:column;gap:.5cqw;padding-right:2cqw;position:relative}
+.circuito section+section{padding-left:2cqw}
+.circuito section+section::before{content:"";position:absolute;left:0;top:.3cqw;bottom:.3cqw;
+  width:1px;background:var(--linha)}
+.circuito b{font-family:var(--display);font-weight:700;font-size:1.1cqw;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--rosa)}
+.circuito p{margin:0;font-family:var(--display);font-weight:700;font-size:1.6cqw;
+  line-height:1.2;color:var(--texto);letter-spacing:-.01em}
+.circuito section:last-child p{color:var(--rosa)}
+
+/* ---------- 5 · fundação ---------- */
+.fund{grid-template-rows:auto 1fr auto;gap:1.6cqw}
+.fund-meio{display:flex;flex-direction:column;justify-content:center;gap:1.7cqw;max-width:66%}
+.quatro{display:flex;gap:2.6cqw;border-top:1px solid var(--linha);padding-top:1.5cqw}
+.quatro section{flex:1;display:flex;flex-direction:column;gap:.5cqw}
+.quatro b{font-family:var(--display);font-weight:700;font-size:1.05cqw;letter-spacing:.2em;
+  color:var(--texto-2)}
+.quatro h3{margin:0;font-family:var(--display);font-weight:800;font-size:2.1cqw;
+  letter-spacing:-.015em;color:var(--texto)}
+
+/* ---------- 6 · criação híbrida ---------- */
+.hib{grid-template-rows:auto 1fr auto;gap:1.6cqw}
+.hib-meio{display:flex;flex-direction:column;justify-content:center;gap:1.7cqw;max-width:66%}
+.selo{position:absolute;top:5.4cqw;right:6cqw;font-family:var(--display);font-weight:700;
+  font-size:1.05cqw;letter-spacing:.2em;text-transform:uppercase;color:var(--offwhite);
+  background:var(--vinho);border-radius:999px;padding:.6cqw 1.3cqw;z-index:3}
+
+/* ---------- 8 · manifesto: a tela que quebra o ritmo ---------- */
+.manif{grid-template-rows:auto 1fr auto;gap:2cqw}
+.manif-meio{display:flex;flex-direction:column;justify-content:center;gap:2.2cqw;max-width:88%}
+.manif h2{margin:0;font-family:var(--display);font-weight:800;font-size:5.2cqw;
+  line-height:1.04;letter-spacing:-.04em}
+.manif h2 span{display:block}
+.manif h2 .dois{color:var(--rosa)}
+.recursos{display:flex;gap:2.2cqw;align-items:center;font-family:var(--display);
+  font-weight:700;font-size:1.5cqw;letter-spacing:.06em;color:var(--texto-2);
+  border-top:1px solid var(--linha);padding-top:1.6cqw}
+.recursos i{font-style:normal;color:var(--rosa)}
+
+/* ---------- 9 · ciclo ---------- */
+.ciclo{grid-template-rows:auto 1fr auto;gap:1.6cqw}
+.ciclo-meio{display:flex;flex-direction:column;justify-content:center;gap:1.7cqw;max-width:64%}
+.loop{display:flex;align-items:center;gap:1.4cqw;border-top:1px solid var(--linha);
+  padding-top:1.6cqw;font-family:var(--display);font-weight:800;font-size:2.1cqw;
+  letter-spacing:-.015em;color:var(--texto)}
+.loop em{font-style:normal;color:var(--texto-2);font-size:1.5cqw;font-weight:700}
+.loop .volta{color:var(--rosa);font-size:2.4cqw}
+
+/* ---------- 11 · previsibilidade: a única tela na cor coadjuvante ---------- */
+.frio .kicker{color:var(--ciano)}
+.frio .quatro b{color:var(--ciano)}
+.frio .selo{background:color-mix(in srgb,var(--ciano) 58%,var(--ink))}
+.frio .quatro h3{font-size:1.68cqw}
+
+/* ---------- 13 · cases: três faixas, o trabalho por baixo do texto ---------- */
+.provas{grid-template-rows:auto 1fr;gap:1.4cqw;padding:4.6cqw 6cqw 7.4cqw}
+.faixas{display:grid;grid-template-rows:1fr 1fr 1fr;gap:.7cqw;min-height:0}
+.faixa{position:relative;overflow:hidden;display:grid;
+  grid-template-columns:1.05fr .72fr 1.6fr;align-items:center;gap:2.4cqw;
+  padding:0 2.6cqw;text-decoration:none;color:inherit;
+  border-left:.22cqw solid var(--rosa2);background:var(--sup2)}
+.faixa .fundo{position:absolute;inset:0;z-index:0}
+.faixa .fundo img{width:100%;height:100%;object-fit:cover;display:block;
+  transform:scale(1.04);transition:transform 1.1s ease,opacity .5s ease;opacity:var(--veu-op)}
+.faixa:hover .fundo img,.faixa:focus-visible .fundo img{transform:scale(1);opacity:var(--veu-op2)}
+.faixa .fundo::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--veu) 8%,color-mix(in srgb,var(--veu) 90%,transparent) 46%,color-mix(in srgb,var(--veu) 62%,transparent) 100%)}
+.faixa > *{position:relative;z-index:1}
+.faixa h3{margin:0;font-family:var(--display);font-weight:800;font-size:2.35cqw;
+  letter-spacing:-.025em;line-height:1.08}
+.faixa h3 span{display:block;font-family:var(--corpo);font-weight:500;font-size:1.1cqw;
+  letter-spacing:.06em;color:var(--texto-2);margin-top:.5cqw}
+.faixa .num{font-family:var(--display);font-weight:800;font-size:3.4cqw;
+  letter-spacing:-.035em;color:var(--rosa2);line-height:1}
+.faixa .num em{display:block;font-style:normal;font-family:var(--corpo);font-weight:500;
+  font-size:1.05cqw;letter-spacing:.02em;color:var(--texto-2);margin-top:.5cqw;line-height:1.3}
+.faixa .diz{display:flex;flex-direction:column;gap:.9cqw}
+.faixa .diz p{margin:0;font-size:1.35cqw;line-height:1.42;color:var(--texto-3);max-width:44ch}
+.faixa .ver{font-family:var(--display);font-weight:700;font-size:1.05cqw;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--texto);
+  display:inline-flex;align-items:center;gap:.6cqw}
+.faixa .ver::after{content:"→";color:var(--rosa2);transition:transform .3s ease}
+.faixa:hover .ver::after{transform:translateX(.4cqw)}
+.on .faixa{opacity:0;animation:entra .8s cubic-bezier(.16,.84,.3,1) forwards}
+.on .faixa:nth-child(1){animation-delay:.12s}
+.on .faixa:nth-child(2){animation-delay:.26s}
+.on .faixa:nth-child(3){animation-delay:.4s}
+@keyframes entra{from{opacity:0;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+
+/* ---------- 14 · a squad ---------- */
+.mesa{grid-template-rows:auto auto 1fr auto;gap:1.4cqw}
+.unidades{display:flex;gap:3cqw;border-top:1px solid var(--linha);padding-top:1.6cqw;
+  align-items:flex-start}
+.unidades section{display:flex;flex-direction:column;gap:.7cqw}
+.unidades section:nth-child(1){flex:.8}
+.unidades section:nth-child(2){flex:1.5}
+.unidades section:nth-child(3){flex:1}
+.unidades b{font-family:var(--display);font-weight:700;font-size:1.1cqw;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--rosa)}
+.unidades ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.4cqw 1.4cqw}
+.unidades li{font-family:var(--display);font-weight:700;font-size:1.5cqw;
+  letter-spacing:-.01em;color:var(--texto)}
+.eco{display:flex;gap:2.6cqw;flex-wrap:wrap;border-top:1px solid var(--linha);
+  padding-top:1.3cqw;font-size:1.2cqw;color:var(--texto-2);line-height:1.4}
+.eco b{font-family:var(--display);font-weight:800;color:var(--texto);font-size:1.3cqw}
+
+
+/* ---------- 14 · a squad em cápsulas ---------- */
+.squad{display:flex;gap:2.4cqw;border-top:1px solid var(--linha);padding-top:1.4cqw;
+  align-items:flex-start}
+.squad > section{display:flex;flex-direction:column;gap:.8cqw}
+.squad > section:nth-child(1){flex:.62}
+.squad > section:nth-child(2){flex:1.7}
+.squad > section:nth-child(3){flex:.95}
+.squad b{font-family:var(--display);font-weight:700;font-size:.98cqw;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--rosa2)}
+.chips{display:flex;flex-wrap:wrap;gap:.5cqw}
+.chip{position:relative;font-family:var(--display);font-weight:700;font-size:1.15cqw;
+  color:var(--texto);background:var(--sup1);
+  border:.09cqw solid var(--borda);border-radius:999px;padding:.55cqw 1.1cqw;
+  white-space:nowrap;cursor:default;transition:border-color .25s,background .25s}
+.chip:hover{border-color:var(--rosa2);background:color-mix(in srgb,var(--rosa2) 14%,transparent)}
+.chip::after{content:attr(data-faz);position:absolute;left:50%;bottom:calc(100% + .6cqw);
+  transform:translateX(-50%) translateY(.3cqw);width:16cqw;
+  font-family:var(--corpo);font-weight:500;font-size:1cqw;line-height:1.36;
+  white-space:normal;text-align:left;color:var(--texto);
+  background:var(--tip);border:.09cqw solid var(--borda);border-radius:.5cqw;padding:.7cqw .9cqw;
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:5}
+.chip:hover::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.squad > section:last-child .chip::after{left:auto;right:0;transform:translateY(.3cqw)}
+.squad > section:last-child .chip:hover::after{transform:translateY(0)}
+
+
+/* ---------- 14 · o quadro de linhas de produto, que se constrói ---------- */
+.quadro{grid-template-columns:1.42fr .84fr;gap:3cqw;align-content:stretch}
+.quadro .halo{position:absolute;left:-10cqw;bottom:-16cqw;width:46cqw;height:46cqw;
+  border-radius:50%;background:radial-gradient(circle,var(--rosa),transparent 62%);
+  opacity:.1;filter:blur(3cqw);pointer-events:none}
+.grade{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:min-content;
+  gap:.8cqw;align-content:center}
+.grade .rot{grid-column:1/-1;font-family:var(--display);font-weight:700;font-size:.92cqw;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--texto-2);margin-top:.9cqw}
+.grade .rot:first-child{margin-top:0}
+.caixa{border:.09cqw solid var(--borda);border-radius:.6cqw;padding:.95cqw 1.15cqw;
+  background:var(--sup2);opacity:.2;
+  transition:opacity .5s ease,border-color .5s ease,background .5s ease,transform .5s ease}
+.caixa h4{margin:0 0 .3cqw;font-family:var(--display);font-weight:800;font-size:1.34cqw;
+  letter-spacing:-.015em;line-height:1.14;color:var(--texto)}
+.caixa p{margin:0;font-size:1.02cqw;line-height:1.36;color:var(--texto-2)}
+.caixa.aceso{opacity:1;border-color:var(--borda2);background:var(--sup1)}
+.caixa.foco{border-color:var(--rosa2);background:color-mix(in srgb,var(--rosa2) 13%,transparent);transform:translateY(-.15cqw)}
+.caixa.modulo.aceso{opacity:.72;border-color:var(--borda)}
+.caixa.modulo.aceso h4{color:var(--texto-3)}
+.painel{display:flex;flex-direction:column;justify-content:center;gap:1.2cqw;
+  border-left:1px solid var(--linha);padding-left:2.6cqw}
+.painel .etapa{font-family:var(--display);font-weight:700;font-size:.95cqw;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--rosa2)}
+.painel h3{margin:0;font-family:var(--display);font-weight:800;font-size:2.5cqw;
+  letter-spacing:-.03em;line-height:1.06}
+.painel p{margin:0;font-size:1.28cqw;line-height:1.52;color:var(--texto-3)}
+.painel .passos{display:flex;gap:.38cqw;margin-top:.6cqw}
+.painel .passos i{width:1.5cqw;height:.22cqw;border-radius:2px;background:var(--borda);
+  transition:background .4s ease}
+.painel .passos i.ja{background:var(--rosa2)}
+
+/* ---------- 15 · fecho ---------- */
+.fecho{grid-template-rows:auto 1fr auto;gap:2cqw}
+.fecho-meio{display:flex;flex-direction:column;justify-content:center;gap:2.2cqw;max-width:74%}
+.fecho h2{margin:0;font-family:var(--display);font-weight:800;font-size:5cqw;
+  line-height:1.02;letter-spacing:-.04em}
+.fecho h2 .dois{display:block;color:var(--rosa2)}
+.fecho-pe{display:flex;align-items:flex-end;justify-content:space-between;gap:2cqw;
+  border-top:1px solid var(--linha);padding-top:1.7cqw}
+.assina{font-family:var(--display);font-weight:800;font-size:1.7cqw;letter-spacing:-.01em}
+.assina span{display:block;font-family:var(--corpo);font-weight:500;font-size:1.15cqw;
+  color:var(--texto-2);letter-spacing:.06em;margin-top:.5cqw}
+.site{font-family:var(--display);font-weight:700;font-size:1.4cqw;letter-spacing:.1em;
+  color:var(--rosa2)}
+
+/* ---------- no off-white, a foto escura não pode sangrar por baixo do texto:
+   o fundo claro toma a esquerda e a imagem fica inteira do lado direito ---------- */
+:root[data-temp="claro"] .veu.esq{
+  background:linear-gradient(90deg,var(--veu) 0%,var(--veu) 62%,
+    color-mix(in srgb,var(--veu) 55%,transparent) 74%,transparent 88%)}
+:root[data-temp="claro"] .veu.pe{
+  background:linear-gradient(0deg,var(--veu) 0%,transparent 22%)}
+:root[data-temp="claro"] .diag-meio,
+:root[data-temp="claro"] .fund-meio,
+:root[data-temp="claro"] .hib-meio,
+:root[data-temp="claro"] .escuta-meio,
+:root[data-temp="claro"] .ciclo-meio{max-width:58%}
+:root[data-temp="claro"] .visao-meio{max-width:64%}
+:root[data-temp="claro"] .manif-meio{max-width:72%}
+:root[data-temp="claro"] .fecho-meio{max-width:64%}
+:root[data-temp="claro"] .itens{max-width:78%}
+:root[data-temp="claro"] .colunas{max-width:70%}
+:root[data-temp="claro"] .squad{max-width:72%}
+:root[data-temp="claro"] .capa-meio .media{max-width:26ch}
+/* a tela de cases e a do quadro não têm foto de fundo: seguem inteiras */
+:root[data-temp="claro"] .provas .itens,
+:root[data-temp="claro"] .quadro .itens{max-width:none}
+</style>
+</head>
+<body>
+
+
+<div id="deck">
+  <div class="stage" id="stage">
+    <div class="trilho"><b id="prog"></b></div>
+
+    <!-- 1 · CAPA -->
+    <section class="slide on" aria-label="Capa">
+      <div class="cena"><img src="img/t1-capa.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo capa">
+        <div class="capa-topo">
+          <svg class="trevo" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 50c0-14-10-24-22-24S6 36 6 50s10 24 22 24 22-10 22-24zm0 0c0 14 10 24 22 24s22-10 22-24-10-24-22-24-22 10-22 24zm0 0c14 0 24-10 24-22S64 6 50 6 26 16 26 28s10 22 24 22zm0 0c-14 0-24 10-24 22s10 22 24 22 24-10 24-22-10-22-24-22z"/></svg>
+          <div class="kicker">Mkt Virtual · Conteúdo e Social</div>
+        </div>
+        <div class="capa-meio">
+          <span class="risco"></span>
+          <h1 class="mega sobe d1">Conteúdo <em>2.0</em></h1>
+          <p class="media sobe d3" style="max-width:30ch">Transformamos presença digital corporativa em motor de autoridade, escuta ativa e tração de receita.</p>
+        </div>
+        <div class="capa-pe sobe d4">
+          <div class="pilares"><span>Estratégia</span><span>Criação Híbrida</span><span>Performance Integrada</span></div>
+          <div class="nota">2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · O FIM DA COMMODITY -->
+    <section class="slide" aria-label="Diagnóstico" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/t2-commodity.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo diag">
+        <div class="kicker sobe d1">01 · Diagnóstico</div>
+        <div class="diag-meio">
+          <h2 class="grande sobe d2">O fim da commodity</h2>
+          <p class="corpo sobe d3" style="max-width:48ch">A pergunta “quantos posts por mês?” transformou gestão de redes em commodity. Se o que se compra é quantidade, qualquer fornecedor entrega, e a única conversa que sobra é preço.</p>
+          <p class="media sobe d4" style="font-size:2.15cqw;max-width:34ch">Nosso campo de batalha é a <span class="grifo"><span class="sob">profundidade de conteúdo</span><span class="cima" aria-hidden="true">profundidade de conteúdo</span></span>.</p>
+        </div>
+        <div class="colunas sobe d5">
+          <section><h3>Modelo antigo</h3><p>Foco em volume, não em resultado.</p><p>Post invisível: publicado sem distribuição.</p></section>
+          <section class="agora"><h3>Conteúdo 2.0</h3><p>Canais proprietários como ativo de negócio.</p><p>Integração total com performance.</p></section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · A VISÃO -->
+    <section class="slide" aria-label="Nossa visão" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s04-escuta.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo visao">
+        <div class="kicker sobe d1">02 · Nossa visão</div>
+        <div class="visao-meio">
+          <h2 class="vira sobe d2"><b>Sair do que eu quero falar</b><i>para o que o cliente quer ouvir.</i></h2>
+          <p class="corpo sobe d3" style="max-width:52ch">Qual é a conversa que já está acontecendo? É dela que a pauta nasce.</p>
+        </div>
+        <div class="itens  sobe d4">
+          <section><b>01</b><h3>Branding no Digital</h3><p>Tangibilização visual, tom de voz e governança de marca em todos os canais.</p></section>
+          <section><b>02</b><h3>Conteúdo Proprietário</h3><p>Formato autoral nascido da escuta do mercado e das dores reais do consumidor.</p></section>
+          <section><b>03</b><h3>Criação de Comunidade</h3><p>Seguidor passivo vira membro engajado: propósito, narrativa própria e co-criação.</p></section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · ESCUTA ANTES DE PAUTA -->
+    <section class="slide" aria-label="Relevância real" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s04b-listening.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo escuta">
+        <div class="kicker sobe d1">03 · Relevância real</div>
+        <div class="escuta-meio">
+          <h2 class="grande sobe d2">Social listening como briefing</h2>
+          <p class="corpo sobe d3" style="max-width:46ch">Não decidimos o que falar. Ouvimos o que o consumidor quer ouvir. Nossa pauta nasce das conversas reais do mercado.</p>
+          <p class="media sobe d4" style="font-size:2.15cqw;max-width:32ch">As redes viram o principal <span class="grifo"><span class="sob">motor de inteligência</span><span class="cima" aria-hidden="true">motor de inteligência</span></span> sobre o público final.</p>
+        </div>
+        <div class="itens fluxo sobe d5">
+          <section><b>01</b><h3>Detectamos o assunto</h3><p>Tendência e assunto do momento mapeados enquanto acontecem, não depois que passaram.</p></section>
+          <section><b>02</b><h3>Criamos conteúdo com o cliente</h3><p>O que o público pergunta, reclama e duvida vira banco de dores, e o banco de dores vira pauta.</p></section>
+          <section><b>03</b><h3>Distribuímos pelos canais</h3><p>Resposta na linguagem de quem perguntou, no formato da plataforma em que perguntou.</p></section>
+          <section><b>04</b><h3>O comercial converte</h3><p>Provamos com dado real, não com intuição, que a marca oferece o que o consumidor já procura.</p></section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · FUNDAÇÃO ANTES DE OPERAÇÃO -->
+    <section class="slide" aria-label="Imersão estratégica" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s05-fundacao.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo fund">
+        <div class="kicker sobe d1">04 · Imersão estratégica</div>
+        <div class="fund-meio">
+          <h2 class="grande longo sobe d2">O alicerce que sustenta o contrato inteiro</h2>
+          <p class="corpo sobe d3" style="max-width:48ch">Antes de falar, entender o terreno. A Head de Estratégia conduz a imersão, e é a etapa que não se repete: ela sustenta os doze meses.</p>
+          <p class="media sobe d4" style="font-size:2.15cqw;max-width:30ch">Tire a imersão e três camadas caem junto. <span class="grifo"><span class="sob">O que sobra é post</span><span class="cima" aria-hidden="true">O que sobra é post</span></span>.</p>
+        </div>
+        <div class="itens  sobe d5">
+          <section><b>01</b><h3>O negócio</h3><p>Diagnóstico do cenário interno, histórico de comunicação e arquitetura de portfólio.</p></section>
+          <section><b>02</b><h3>A marca</h3><p>Big Idea, mote institucional e taglines. Transição de imagem quando necessária.</p></section>
+          <section><b>03</b><h3>O público</h3><p>Persona B2C, B2B e B2G, mapa de empatia, mundo perfeito, jornada e funil.</p></section>
+          <section><b>04</b><h3>O mercado</h3><p>Benchmark competitivo, matriz de fontes de valor e SWOT aprofundada.</p></section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · CRIAÇÃO HÍBRIDA E NATIVA -->
+    <section class="slide" aria-label="Creator economy" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s06-hibrida.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="selo">Módulo · soma ao pacote</div>
+      <div class="conteudo hib">
+        <div class="kicker sobe d1">05 · Creator economy</div>
+        <div class="hib-meio">
+          <h2 class="grande longo sobe d2">A ponte estratégica: direção mais creator</h2>
+          <p class="corpo sobe d3" style="max-width:48ch">A dupla criativa ideal não é mais redator e diretor de arte. É diretor de criação e creator. A internet não tolera anúncio de TV adaptado para o feed.</p>
+          <p class="media sobe d4" style="font-size:2.15cqw;max-width:32ch">A ideia já nasce com a <span class="grifo"><span class="sob">linguagem nativa</span><span class="cima" aria-hidden="true">linguagem nativa</span></span> da plataforma.</p>
+        </div>
+        <div class="itens  sobe d5">
+          <section><b>01</b><h3>Curadoria</h3><p>Seleção por fit cultural e técnico, não por número de seguidor.</p></section>
+          <section><b>02</b><h3>Co-criação</h3><p>A marca entra com o rigor técnico, o creator com a espontaneidade que retém.</p></section>
+          <section><b>03</b><h3>Whitelisting</h3><p>Mídia paga veiculada direto pelo perfil do creator parceiro.</p></section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · PRODUÇÃO AUDIOVISUAL PRÓPRIA -->
+    <section class="slide" aria-label="Produção integrada" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s07-audiovisual.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="selo">Módulo · soma ao pacote</div>
+      <div class="conteudo fund">
+        <div class="kicker sobe d1">06 · Produção integrada</div>
+        <div class="fund-meio">
+          <h2 class="grande longo sobe d2">Captação própria: a agência que também filma</h2>
+          <p class="corpo sobe d3" style="max-width:48ch">A maior parte das agências terceiriza vídeo. A Mkt Virtual tem operação audiovisual própria dentro do grupo, a Mokotó. Isso muda prazo, custo e controle.</p>
+          <p class="media sobe d4" style="font-size:2.15cqw;max-width:34ch">Ter a produção dentro de casa é o que torna o <span class="grifo"><span class="sob">volume viável</span><span class="cima" aria-hidden="true">volume viável</span></span>.</p>
+        </div>
+        <div class="itens fluxo sobe d5">
+          <section><b>Antes</b><h3>Pré-produção</h3><p>Roteiro e direcionamento a partir da pauta já aprovada.</p></section>
+          <section><b>No dia</b><h3>Captação</h3><p>Equipe em campo, imagem e áudio com equipamento próprio.</p></section>
+          <section><b>Depois</b><h3>Pós-produção</h3><p>Decupagem, edição, trilha, legenda e tratamento de cor.</p></section>
+          <section><b>Entrega</b><h3>Vídeo pronto para o feed</h3><p>Nos formatos das redes contratadas, com rodadas de ajuste definidas.</p></section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · DISTRIBUIÇÃO ATRELADA -->
+    <section class="slide" aria-label="O fim do post invisível" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s08-distribuicao.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="selo">Módulo · soma ao pacote</div>
+      <div class="conteudo manif">
+        <div class="kicker sobe d1">07 · O fim do post invisível</div>
+        <div class="manif-meio">
+          <h2 class="sobe d2"><span>Conteúdo sem mídia é invisível.</span><span class="dois">Mídia sem conteúdo é ruído.</span></h2>
+          <p class="corpo sobe d3" style="max-width:52ch">Nenhum conteúdo estratégico é publicado sem estratégia de distribuição atrelada. A distribuição é o que separa conteúdo que existe de conteúdo que trabalha.</p>
+        </div>
+        <div class="recursos sobe d4">
+          <span>Segmentação por ICP</span><i>·</i><span>Dark post</span><i>·</i><span>Whitelisting de creator</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 · O CICLO QUE APRENDE -->
+    <section class="slide" aria-label="O ciclo vivo" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s09-ciclo.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo ciclo">
+        <div class="kicker sobe d1">08 · O ciclo vivo</div>
+        <div class="ciclo-meio">
+          <h2 class="grande longo sobe d2">Uma engrenagem contínua de inteligência</h2>
+          <p class="corpo sobe d3" style="max-width:48ch">O que o consumidor pergunta vira pauta. O que a pauta gera de conversa vira dado. O dado corrige a pauta seguinte.</p>
+          <p class="media sobe d4" style="font-size:2.15cqw;max-width:36ch">É isso que separa uma agência que produz de <span class="grifo"><span class="sob">uma agência que aprende</span><span class="cima" aria-hidden="true">uma agência que aprende</span></span>.</p>
+        </div>
+        <div class="itens fluxo sobe d5">
+          <section><b>01</b><h3>Escuta</h3><p>Social listening e comunidade como motor de inteligência sobre o público final.</p></section>
+          <section><b>02</b><h3>Criação híbrida</h3><p>Time interno e creators produzindo conteúdo nativo que resolve a dor na prática.</p></section>
+          <section><b>03</b><h3>Tração</h3><p>Distribuição pelos canais proprietários e mídia paga, aos alvos certos.</p></section>
+          <section><b>04</b><h3>Conversão</h3><p>Conteúdo exclusivo gerando lead qualificado e conversa comercial.</p></section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · AS QUATRO ETAPAS -->
+    <section class="slide" aria-label="Como operamos" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s10-etapas.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo fund">
+        <div class="kicker sobe d1">09 · Como operamos</div>
+        <div class="fund-meio">
+          <h2 class="grande longo sobe d2">Nenhum passo no escuro: cada fase sustenta a seguinte</h2>
+          <p class="corpo sobe d3" style="max-width:48ch">Quatro etapas, e cada uma existe porque a anterior existiu. Todo pacote, do P ao G, nasce da mesma espinha: o que muda é a profundidade de cada etapa.</p>
+          <p class="media sobe d4" style="font-size:2.15cqw;max-width:36ch">O que o cliente compra não é a peça. É <span class="grifo"><span class="sob">a cadeia que faz a peça certa existir</span><span class="cima" aria-hidden="true">a cadeia que faz a peça certa existir</span></span>.</p>
+        </div>
+        <div class="itens fluxo sobe d5">
+          <section><b>Setup</b><h3>Imersão Estratégica</h3><p>Diagnóstico de negócio e marca, Big Idea, benchmark, SWOT, persona e jornada.</p></section>
+          <section><b>Setup</b><h3>Planejamento</h3><p>Pilares editoriais, tom de voz, diretrizes de linguagem e framework de KPIs.</p></section>
+          <section><b>Mês a mês</b><h3>Operação Always-On</h3><p>Direção editorial, esteira de produção, publicação e relacionamento.</p></section>
+          <section><b>Mês a mês</b><h3>Leitura &amp; Evolução</h3><p>Report de resultados que vira insumo da pauta seguinte.</p></section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · PREVISIBILIDADE -->
+    <section class="slide frio" aria-label="Governança" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s11-previsibilidade.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo fund">
+        <div class="kicker sobe d1">10 · Governança</div>
+        <div class="fund-meio">
+          <h2 class="grande longo sobe d2">A operação roda em D+15 e D+30</h2>
+          <p class="corpo sobe d3" style="max-width:50ch">O maior erro de uma agência é produzir o conteúdo da semana na própria semana. Isso compromete a qualidade e estressa o time. Em janeiro, o time já produz e aprova o conteúdo de fevereiro.</p>
+          <p class="media sobe d4" style="font-size:2.15cqw;max-width:38ch">Eliminamos o estresse de aprovação em cima da hora com <span class="grifo"><span class="sob">rigor de gestão</span><span class="cima" aria-hidden="true">rigor de gestão</span></span>, não com esforço heroico.</p>
+        </div>
+        <div class="itens  sobe d5">
+          <section><b>01</b><h3>Gordura no cronograma</h3><p>Em janeiro, o time já produz e aprova o conteúdo de fevereiro.</p></section>
+          <section><b>02</b><h3>Janelas de oportunidade</h3><p>De uma a duas vagas por semana ficam livres para trend e factual.</p></section>
+          <section><b>03</b><h3>SLA de 48 horas</h3><p>Prazo contratual para a aprovação do cliente, que blinda o cronograma.</p></section>
+          <section><b>04</b><h3>Automação de workflow</h3><p>Cada peça é um card que caminha por colunas, do a fazer ao agendado.</p></section>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 13 · PROVA · TRÊS CASES NUMA TELA -->
+    <section class="slide" aria-label="Prova" hidden>
+      <div class="conteudo provas">
+        <div class="kicker sobe d1">11 · Prova · O método rodando em conta real</div>
+        <div class="faixas">
+          <a class="faixa" href="https://case-showcase-central.lovable.app" target="_blank" rel="noopener">
+            <div class="fundo"><img loading="lazy" decoding="async" src="img/case-litoral.jpg" alt=""></div>
+            <h3>Litoral Plaza Shopping<span>Conta contínua desde 2022</span></h3>
+            <div class="num">100 mil<em>seguidores alcançados</em></div>
+            <div class="diz">
+              <p>Planejamento e gestão de redes, produção semanal de vídeo e foto, mídia paga e SAC. O ciclo completo rodando sem interrupção há quatro anos.</p>
+              <span class="ver">Ver o case completo</span>
+            </div>
+          </a>
+          <a class="faixa" href="https://case-showcase-central.lovable.app" target="_blank" rel="noopener">
+            <div class="fundo"><img loading="lazy" decoding="async" src="img/case-centronorte.jpg" alt=""></div>
+            <h3>Shopping Center Norte<span>Varejo e shopping, São Paulo</span></h3>
+            <div class="num">Destaque<em>nos maiores engajamentos orgânicos do feed</em></div>
+            <div class="diz">
+              <p>Conteúdo de oportunidade conectando as lojas ao hype do filme “O Diabo Veste Prada”, com linguagem nativa da plataforma.</p>
+              <span class="ver">Ver o case completo</span>
+            </div>
+          </a>
+          <a class="faixa" href="https://case-showcase-central.lovable.app" target="_blank" rel="noopener">
+            <div class="fundo"><img loading="lazy" decoding="async" src="img/case-xzone.jpg" alt=""></div>
+            <h3>XZone, da Mondial<span>Social desde 2020, TikTok aberto em 2022</span></h3>
+            <div class="num">120,7 mil<em>views no vídeo de maior alcance</em></div>
+            <div class="diz">
+              <p>Linguagem de nicho gamer, gestão de creators e série de vídeos de lançamento produzida pela Mokotó. Social e audiovisual no mesmo cliente, pelo mesmo grupo.</p>
+              <span class="ver">Ver o case completo</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · O QUADRO DE LINHAS DE PRODUTO -->
+    <section class="slide" data-passos="11" aria-label="As linhas de produto" hidden>
+      <div class="conteudo quadro">
+        <div class="halo"></div>
+        <div class="grade">
+          <div class="rot">O núcleo · o que faz o serviço existir</div>
+          <div class="caixa" data-i="0"><h4>Imersão estratégica</h4><p>Negócio, marca, público e mercado</p></div>
+          <div class="caixa" data-i="1"><h4>Planejamento Social</h4><p>Pilares, tom de voz e KPIs</p></div>
+          <div class="caixa" data-i="2"><h4>Direção editorial</h4><p>Mote, pauta e briefing do mês</p></div>
+          <div class="caixa" data-i="3"><h4>Produção de conteúdo</h4><p>Estático, carrossel e motion</p></div>
+          <div class="caixa" data-i="4"><h4>Gestão das redes sociais</h4><p>Copy, agendamento e comunidade</p></div>
+          <div class="caixa" data-i="5"><h4>Report com insights</h4><p>Leitura que corrige a pauta seguinte</p></div>
+          <div class="rot">Modular · soma conforme a estratégia do ciclo</div>
+          <div class="caixa modulo" data-i="6"><h4>Creator economy</h4><p>Curadoria, co-criação e whitelisting</p></div>
+          <div class="caixa modulo" data-i="7"><h4>Diária de captação</h4><p>Equipe da Mokotó em campo</p></div>
+          <div class="caixa modulo" data-i="8"><h4>SAC 3.0</h4><p>Bloco de minutos por dia útil</p></div>
+          <div class="caixa modulo" data-i="9"><h4>Impulsionamento de mídia</h4><p>Dark post, ICP e report próprio</p></div>
+        </div>
+        <div class="painel">
+          <div class="etapa" data-papel="etapa">Linha 01</div>
+          <h3 data-papel="titulo">Imersão estratégica</h3>
+          <p data-papel="texto">Diagnóstico de negócio, marca e posicionamento, Big Idea, benchmark, SWOT, persona e jornada. É a fundação: sem ela, tudo o que vem depois roda no escuro. Se o cliente já tem parte disso bem desenhada, a gente aproveita e adapta só o que falta.</p>
+          <div class="passos"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · A SQUAD -->
+    <section class="slide" aria-label="A squad" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s15-squad.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo mesa">
+        <div class="kicker sobe d1">12 · A força da mesa</div>
+        <h2 class="grande sobe d2" style="font-size:4.1cqw">A squad dedicada à sua conta</h2>
+        <p class="corpo sobe d3" style="max-width:52ch;align-self:start">O time não é genérico: cada função entra porque há entregável no pacote que a exige.</p>
+        <div>
+          <div class="squad sobe d4">
+            <section><b>Powerhouse</b><div class="chips"><span class="chip" data-faz="Imersão, planejamento e leitura estratégica do report.">Head de Estratégia</span></div></section>
+            <section><b>Mkt Virtual</b><div class="chips"><span class="chip" data-faz="Linha editorial macro, DNA de influência e ajuste de rota por BI.">Content Experience</span><span class="chip" data-faz="Legenda, copy das peças e roteiro de captação.">Redator e roteirista</span><span class="chip" data-faz="Layout e corte dinâmico, em todos os formatos contratados.">Designer e editor</span><span class="chip" data-faz="Direção de arte e QA criativo antes do cliente.">Coordenador de Criação</span><span class="chip" data-faz="Publicação, stories, escuta e atendimento de comunidade.">Social Media</span><span class="chip" data-faz="O maestro: cronograma, SLA entre frentes e logística de creators.">Gerente de Projetos</span></div></section>
+            <section><b>Mokotó</b><div class="chips"><span class="chip" data-faz="Captação em campo, imagem e áudio.">Videomaker</span><span class="chip" data-faz="Decupagem, edição, trilha, legenda e cor.">Editora</span><span class="chip" data-faz="Direção executiva da produção de vídeo.">Diretor de Audiovisual</span></div></section>
+          </div>
+          <div class="eco sobe d5" style="margin-top:1.4cqw">
+            <span><b>Mkt Virtual</b> estratégia, posicionamento, criação e mídia digital.</span>
+            <span><b>Mukutu</b> engenharia de software e inteligência tecnológica.</span>
+            <span><b>Mokotó</b> produção audiovisual de alta densidade.</span>
+            <span><b>Juicy</b> laboratório de inovação e tendências culturais.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · FECHO -->
+    <section class="slide" aria-label="Próximo passo" hidden>
+      <div class="cena"><img loading="lazy" decoding="async" src="img/s16-fecho.jpg" alt=""><div class="veu esq"></div><div class="veu pe"></div></div>
+      <div class="conteudo fecho">
+        <div class="kicker sobe d1">Mkt Virtual · Conteúdo e Social</div>
+        <div class="fecho-meio">
+          <h2 class="sobe d2">Social não se compra por volume.<span class="dois">Compra-se por sistema.</span></h2>
+          <p class="corpo sobe d3" style="max-width:52ch">Vamos transformar suas redes no seu principal ativo de crescimento? O próximo passo é uma sessão de imersão e diagnóstico, para mapearmos as conversas e as oportunidades do seu ecossistema.</p>
+        </div>
+        <div class="fecho-pe sobe d4">
+          <div class="assina">Mkt Virtual: a engrenagem completa do seu crescimento.<span>Lastro de mais de 25 anos operando contextos complexos, com senioridade e método.</span></div>
+          <div class="site">mktvirtual.com.br</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="barra">
+      <div class="grupo">
+        <button id="ant" aria-label="Slide anterior">←</button>
+        <button id="prox" aria-label="Próximo slide">→</button>
+        <span class="passo"><b id="n">1</b> / <span id="total">3</span></span>
+      </div>
+      <div class="grupo">
+        <button id="temp" aria-label="Alternar entre fundo escuro e off-white">◐ Off-white</button>
+        <button id="tela" aria-label="Tela cheia">⛶ Tela cheia</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var PASSOS_QUADRO=[{"e": "Linha 01", "t": "Imersão estratégica", "p": "Diagnóstico de negócio, marca e posicionamento, Big Idea, benchmark, SWOT, persona e jornada. É a fundação: sem ela, tudo o que vem depois roda no escuro. Se o cliente já tem parte disso bem desenhada, a gente aproveita e adapta só o que falta."}, {"e": "Linha 02", "t": "Planejamento Social", "p": "Pilares editoriais, tom de voz, diretrizes de linguagem, framework de KPIs e linhas criativas. Traduz a imersão em algo operável: é o manual que o time consulta todo mês. Existindo material anterior, ele entra como base."}, {"e": "Linha 03", "t": "Direção editorial", "p": "Mote e conceito do período, pauta por pilar, briefing peça a peça e aprovação interna antes de ir ao cliente. É o que garante que cada peça nasce de uma decisão, e não de um calendário a preencher."}, {"e": "Linha 04", "t": "Produção de conteúdo", "p": "Estático, carrossel e motion na identidade da marca, com legenda, QA de criação e rodadas de ajuste definidas. Quem define o mix do período é a estratégia, não uma tabela fixa."}, {"e": "Linha 05", "t": "Gestão das redes sociais", "p": "Copy final, agendamento, publicação na data, hashtags e CTA, primeira camada de comentários e conferência no ar. É a operação que faz o conteúdo existir de verdade no canal."}, {"e": "Linha 06", "t": "Report com insights", "p": "Alcance, engajamento e consumo de vídeo, análise por pilar e plano de ação. O report não fecha o mês: abre o seguinte, corrigindo pauta, criação e planejamento."}, {"e": "Modular 01", "t": "Creator economy", "p": "Curadoria por fit cultural e técnico, co-criação com a direção de criação da casa e whitelisting para veicular mídia pelo perfil do parceiro. Entra quando a marca precisa da linguagem de quem já tem a audiência."}, {"e": "Modular 02", "t": "Diária de captação", "p": "Equipe da Mokotó em campo, dentro do grupo: roteiro a partir da pauta aprovada, captação de imagem e áudio com equipamento próprio, decupagem, edição, trilha, legenda e cor. Entra quando o conteúdo pede material próprio em vez de banco de imagem."}, {"e": "Modular 03", "t": "SAC 3.0", "p": "Atendimento das mensagens e comentários com fila, triagem, classificação e escalada do que exige o cliente, mais o relatório de volume, SLA e temas recorrentes. Entra quando o volume de conversa justifica estrutura."}, {"e": "Modular 04", "t": "Impulsionamento de mídia", "p": "Gestão do investimento, estruturação e veiculação das campanhas, segmentação por ICP, dark post e ajuste de verba, com relatório próprio. Entra quando o conteúdo precisa chegar a quem ainda não segue a marca."}, {"e": "O quadro", "t": "Montamos junto", "p": "Cada linha tem variações e complexidades diferentes conforme o momento de negócio e a maturidade digital do cliente. Nosso time comercial analisa isso e direciona o que mais se encaixa. A gente desenha com você o que cabe no bolso e o que é estratégico para aquele ciclo, sem forçar quantidade nem escopo."}];
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(stage.querySelectorAll('.slide'));
+  var i=0;
+  document.getElementById('total').textContent=slides.length;
+
+  function mostra(n, deTras){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,k){
+      if(k===n){
+        s.hidden=false;
+        s.classList.remove('on'); void s.offsetWidth; s.classList.add('on');
+      }else{
+        s.classList.remove('on');
+        setTimeout(function(){ if(!s.classList.contains('on')) s.hidden=true; },500);
+      }
+    });
+    i=n;
+    var q=quadro();
+    if(q){ passo = deTras ? parseInt(q.getAttribute('data-passos'),10)-1 : 0; pinta(); }
+    document.getElementById('n').textContent=n+1;
+    document.getElementById('prog').style.width=((n+1)/slides.length*100)+'%';
+    window.__telaAtual=n+1;
+    try{ window.dispatchEvent(new Event('mkv-tela')); }catch(e){}
+  }
+
+  /* ---- a temperatura do deck: escuro ou off-white ---- */
+  var raiz=document.documentElement, btTemp=document.getElementById('temp');
+  function temp(t){
+    raiz.setAttribute('data-temp',t);
+    btTemp.textContent = t==='escuro' ? '◐ Off-white' : '◑ Escuro';
+    try{localStorage.setItem('mkv-temp',t);}catch(e){}
+  }
+  btTemp.addEventListener('click',function(e){
+    e.stopPropagation();
+    temp(raiz.getAttribute('data-temp')==='escuro'?'claro':'escuro');
+  });
+  var salvo=null; try{salvo=localStorage.getItem('mkv-temp');}catch(e){}
+  temp(salvo==='claro'?'claro':'escuro');
+
+  /* ---- construção passo a passo dentro de uma tela ---- */
+  var passo=0;
+  function quadro(){ var s=slides[i]; return s && s.hasAttribute('data-passos') ? s : null; }
+  function pinta(){
+    var s=quadro(); if(!s) return;
+    var d=PASSOS_QUADRO[passo]; if(!d) return;
+    s.querySelector('[data-papel="etapa"]').textContent=d.e;
+    s.querySelector('[data-papel="titulo"]').textContent=d.t;
+    s.querySelector('[data-papel="texto"]').textContent=d.p;
+    [].forEach.call(s.querySelectorAll('.caixa'),function(c){
+      var n=parseInt(c.getAttribute('data-i'),10);
+      c.classList.toggle('aceso', n<=passo);
+      c.classList.toggle('foco', n===passo && passo<10);
+    });
+    [].forEach.call(s.querySelectorAll('.passos i'),function(b,k){
+      b.classList.toggle('ja', k<=passo);
+    });
+  }
+  function maxPasso(){ var s=quadro(); return s ? parseInt(s.getAttribute('data-passos'),10)-1 : 0; }
+
+  function avanca(){
+    if(quadro() && passo<maxPasso()){ passo++; pinta(); return; }
+    mostra(i+1);
+  }
+  function volta(){
+    if(quadro() && passo>0){ passo--; pinta(); return; }
+    mostra(i-1, true);
+  }
+
+  document.getElementById('prox').addEventListener('click',function(e){e.stopPropagation();avanca();});
+  document.getElementById('ant').addEventListener('click',function(e){e.stopPropagation();volta();});
+  document.getElementById('tela').addEventListener('click',function(e){
+    e.stopPropagation();
+    if(document.fullscreenElement){document.exitFullscreen();}
+    else if(document.documentElement.requestFullscreen){document.documentElement.requestFullscreen();}
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();avanca();}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();volta();}
+    if(e.key==='t'||e.key==='T'){temp(raiz.getAttribute('data-temp')==='escuro'?'claro':'escuro');}
+  });
+
+  stage.addEventListener('click',function(e){
+    if(e.target.closest('.barra')) return;
+    if(document.body.classList.contains('rev-on')) return;
+    var r=stage.getBoundingClientRect();
+    if(e.clientX < r.left + r.width/2){ volta(); } else { avanca(); }
+  });
+
+  var x0=null;
+  stage.addEventListener('touchstart',function(e){
+    if(document.body.classList.contains('rev-on')) return;
+    x0=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(x0===null)return; var dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>45){ if(dx<0){avanca();}else{volta();} } x0=null;
+  },{passive:true});
+
+  mostra(0);
+})();
+</script>
+
+</body>
+</html>
