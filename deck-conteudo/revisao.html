@@ -381,6 +381,21 @@ button:focus-visible{outline:.15cqw solid var(--rosa);outline-offset:.2cqw}
 /* a tela de cases e a do quadro não têm foto de fundo: seguem inteiras */
 :root[data-temp="claro"] .provas .itens,
 :root[data-temp="claro"] .quadro .itens{max-width:none}
+
+/* no off-white, o topo e o rodapé da capa não podem correr por cima da foto */
+:root[data-temp="claro"] .capa-topo,
+:root[data-temp="claro"] .capa-pe,
+:root[data-temp="claro"] .fecho-pe{max-width:60%}
+:root[data-temp="claro"] .capa-meio .media{max-width:30ch}
+/* degradê mais longo, para a passagem do claro para a foto não ter borda dura */
+:root[data-temp="claro"] .veu.esq{
+  background:linear-gradient(90deg,var(--veu) 0%,var(--veu) 54%,
+    color-mix(in srgb,var(--veu) 72%,transparent) 66%,
+    color-mix(in srgb,var(--veu) 30%,transparent) 80%,transparent 94%)}
+:root[data-temp="claro"] .slide.direita .veu.esq{
+  background:linear-gradient(270deg,var(--veu) 0%,var(--veu) 54%,
+    color-mix(in srgb,var(--veu) 72%,transparent) 66%,
+    color-mix(in srgb,var(--veu) 30%,transparent) 80%,transparent 94%)}
 </style>
 </head>
 <body>
