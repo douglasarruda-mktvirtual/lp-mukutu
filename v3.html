@@ -538,10 +538,16 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
   /* =========================================================
      PONTE COM O WIDGET OFICIAL DO RD STATION
      Nossa interface é a da tela. Quem chama o RD é o código do
-     próprio RD, num formulário invisível. Troque RD_FORM_ID pelo
-     id que o RD dá em Formulários > Ver código.
+     próprio RD, num formulário invisível.
+
+     São dois ativos. Sem parâmetro na URL a conversão vai para o
+     ativo de PRODUÇÃO. Com ?teste=1 ela vai para o ativo de QA,
+     isolada da base real, que é o jeito de testar sem sujar nada.
+     Os ids saem do RD em Formulários > Ver código.
      ========================================================= */
-  var RD_FORM_ID = 'mukutu-sites-qa-d20286274c7dc8f285ac';
+  var RD_FORM_PROD = 'mukutu-sites-v3-c9bb222304ddd0e39060';
+  var RD_FORM_QA   = 'mukutu-sites-qa-d20286274c7dc8f285ac';
+  var RD_FORM_ID   = TESTE ? RD_FORM_QA : RD_FORM_PROD;
   var RD_GA_ID   = 'UA-235377-3';
 
   function formDoWidget(){
