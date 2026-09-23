@@ -737,23 +737,26 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
   /* =========================================================
      O QUIZ, quatro passos
      ========================================================= */
-  /* Faixas de investimento. O campo cf_investimento_software_house do RD aceita
-     SÓ estas seis, e valor fora da lista ele descarta em silêncio. Por isso a
-     tela mostra exatamente as seis do RD, e não as sete propostas pelo Édipo em
-     23/09/2026 (decisão do Douglas no mesmo dia: usar o que já existe, para tela
-     e relatório baterem). Padrão da casa: rótulo limpo na tela, valor exato no
-     envio (README, seção 11b). */
+  /* Faixas de investimento fechadas pelo Édipo no chat de 23/09/2026, depois de
+     ele ver as seis que existiam no RD e dizer que aquelas faziam a Mukutu
+     "parecer parceiro de range baixo". Texto igual ao que ele escreveu, de
+     propósito: o que aparece na tela é o mesmo valor que vai para o RD, sem
+     tradução no meio. O campo cf_investimento_software_house precisa ter
+     exatamente estas seis opções cadastradas, senão o RD descarta em silêncio. */
   var INVESTIMENTOS = [
-    {r:'Até R$ 9.500',               v:'Até R$9.500'},
-    {r:'De R$ 9.500 a R$ 20.000',    v:'R$9.500 a R$20.000'},
-    {r:'De R$ 20.000 a R$ 45.000',   v:'R$20.000 a R$45.000'},
-    {r:'De R$ 45.000 a R$ 80.000',   v:'R$45.000 a R$80.000'},
-    {r:'De R$ 80.000 a R$ 150.000',  v:'R$80.000 a R$150.000'},
-    {r:'A partir de R$ 150.000',     v:'A partir de R$150.000'}
+    'de R$ 8.000,00 a R$ 15.000,00',
+    'de R$ 15.000,00 a R$ 40.000,00',
+    'de R$ 40.000,00 a R$ 80.000,00',
+    'de R$ 80.000,00 a R$ 150.000,00',
+    'de R$ 150.000,00 a R$ 600.000,00',
+    'acima de R$ 600.000,00'
   ];
 
   /* Cargos pedidos pelo Édipo em 23/09/2026. Vão para job_title, que é
-     texto livre no formulário do RD, então nenhum rótulo se perde. */
+     texto livre no formulário do RD, então nenhum rótulo se perde.
+     "Prestador de serviço / Fornecedor" entrou no chat do mesmo dia, a pedido
+     dele, junto com "Estudante": os dois ficam na tela para serem capturados e
+     pontuados negativo no scoring, em vez de barrados na entrada. */
   var CARGOS = [
     'Sócio / Diretor / CEO (Partner / Director / CEO)',
     'Gerente de Marketing (Marketing Manager)',
@@ -761,6 +764,7 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     'Gerente de Tecnologia (Technology Manager)',
     'Marketing / Assistente de Tecnologia (Marketing / Technology Assistant)',
     'Compras / Suprimentos / Procurement (Purchases / Supplies / Procurement)',
+    'Prestador de serviço / Fornecedor',
     'Estudante',
     'Outros cargos'
   ];
