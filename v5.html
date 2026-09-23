@@ -606,9 +606,8 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
       personal_phone: resp.whatsapp,
       job_title: resp.cargo,
       cf_situacao_do_site: resp.cenario,
-      cf_investimento_software_house: FAIXA_RD[resp.investimento] || '',
-      cf_descreva_o_que_voce_busca_em_um_fornecedor_especialista_1:
-        resp.projeto + (resp.investimento ? ' [Investimento declarado: ' + resp.investimento + ']' : ''),
+      cf_investimento_software_house: resp.investimento || '',
+      cf_descreva_o_que_voce_busca_em_um_fornecedor_especialista_1: resp.projeto,
       cf_utm_source: utm('source'), cf_utm_medium: utm('medium'),
       cf_utm_campaing: utm('campaign'), cf_utm_content: utm('content')
     });
@@ -735,31 +734,20 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
   /* =========================================================
      O QUIZ, quatro passos
      ========================================================= */
-  /* Faixas de investimento pedidas pelo Édipo em 23/09/2026. */
+  /* Faixas de investimento. O campo cf_investimento_software_house do RD aceita
+     SÓ estas seis, e valor fora da lista ele descarta em silêncio. Por isso a
+     tela mostra exatamente as seis do RD, e não as sete propostas pelo Édipo em
+     23/09/2026 (decisão do Douglas no mesmo dia: usar o que já existe, para tela
+     e relatório baterem). Padrão da casa: rótulo limpo na tela, valor exato no
+     envio (README, seção 11b). */
   var INVESTIMENTOS = [
-    'de R$ 8.000,00 a R$ 15.000,00',
-    'de R$ 15.000,00 a R$ 30.000,00',
-    'de R$ 30.000,00 a R$ 60.000,00',
-    'de R$ 60.000,00 a R$ 120.000,00',
-    'de R$ 120.000,00 a R$ 200.000,00',
-    'de R$ 200.000,00 a R$ 600.000,00',
-    'acima de R$ 600.000,00'
+    {r:'Até R$ 9.500',               v:'Até R$9.500'},
+    {r:'De R$ 9.500 a R$ 20.000',    v:'R$9.500 a R$20.000'},
+    {r:'De R$ 20.000 a R$ 45.000',   v:'R$20.000 a R$45.000'},
+    {r:'De R$ 45.000 a R$ 80.000',   v:'R$45.000 a R$80.000'},
+    {r:'De R$ 80.000 a R$ 150.000',  v:'R$80.000 a R$150.000'},
+    {r:'A partir de R$ 150.000',     v:'A partir de R$150.000'}
   ];
-
-  /* O formulário do RD aceita SÓ as seis faixas cadastradas nele. As sete
-     acima ainda não existem lá, e valor fora da lista é descartado em
-     silêncio. Enquanto ninguém criar as opções no RD, mando a faixa
-     cadastrada que cobre o valor declarado, e a declarada vai literal no
-     campo aberto, entre colchetes. */
-  var FAIXA_RD = {
-    'de R$ 8.000,00 a R$ 15.000,00':    'R$9.500 a R$20.000',
-    'de R$ 15.000,00 a R$ 30.000,00':   'R$20.000 a R$45.000',
-    'de R$ 30.000,00 a R$ 60.000,00':   'R$45.000 a R$80.000',
-    'de R$ 60.000,00 a R$ 120.000,00':  'R$80.000 a R$150.000',
-    'de R$ 120.000,00 a R$ 200.000,00': 'A partir de R$150.000',
-    'de R$ 200.000,00 a R$ 600.000,00': 'A partir de R$150.000',
-    'acima de R$ 600.000,00':           'A partir de R$150.000'
-  };
 
   /* Cargos pedidos pelo Édipo em 23/09/2026. Vão para job_title, que é
      texto livre no formulário do RD, então nenhum rótulo se perde. */
@@ -810,9 +798,10 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     var o0 = document.createElement('option');
     o0.value = ''; o0.textContent = vazio || 'Selecione';
     s.appendChild(o0);
-    opcoes.forEach(function(txt){
+    opcoes.forEach(function(op){
       var o = document.createElement('option');
-      o.value = txt; o.textContent = txt;
+      o.value = op.v !== undefined ? op.v : op;
+      o.textContent = op.r !== undefined ? op.r : op;
       s.appendChild(o);
     });
     if(resp[id]) s.value = resp[id];
