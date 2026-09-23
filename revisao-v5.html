@@ -871,9 +871,11 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
       f2.appendChild(ta);
       var e2 = el('span','err'); e2.setAttribute('data-err','q-projeto'); f2.appendChild(e2);
       fs2.appendChild(f2);
-      /* Investimento fica OPCIONAL de propósito: a base mostra que faixa
-         obrigatória foi o gargalo da LP antiga (ver README, seção 2). */
-      fs2.appendChild(selecao('q-investimento','Investimento (Budget)', INVESTIMENTOS, 'Selecione uma faixa (opcional)'));
+      /* Investimento é OBRIGATÓRIO a pedido do Édipo (chat de 23/09/2026:
+         "o budget tem que ser obrigatório e tá como opcional"). O gargalo da LP
+         antiga não era a obrigatoriedade sozinha, era ela somada a um piso de
+         R$ 50.000; com piso de R$ 8.000 a barreira cai. Ver README, seção 21. */
+      fs2.appendChild(selecao('q-investimento','Investimento (Budget)', INVESTIMENTOS, 'Selecione uma faixa'));
       tela.appendChild(fs2);
       slot.appendChild(tela);
       rodape('Continuar');
@@ -976,9 +978,11 @@ footer{border-top:1px solid var(--border); padding-block:38px; font-size:13px; c
     }
 
     if(passo === 2){
+      var ok2 = true;
       var t = $('q-projeto').value.trim();
-      if(t.length < 10){ setErr('q-projeto','Escreva pelo menos 10 caracteres.'); $('q-projeto').focus(); return; }
-      setErr('q-projeto');
+      if(t.length < 10){ setErr('q-projeto','Escreva pelo menos 10 caracteres.'); ok2 = false; } else setErr('q-projeto');
+      if(!$('q-investimento').value){ setErr('q-investimento','Selecione uma faixa de investimento.'); ok2 = false; } else setErr('q-investimento');
+      if(!ok2){ var b2 = slot.querySelector('[aria-invalid="true"]'); if(b2) b2.focus(); return; }
       resp.projeto = t;
       resp.investimento = $('q-investimento').value;
       ir(3); return;
