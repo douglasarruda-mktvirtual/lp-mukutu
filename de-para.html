@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>De/para · LP Criação de Sites Mukutu</title>
+<style>
+:root{
+  --bg:#F4F2EC; --surface:#FFFFFF; --ink:#19191E; --dim:#5E616B; --line:#DCD8CC;
+  --accent:#F5DD71; --verde:#386167; --casa:#108F8C; --edipo:#B5651D;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){ --bg:#141418; --surface:#1D1E22; --ink:#EAE5D3; --dim:#9DA1AA; --line:#33343B; --casa:#6CC2BA; --edipo:#E8A15C; }
+}
+:root[data-theme="dark"]{ --bg:#141418; --surface:#1D1E22; --ink:#EAE5D3; --dim:#9DA1AA; --line:#33343B; --casa:#6CC2BA; --edipo:#E8A15C; }
+*{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:"Helvetica Neue",Arial,sans-serif; font-size:16px; line-height:1.5;}
+.wrap{max-width:1240px; margin:0 auto; padding:28px 16px 64px;}
+h1{font-size:clamp(24px,3vw,34px); letter-spacing:-.02em; margin:0 0 6px;}
+.lead{color:var(--dim); margin:0 0 22px; max-width:70ch;}
+.nota{display:inline-block; font-size:13px; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:6px 12px; margin-bottom:22px;}
+.barra{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
+.barra button{font:inherit; font-size:14px; font-weight:600; padding:9px 16px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer; min-height:40px;}
+.barra button[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink);}
+.lado{display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start;}
+.painel{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px; min-width:0;}
+.painel h2{font-size:15px; margin:0 0 4px; display:flex; justify-content:space-between; gap:8px; align-items:baseline;}
+.painel h2 a{font-size:13px; font-weight:600; color:var(--casa); text-decoration:underline;}
+.painel p{font-size:13px; color:var(--dim); margin:0 0 10px;}
+.tela{position:relative; margin:0 auto; overflow:hidden; border-radius:12px; border:1px solid var(--line); background:#19191E;}
+.tela iframe{border:0; transform-origin:0 0; display:block;}
+.lista{margin-top:34px; display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+.bloco{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px;}
+.bloco h3{margin:0 0 4px; font-size:18px;}
+.bloco .sub{font-size:13px; color:var(--dim); margin:0 0 12px;}
+.bloco ul{margin:0; padding-left:18px;}
+.bloco li{margin:7px 0; font-size:14.5px;}
+.tag{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 8px; border-radius:999px; margin-right:6px; vertical-align:1px;}
+.tag.casa{background:color-mix(in srgb, var(--casa) 16%, transparent); color:var(--casa);}
+.tag.edipo{background:color-mix(in srgb, var(--edipo) 16%, transparent); color:var(--edipo);}
+.mant{margin-top:18px; font-size:14px; color:var(--dim);}
+@media (max-width:860px){
+  .lado,.lista{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>LP Criação de Sites: atual × V6</h1>
+  <p class="lead">A mesma página, antes e depois dos ajustes. A V6 melhora o que já existe, sem seções novas. Escolha o tamanho de tela e use as duas lado a lado.</p>
+  <span class="nota">Prévia: nada é enviado ao RD e não há rastreamento. Pode preencher à vontade.</span>
+
+  <div class="barra" role="group" aria-label="Tamanho de tela">
+    <button type="button" data-modo="celular" aria-pressed="true">Celular</button>
+    <button type="button" data-modo="computador" aria-pressed="false">Computador</button>
+  </div>
+
+  <div class="lado">
+    <section class="painel">
+      <h2>Atual (no ar) <a href="v5.html" target="_blank" rel="noopener">abrir em tela cheia</a></h2>
+      <p>V5, como está em mukutu.com.br/criacao-de-sites</p>
+      <div class="tela" data-tela><iframe src="v5.html" title="LP atual" loading="lazy"></iframe></div>
+    </section>
+    <section class="painel">
+      <h2>V6 (proposta) <a href="v6.html" target="_blank" rel="noopener">abrir em tela cheia</a></h2>
+      <p>Com os ajustes abaixo</p>
+      <div class="tela" data-tela><iframe src="v6.html" title="LP V6" loading="lazy"></iframe></div>
+    </section>
+  </div>
+
+  <div class="lista">
+    <section class="bloco">
+      <h3>O que muda</h3>
+      <p class="sub"><span class="tag casa">Casa</span>funcionamento e layout, sem mexer em texto aprovado</p>
+      <ul>
+        <li><b>Sem botões concorrendo:</b> saíram o "Pedir orçamento" do topo e a barra fixa do rodapé. Eles só levavam até o formulário.</li>
+        <li><b>Opções do primeiro passo com seta</b>, com cara de botão.</li>
+        <li><b>Envio com confirmação:</b> "Enviando seu projeto" com o botão travado; "recebemos" só depois da resposta do RD; se falhar, aviso claro e "Tentar de novo".</li>
+        <li><b>Erros visíveis:</b> resumo junto do botão ("Falta o WhatsApp e o aceite") e mensagens corrigidas.</li>
+        <li><b>Telefone:</b> o preenchimento automático com +55 passa a funcionar.</li>
+        <li><b>"Voltar" mantém o que foi digitado</b>, e o voltar do celular volta um passo em vez de fechar a página.</li>
+        <li><b>Aceite</b> com caixa maior; campos com 16px (sem zoom no iPhone); tecla "Ir" do teclado avança.</li>
+        <li><b>Título para quem vem do Google</b> segue a palavra buscada.</li>
+        <li><b>Página mais leve:</b> de 218 KB para 59 KB; logos como arquivo.</li>
+      </ul>
+    </section>
+    <section class="bloco">
+      <h3>Sugestões para o Édipo</h3>
+      <p class="sub"><span class="tag edipo">Aguarda OK</span>já aplicadas na V6 para ver como ficam</p>
+      <ul>
+        <li><b>Passo 3:</b> tipo de projeto por toque, texto livre opcional.</li>
+        <li><b>Investimento em botões</b> com texto curto ("R$ 8 a 15 mil"). O RD recebe o texto de hoje.</li>
+        <li><b>Cargos só em português</b> na tela. O RD recebe o texto de hoje.</li>
+        <li><b>No celular, quiz primeiro</b> e a ancoragem logo abaixo, como na referência (SoftDesign). No computador não muda.</li>
+      </ul>
+      <p class="mant">Faixas de investimento, obrigatoriedade, cargos, textos e os números "26 anos" e "500 projetos" continuam como estão.</p>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+  var MODOS = { celular:{w:375, h:760}, computador:{w:1366, h:768} };
+  var modo = 'celular';
+  function aplica(){
+    var m = MODOS[modo];
+    document.querySelectorAll('[data-tela]').forEach(function(t){
+      var largura = t.parentNode.clientWidth - 28;
+      var esc = Math.min(1, largura / m.w);
+      var f = t.querySelector('iframe');
+      f.style.width = m.w + 'px'; f.style.height = m.h + 'px';
+      f.style.transform = 'scale(' + esc + ')';
+      t.style.width = Math.round(m.w * esc) + 'px';
+      t.style.height = Math.round(m.h * esc) + 'px';
+    });
+  }
+  document.querySelectorAll('[data-modo]').forEach(function(b){
+    b.addEventListener('click', function(){
+      modo = b.getAttribute('data-modo');
+      document.querySelectorAll('[data-modo]').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      aplica();
+    });
+  });
+  window.addEventListener('resize', aplica);
+  aplica();
+})();
+</script>
+</body>
+</html>
