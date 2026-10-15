@@ -1363,7 +1363,7 @@ $('rvMode').onclick=()=>{reviewOn=!reviewOn;$('rvMode').classList.toggle('on',re
   $('rvhint').textContent=reviewOn?'Clique em qualquer trecho para pedir um ajuste.':'Modo apresentação: clique para avançar.';pop.hidden=true};
 
 /* salvar (no navegador de quem revisa) */
-const KEY='rv-treinamento-ofertas-mkt';
+const KEY='rv-treinamento-ofertas-mkt-v2';
 function ler(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
 function gravar(){try{localStorage.setItem(KEY,JSON.stringify(items));return true}catch(e){return false}}
 function nome(){try{return localStorage.getItem(KEY+'-nome')||''}catch(e){return ''}}
