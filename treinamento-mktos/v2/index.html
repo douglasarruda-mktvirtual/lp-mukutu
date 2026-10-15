@@ -245,9 +245,9 @@ h1{font-family:Manrope;font-weight:800;line-height:1.05;letter-spacing:-.02em}
 .pill h5{font:800 13px Manrope;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:16px}
 .pill .prods .wrap{display:flex;flex-wrap:wrap;gap:16px 8px}
 .pill .prods .lb{font-size:14px;height:38px}
-.pill .scope{position:absolute;left:840px;top:590px;width:688px;background:#fff;border-radius:14px;padding:18px 24px}
+.pill .scope{position:absolute;left:840px;top:560px;width:688px;background:#fff;border-radius:14px;padding:18px 24px}
 .pill .scope b{display:block;font:800 15px Manrope;color:var(--k2);margin:4px 0 4px}
-.pill .scope p{font-size:16px;line-height:1.4;color:var(--ink2);margin-bottom:8px}
+.pill .scope p{font-size:15px;line-height:1.35;color:var(--ink2);margin-bottom:6px}
 .pill .flow{position:absolute;left:96px;right:72px;top:252px;height:330px}
 .pill .belt{position:absolute;left:0;right:0;top:118px;height:14px;border-radius:7px;background:repeating-linear-gradient(90deg,#D8D1C1 0 18px,#CBC3B1 18px 36px);
   background-size:72px 14px;animation:belt 1.2s linear infinite paused}
@@ -614,6 +614,7 @@ a.pj:after{content:"↗";position:absolute;right:12px;top:10px;color:var(--ciano
             <div class="it" data-k="r1"><span class="tg"></span>Implantação de Automação de Marketing</div>
             <div class="it" data-k="r2"><span class="tg"></span>Lead Scoring</div>
             <div class="it" data-k="r3"><span class="tg"></span>Gestão e Evolução de Fluxos e Réguas</div>
+            <div class="it" data-k="r4"><span class="tg"></span>Newsletter / E-mail (Produção + Envio)</div>
           </div></div>
       </div>
       <div class="right"><h4>Resumo da cotação</h4><div id="resumo"></div></div>
@@ -746,13 +747,15 @@ a.pj:after{content:"↗";position:absolute;right:12px;top:10px;color:var(--ciano
   <div class="scope rv" style="transition-delay:.6s"><h5>Escopo no nível médio, resumido</h5>
     <b>Implantação de Automação</b><p>3 a 5 réguas em e-mail e canal adicional, templates redigidos e 1 integração com o CRM.</p>
     <b>Lead Scoring</b><p>Pontuação por perfil, faixas de temperatura e critério de MQL.</p>
-    <b>Gestão de Fluxos e Réguas</b><p>Fluxos no ar, base higienizada e entregabilidade monitorada.</p></div>
+    <b>Gestão de Fluxos e Réguas</b><p>Fluxos no ar, base higienizada e entregabilidade monitorada.</p>
+    <b>Newsletter / E-mail e Régua Adicional</b><p>Pauta, redação e diagramação de cada e-mail e das peças da régua, no layout aprovado, e envio.</p></div>
   <div class="flow"><h5>A esteira e quem entra em cada etapa</h5>
     <div class="belt" style="top:146px"></div><div class="runner" style="top:142px"></div>
-    <div class="steps" style="top:30px;--n:6">
+    <div class="steps" style="top:30px;--n:7">
       <div class="st" style="transition-delay:.6s"><small>Imergir</small><span class="lb t opt">Imersão</span><div class="figs"><span class="fig"><i style="--k:var(--amarelo)"></i>Head de Estratégia</span><span class="fig" style="color:var(--mut)">quando faz sentido</span></div></div>
       <div class="st" style="transition-delay:.8s"><small>Planejar</small><span class="lb r">Planejamento de CRM</span><div class="figs"><span class="fig"><i></i>Coord. de Inbound</span><span class="fig"><i></i>Analista de Inbound</span></div></div>
       <div class="st" style="transition-delay:1s"><small>Executar</small><span class="lb r">Implantação de automação</span><div class="figs"><span class="fig"><i></i>Analista de Inbound</span><span class="fig"><i></i>Coord. de Inbound</span><span class="fig"><i style="--k:var(--rosa)"></i>Redator</span></div></div>
+      <div class="st" style="transition-delay:1.1s"><small>Executar</small><span class="lb r">Redação e criação de e-mails e réguas</span><div class="figs"><span class="fig"><i style="--k:var(--rosa)"></i>Redator</span><span class="fig"><i style="--k:var(--rosa)"></i>Designer</span><span class="fig"><i style="--k:var(--rosa)"></i>Coord. de Criação</span><span class="fig"><i></i>Coord. de Inbound</span></div></div>
       <div class="st" style="transition-delay:1.2s"><small>Executar</small><span class="lb r">Lead scoring</span><div class="figs"><span class="fig"><i></i>Coord. de Inbound</span><span class="fig"><i></i>Analista de Inbound</span></div></div>
       <div class="st" style="transition-delay:1.4s"><small>Executar</small><span class="lb r">Gestão de fluxos e réguas</span><div class="figs"><span class="fig"><i></i>Analista de Inbound</span><span class="fig"><i></i>Coord. de Inbound</span></div></div>
       <div class="st" style="transition-delay:1.6s"><small>Acompanhar</small><span class="lb r">Relatório de CRM</span><div class="figs"><span class="fig"><i></i>Analista de Inbound</span><span class="fig"><i></i>Coord. de Inbound</span></div></div>
@@ -1061,7 +1064,7 @@ addEventListener('keydown',e=>{if(e.target&&e.target.closest&&e.target.closest('
 /* ── slide 2: recriação da tela de orçar ── */
 const os=document.getElementById('os'),cursor=document.getElementById('cur'),resumo=document.getElementById('resumo');
 const info={c1:['Planejamento de Social / Conteúdo','Pontual'],c3:['Estático (Social)','Mensal'],c4:['Publicação de Feed','Mensal'],
-  m2:['Gestão de Mídia','Mensal'],r2:['Lead Scoring','Pontual'],r3:['Gestão de Fluxos e Réguas','Mensal']};
+  m2:['Gestão de Mídia','Mensal'],r2:['Lead Scoring','Pontual'],r3:['Gestão de Fluxos e Réguas','Mensal'],r4:['Newsletter / E-mail','Mensal']};
 function pos(el){const a=os.getBoundingClientRect(),b=el.getBoundingClientRect(),s=a.width/860;return[(b.left-a.left)/s+40,(b.top-a.top)/s+(b.height/s)/2-4]}
 function moveTo(el){const[x,y]=pos(el);cursor.style.transform=`translate(${x}px,${y}px)`}
 function click(){cursor.classList.remove('click');void cursor.offsetWidth;cursor.classList.add('click')}
@@ -1074,7 +1077,7 @@ function resetBuilder(){
 function openP(p){const el=os.querySelector(`.pil[data-p="${p}"]`);moveTo(el.querySelector('.hd'));return el}
 function playBuilder(){
   resetBuilder();let t=1200;const step=(ms,fn)=>{t+=ms;at(t,fn)};
-  const seq=[['c',['c1','c3','c4']],['m',['m2']],['r',['r2','r3']]];
+  const seq=[['c',['c1','c3','c4']],['m',['m2']],['r',['r2','r3','r4']]];
   seq.forEach(([p,ks])=>{
     let pil;step(700,()=>{pil=openP(p)});step(700,()=>{click();pil.classList.add('open')});
     os.querySelector(`.pil[data-p="${p}"]`);
@@ -1155,7 +1158,7 @@ document.querySelectorAll('#btns button').forEach(x=>x.onclick=()=>build(+x.data
  lab('03','Executar','Os serviços do dia a dia');
  [['c',['Direção Editorial','Redação e criação de peças','Captação e edição','Gestão do feed e SAC','Impulsionamento']],
   ['m',['Engenharia técnica e testes','Criativos de mídia','Operação e otimização']],
-  ['r',['Implantação de automação','Lead scoring','Fluxos e réguas']]].forEach(([k,its])=>add(its.map(n=>`<span class="lb ${k}">${n}</span>`).join(''),'g-col drop'));
+  ['r',['Implantação de automação','Redação e criação de e-mails e réguas','Lead scoring','Fluxos e réguas']]].forEach(([k,its])=>add(its.map(n=>`<span class="lb ${k}">${n}</span>`).join(''),'g-col drop'));
  lab('04','Acompanhar','Report e leitura todo mês');
  ['c:Report de Resultados','m:Relatórios e reuniões','r:Relatório de CRM'].forEach(x=>{const[k,n]=x.split(':');add(n,'lb drop '+k)});
 })();
@@ -1172,7 +1175,7 @@ const SZ=[
   t:{baixa:['Analista de Performance','Coord. de Mídia','Head de Estratégia'],media:['Analista de Performance','Coord. de Mídia','Head de Estratégia'],alta:['Analista de Performance','Coord. de Mídia','Head de Estratégia']}},
  {k:'r',cor:'var(--vinho)',pil:'Inbound & CRM',nome:'Implantação de Automação',tipo:'Serviço de implantação · pontual',
   h:{baixa:31.0,media:74.0,alta:152.0},
-  d:{baixa:'1 canal (e-mail), até 2 fluxos, templates adaptados',media:'E-mail + 1 canal, 3 a 5 fluxos, 1 integração direta',alta:'Multicanal, 6 ou mais fluxos, integrações e lead scoring'},
+  d:{baixa:'1 canal (e-mail), até 2 fluxos, templates adaptados',media:'E-mail + 1 canal, 3 a 5 fluxos, templates redigidos e diagramados, 1 integração direta',alta:'Multicanal, 6 ou mais fluxos, integrações e lead scoring'},
   t:{baixa:['Analista de Inbound','Coord. de Inbound'],media:['Analista de Inbound','Coord. de Inbound','Redator','Coord. de Conteúdo'],alta:['Analista de Inbound','Coord. de Inbound','Redator','Coord. de Conteúdo']}}];
 const sizesEl=document.getElementById('sizes');
 SZ.forEach((s,i)=>{const d=document.createElement('div');d.className='sz rv';d.style.transitionDelay=(.4+i*.15)+'s';
@@ -1231,6 +1234,7 @@ const KB_CARDS=[
  ['var(--ciano-esc)','Mídia','Planejamento de Campanha','Etapa: plano',[0,1,2]],
  ['var(--ciano-esc)','Mídia','Ativação e Gestão','Outubro',[5,6,6]],
  ['var(--vinho)','CRM','Implantação de Automação','Régua 1',[1,3,4]],
+ ['var(--vinho)','CRM','Produção de E-mail · 4 e-mails','Novembro',[0,3,4]],
  ['var(--vinho)','CRM','Relatório de CRM','Outubro',[6,7,7]],
  ['var(--rosa)','Conteúdo','Report de Resultados','Setembro',[7,7,7]],
  ['var(--ciano-esc)','Mídia','Criativos de Mídia · 6 peças','Lote 2',[2,3,4]]];
