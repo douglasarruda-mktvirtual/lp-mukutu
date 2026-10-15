@@ -1,0 +1,1439 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Revisão do Treinamento Ofertas Mkt</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rosa:#EB4D87; --vinho:#B22D52; --amarelo:#FCD567; --ciano:#52C6DA; --ciano-esc:#2A8FA3;
+  --bege:#F6F3EC; --paper:#EFEADF; --ink:#1F1F1F; --ink2:#4A4740; --mut:#6E6A63; --line:#C9C4B4;
+  --os-bg:#14161B; --os-card:#1D2027; --os-line:#2C303A; --os-txt:#E8E6E1; --os-mut:#8A8F99; --os-lar:#F5A524;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0d0d0d;overflow:hidden}
+body{font-family:Raleway,sans-serif;color:var(--ink)}
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center center}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .6s ease;overflow:hidden}
+.slide.on{opacity:1;pointer-events:auto}
+.eyebrow{font-family:Manrope;font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--rosa)}
+h1{font-family:Manrope;font-weight:800;line-height:1.05;letter-spacing:-.02em}
+.logo{position:absolute;top:48px;right:64px;width:150px}
+.dots{position:fixed;top:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:9}
+.dots i{width:28px;height:4px;border-radius:2px;background:#ffffff33;transition:background .3s}
+.dots i.on{background:var(--rosa)}
+.hint{position:fixed;top:12px;right:16px;color:#ffffff55;font:12px Raleway;z-index:9}
+
+/* reveal helpers */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)}
+.on .rv{opacity:1;transform:none}
+
+/* ───── SLIDE 1: o desafio ───── */
+#s1{background:var(--ink);color:var(--bege)}
+#s1 .txt{position:absolute;left:96px;top:150px;width:620px}
+#s1 h1{font-size:76px;color:var(--bege);margin:22px 0 40px}
+#s1 h1 em{font-style:normal;background:linear-gradient(transparent 62%, #FCD56766 62%)}
+#s1 ul{list-style:none}
+#s1 li{font-size:27px;line-height:1.3;margin:0 0 22px;padding-left:44px;position:relative;color:#E9E4D8}
+#s1 li:before{content:"";position:absolute;left:0;top:13px;width:24px;height:4px;background:var(--rosa);border-radius:2px}
+#s1 .pile{position:absolute;right:40px;top:150px;width:820px;height:700px}
+.shot{position:absolute;border-radius:10px;overflow:hidden;box-shadow:0 30px 60px #0009, 0 0 0 1px #ffffff14;background:#fff}
+.shot img{display:block;width:100%}
+#s1 .shot.a{width:640px;left:150px;top:40px;transform:rotate(5deg) translateY(40px);opacity:0;transition:all 1s cubic-bezier(.2,.8,.2,1) .5s}
+#s1 .shot.b{width:680px;left:40px;top:250px;transform:rotate(-4deg) translateY(60px);opacity:0;transition:all 1s cubic-bezier(.2,.8,.2,1) .9s}
+#s1.on .shot.a{transform:rotate(5deg);opacity:.9}
+#s1.on .shot.b{transform:rotate(-4deg);opacity:1}
+.tag{position:absolute;font:600 14px Manrope;background:var(--amarelo);color:var(--ink);padding:6px 12px;border-radius:6px;z-index:3;letter-spacing:.04em}
+#s1 .tag{left:60px;top:228px;transform:rotate(-4deg);opacity:0;transition:opacity .6s 1.6s}
+#s1.on .tag{opacity:1}
+.chip{position:absolute;z-index:4;background:#fff;color:var(--ink);font:700 19px Manrope;padding:14px 20px;border-radius:14px;
+  box-shadow:0 14px 30px #0008;white-space:nowrap;opacity:0;transition:opacity .6s}
+.chip:after{content:"";position:absolute;left:26px;bottom:-9px;border:9px solid transparent;border-top-color:#fff;border-bottom:0}
+.chip.r{background:var(--rosa);color:#fff}.chip.r:after{border-top-color:var(--rosa)}
+#s1.on .chip{opacity:1;animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -14px}}
+
+/* ───── SLIDE 2: a virada ───── */
+#s2{background:var(--bege)}
+#s2 .txt{position:absolute;left:96px;top:120px;width:560px}
+#s2 h1{font-size:62px;margin:20px 0 26px}
+#s2 h1 em{font-style:normal;color:var(--rosa)}
+#s2 p.sub{font-size:25px;line-height:1.4;color:var(--ink2)}
+#s2 p.sub b{color:var(--ink);font-weight:600}
+.oldmc{position:absolute;left:96px;top:560px;width:300px;transform:rotate(-3deg)}
+.oldmc .shot{position:relative;width:300px;filter:grayscale(1);opacity:.75}
+.oldmc svg.x{position:absolute;left:0;top:26px;width:300px;height:145px;pointer-events:none;overflow:visible}
+.oldmc svg.x line{stroke:var(--rosa);stroke-width:7;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .5s ease}
+#s2.on .oldmc svg.x line{stroke-dashoffset:0}
+#s2.on .oldmc svg.x line.l1{transition-delay:1s}
+#s2.on .oldmc svg.x line.l2{transition-delay:1.3s}
+.oldmc .lbl{font:800 13px Manrope;letter-spacing:.12em;color:var(--mut);margin-bottom:10px;text-transform:uppercase}
+.arrow-big{position:absolute;left:420px;top:650px;font:800 60px Manrope;color:var(--rosa);opacity:0;transition:opacity .5s 1.4s}
+#s2.on .arrow-big{opacity:1}
+
+/* builder mock (recriação da tela de orçar do Mkt OS) */
+.os{position:absolute;right:72px;top:110px;width:860px;height:560px;background:var(--os-bg);border-radius:16px;
+  box-shadow:0 40px 80px #0005,0 0 0 1px #0002;color:var(--os-txt);font-family:Manrope;overflow:hidden}
+.os .bar{height:44px;background:#0F1115;display:flex;align-items:center;gap:8px;padding:0 16px;border-bottom:1px solid var(--os-line)}
+.os .bar i{width:11px;height:11px;border-radius:50%;background:#3a3f4a}
+.os .bar span{margin-left:14px;font-size:13px;color:var(--os-mut)}
+.os .crumb{padding:16px 22px 6px;font-size:13px;color:var(--os-mut)}
+.os .crumb b{color:var(--os-txt);font-size:20px;display:block;margin-top:4px}
+.os .cols{display:flex;gap:16px;padding:10px 22px}
+.os .left{flex:1.25;display:flex;flex-direction:column;gap:10px}
+.os .right{flex:1;background:var(--os-card);border:1px solid var(--os-line);border-radius:12px;padding:14px;height:400px;overflow:hidden}
+.pil{background:var(--os-card);border:1px solid var(--os-line);border-radius:12px;overflow:hidden;transition:border-color .3s}
+.pil.open{border-color:var(--os-lar)}
+.pil .hd{display:flex;align-items:center;gap:10px;padding:12px 14px;font-weight:700;font-size:15px}
+.pil .hd .dot{width:12px;height:12px;border-radius:3px}
+.pil .hd .cnt{margin-left:auto;font-size:11px;background:#2a2e37;color:var(--os-mut);padding:3px 9px;border-radius:20px;transition:all .3s}
+.pil .hd .cnt.act{background:var(--os-lar);color:#1a1a1a}
+.pil .items{max-height:0;transition:max-height .5s ease}
+.pil.open .items{max-height:260px}
+.it{display:flex;align-items:center;gap:12px;padding:9px 14px;border-top:1px solid var(--os-line);font-size:13.5px;font-weight:500;color:#C9CCD3}
+.tg{width:34px;height:19px;border-radius:10px;background:#3a3f4a;position:relative;flex:none;transition:background .25s}
+.tg:after{content:"";position:absolute;left:3px;top:3px;width:13px;height:13px;border-radius:50%;background:#9aa0aa;transition:all .25s}
+.it.sel .tg{background:var(--os-lar)}
+.it.sel .tg:after{left:18px;background:#fff}
+.it.sel{color:#fff}
+.right #resumo{height:350px;overflow:hidden;scroll-behavior:smooth}
+.right h4{font-size:13px;color:var(--os-mut);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.ri{background:#252932;border-radius:9px;padding:8px 11px;margin-bottom:7px;opacity:0;transform:translateX(30px);transition:all .45s cubic-bezier(.2,.8,.2,1)}
+.ri.in{opacity:1;transform:none}
+.ri b{font-size:12.5px;display:block;margin-bottom:4px}
+.ri .pl{display:flex;gap:6px;flex-wrap:wrap}
+.ri .pl span{font-size:10.5px;padding:2px 7px;border-radius:10px;font-weight:700}
+.ok{background:#1f3b2c;color:#6fe0a0}.no{background:#41232b;color:#ff8fa8}.hh{background:#2b3140;color:#a9c4ff}
+.cursor{position:absolute;width:26px;height:26px;z-index:20;left:0;top:0;transition:transform .7s cubic-bezier(.4,.1,.2,1);pointer-events:none}
+.cursor svg{filter:drop-shadow(0 2px 3px #0008)}
+.cursor .ring{position:absolute;left:-14px;top:-14px;width:40px;height:40px;border-radius:50%;border:3px solid var(--rosa);opacity:0;transform:scale(.4)}
+.cursor.click .ring{animation:ping .45s ease-out}
+@keyframes ping{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.4)}}
+.realthumb{position:absolute;right:72px;top:688px;display:flex;align-items:center;gap:14px;opacity:0;transition:opacity .6s}
+.realthumb.in{opacity:1}
+.realthumb img{width:128px;border-radius:6px;box-shadow:0 6px 16px #0003}
+.realthumb span{font:600 15px Raleway;color:var(--mut);max-width:330px}
+.track{position:absolute;left:96px;right:72px;bottom:46px;display:flex;align-items:center;gap:0;opacity:0;transition:opacity .6s}
+.track.in{opacity:1}
+.track .st{font:800 20px Manrope;padding:12px 22px;border-radius:40px;color:#fff;white-space:nowrap}
+.track .ln{flex:1;height:4px;background:var(--line);margin:0 10px;border-radius:2px;position:relative;overflow:hidden}
+.track .ln:after{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .8s ease}
+.track.in .ln:after{transform:scaleX(1)}
+.track .end{font:600 19px Raleway;color:var(--ink2);margin-left:18px;white-space:nowrap}
+
+/* ───── SLIDE 9: lego ───── */
+#s9{background:var(--bege)}
+#s9 .txt{position:absolute;left:96px;top:110px;width:1100px}
+#s9 h1{font-size:60px;margin:18px 0 16px}
+#s9 h1 em{font-style:normal;background:linear-gradient(transparent 60%, var(--amarelo) 60%)}
+#s9 p.sub{font-size:24px;color:var(--ink2)}
+.shelf{position:absolute;left:96px;top:345px;width:600px}
+.shelf h5,.plate-wrap h5{font:800 13px Manrope;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.shelf .row{display:flex;flex-wrap:wrap;gap:13px 8px;margin-bottom:11px;min-height:36px}
+.plate-wrap{position:absolute;left:740px;top:345px;width:780px}
+.plate{position:relative;height:375px;border-radius:14px;background:#E3DDCF;
+  background-image:radial-gradient(circle at 50% 50%, #d6cfbe 9px, transparent 10px);background-size:36px 36px;background-position:4px 4px;
+  box-shadow:inset 0 -6px 0 #d2cbb9}
+.plate .name{position:absolute;left:0;right:0;bottom:-40px;text-align:center;font:800 20px Manrope;color:var(--ink);opacity:0;transition:opacity .5s}
+.plate .name.in{opacity:1}
+.brick{position:absolute;height:36px;border-radius:5px;color:#fff;font:700 12px Manrope;display:flex;align-items:center;padding:4px 12px 0;
+  white-space:nowrap;box-shadow:inset 0 -5px 0 #0000002e, 0 6px 10px #0002;transition:transform .7s cubic-bezier(.3,1.5,.5,1), opacity .4s;z-index:2}
+.brick:before{content:"";position:absolute;left:6px;right:6px;top:-7px;height:8px;
+  background:radial-gradient(circle at 50% 100%, var(--c) 7px, transparent 8px) 0 0/24px 16px repeat-x}
+.brick.c{background:var(--rosa);--c:var(--rosa)}
+.brick.m{background:var(--ciano-esc);--c:var(--ciano-esc)}
+.brick.r{background:var(--vinho);--c:var(--vinho)}
+.brick.t{background:var(--amarelo);--c:var(--amarelo);color:var(--ink)}
+.brick.ghost{position:relative;opacity:.28;transform:none !important}
+.brick.snap{animation:snap .35s ease-out}
+@keyframes snap{0%{scale:1.06}100%{scale:1}}
+.btns{position:absolute;left:96px;bottom:46px;display:flex;gap:12px}
+.btns button{font:700 16px Manrope;padding:13px 20px;border-radius:40px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:all .2s}
+.btns button.on,.btns button:hover{background:var(--ink);color:var(--bege)}
+.legend{position:absolute;right:80px;bottom:56px;display:flex;gap:22px;font:600 15px Raleway;color:var(--ink2)}
+.legend span:before{content:"";display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:8px;vertical-align:-2px;background:var(--k)}
+
+/* ───── comuns das telas 3 a 8 ───── */
+.lb{display:inline-flex;align-items:center;position:relative;height:40px;border-radius:5px;color:#fff;font:700 14px Manrope;padding:5px 14px 0;
+  white-space:nowrap;box-shadow:inset 0 -5px 0 #0000002e,0 6px 10px #0002}
+.lb:before{content:"";position:absolute;left:6px;right:6px;top:-7px;height:8px;
+  background:radial-gradient(circle at 50% 100%, var(--c) 7px, transparent 8px) 0 0/24px 16px repeat-x}
+.lb.c{background:var(--rosa);--c:var(--rosa)} .lb.m{background:var(--ciano-esc);--c:var(--ciano-esc)}
+.lb.r{background:var(--vinho);--c:var(--vinho)} .lb.t{background:var(--amarelo);--c:var(--amarelo);color:var(--ink)}
+.lb.g{background:#8B877E;--c:#8B877E}
+.drop{opacity:0;transform:translateY(-120px)}
+.on .drop{opacity:1;transform:none;transition:transform .6s cubic-bezier(.3,1.45,.5,1),opacity .3s}
+
+/* ───── 3 · advisory ───── */
+#s3{background:var(--ink);color:var(--bege)}
+#s3 .txt{position:absolute;left:96px;top:110px;width:1300px}
+#s3 h1{font-size:68px;color:var(--bege);margin:20px 0 18px}
+#s3 h1 em{font-style:normal;color:var(--amarelo)}
+#s3 p.sub{font-size:25px;color:#D9D3C6;max-width:1000px}
+#s3 .side{position:absolute;top:400px;width:640px;height:420px;border-radius:18px;padding:30px 34px}
+#s3 .side.a{left:96px;background:#2A2A2A}
+#s3 .side.b{left:864px;background:#2E2A22;box-shadow:inset 0 0 0 2px #FCD56755}
+#s3 .side h3{font:800 16px Manrope;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+#s3 .side.a h3{color:#9B968C} #s3 .side.b h3{color:var(--amarelo)}
+#s3 .side ul{list-style:none;position:relative;z-index:2}
+#s3 .side li{font-size:21px;margin-bottom:12px;color:#E9E4D8;padding-left:30px;position:relative}
+#s3 .side.a li:before{content:"✕";position:absolute;left:0;color:#9B968C;font-weight:700}
+#s3 .side.b li:before{content:"✓";position:absolute;left:0;color:var(--amarelo);font-weight:700}
+#s3 .stage-a{position:absolute;left:390px;top:250px;width:220px;height:150px}
+#s3 .stage-a .lb{position:absolute;left:40px;bottom:0;opacity:0}
+#s3.on .stage-a .lb{animation:solta 2.4s cubic-bezier(.4,0,.6,1) .8s forwards}
+@keyframes solta{0%{opacity:0;transform:translateY(-140px) rotate(-10deg)}35%{opacity:1;transform:translateY(0) rotate(4deg)}
+  50%{transform:translateY(-26px) rotate(-2deg)}65%{transform:translateY(0) rotate(0)}100%{opacity:1;transform:translateY(0) rotate(0)}}
+#s3 .stage-a span{position:absolute;left:0;bottom:-30px;font:600 15px Raleway;color:#9B968C;opacity:0;transition:opacity .5s 3s}
+#s3.on .stage-a span{opacity:1}
+#s3 .stage-b{position:absolute;left:300px;top:150px;width:320px;height:250px}
+#s3 .stage-b .lb{position:absolute}
+#s3 .quote{position:absolute;left:96px;bottom:34px;font:600 italic 20px Raleway;color:#BDB8AC}
+#s3 .quote b{font-style:normal;color:var(--amarelo);font-weight:700}
+
+/* ───── 4 · pilares sobre a base ───── */
+#s4{background:var(--bege)}
+#s4 .txt{position:absolute;left:96px;top:100px;width:1300px}
+#s4 h1{font-size:60px;margin:18px 0 12px}
+#s4 p.sub{font-size:23px;color:var(--ink2)}
+#s4 .build{position:absolute;left:96px;top:300px;width:1100px;height:560px}
+#s4 .layer{position:absolute;left:0;right:0;display:flex;gap:16px}
+#s4 .col{flex:1;display:flex;flex-direction:column-reverse;gap:14px}
+#s4 .lb{justify-content:center;width:100%}
+#s4 .lb.wide{height:52px;font-size:17px}
+#s4 .rail{position:absolute;left:1230px;top:300px;width:290px;height:560px}
+#s4 .rail div{position:absolute;left:0;right:0;opacity:0;transform:translateX(30px);transition:all .5s}
+#s4.on .rail div{opacity:1;transform:none}
+#s4 .rail b{display:block;font:800 22px Manrope}
+#s4 .rail span{font:500 15px Raleway;color:var(--ink2)}
+#s4 .rail i{font-style:normal;font:800 14px Manrope;color:var(--rosa);letter-spacing:.1em}
+
+/* ───── 5 · três tamanhos ───── */
+#s5{background:var(--bege)}
+#s5 .txt{position:absolute;left:96px;top:100px;width:1300px}
+#s5 h1{font-size:60px;margin:18px 0 12px}
+#s5 p.sub{font-size:23px;color:var(--ink2)}
+#s5 .lvl{position:absolute;left:96px;top:290px;display:flex;gap:10px}
+#s5 .lvl button{font:800 17px Manrope;padding:12px 26px;border-radius:40px;border:2px solid var(--ink);background:transparent;cursor:pointer;color:var(--ink)}
+#s5 .lvl button.on{background:var(--ink);color:var(--bege)}
+#s5 .cols3{position:absolute;left:96px;right:80px;top:380px;display:flex;gap:28px}
+#s5 .sz{flex:1;background:#fff;border-radius:16px;padding:26px 28px;min-height:380px;position:relative}
+#s5 .sz h4{font:800 14px Manrope;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+#s5 .sz h3{font:800 24px Manrope;margin-bottom:2px}
+#s5 .sz .tipo{font:600 14px Raleway;color:var(--mut);margin-bottom:28px}
+#s5 .sz .bk{height:46px;border-radius:6px;position:relative;transition:width .7s cubic-bezier(.3,1.4,.5,1);box-shadow:inset 0 -6px 0 #0000002e}
+#s5 .sz .bk:before{content:"";position:absolute;left:6px;right:6px;top:-8px;height:9px;
+  background:radial-gradient(circle at 50% 100%, var(--c) 8px, transparent 9px) 0 0/26px 18px repeat-x}
+#s5 .sz .bk span{position:absolute;right:-30px;top:12px;font:800 15px Manrope;color:var(--mut)}
+#s5 .sz .desc{font:600 22px Raleway;line-height:1.35;margin:34px 0 22px;min-height:90px;color:var(--ink)}
+#s5 .sz .team{display:flex;flex-wrap:wrap;gap:8px}
+#s5 .sz .team em{font-style:normal;font:700 15px Manrope;padding:7px 13px;border-radius:20px;background:var(--paper);color:var(--ink2);transition:all .4s}
+#s5 .sz .team em.new{background:var(--amarelo);color:var(--ink)}
+#s5 .foot{position:absolute;left:96px;bottom:28px;font:600 19px Raleway;color:var(--ink2)}
+#s5 .foot b{color:var(--ink)}
+
+/* ───── 6 a 8 · um pilar por tela ───── */
+.pill{background:var(--bege)}
+.pill .band{position:absolute;left:0;top:0;bottom:0;width:18px;background:var(--k)}
+.pill .txt{position:absolute;left:96px;top:96px;width:1350px}
+.pill h1{font-size:56px;margin:14px 0 8px}
+.pill .eyebrow{color:var(--k2)}
+.pill p.sub{font-size:21px;color:var(--ink2)}
+.pill .prods{position:absolute;left:96px;top:600px;width:700px}
+.pill h5{font:800 13px Manrope;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:16px}
+.pill .prods .wrap{display:flex;flex-wrap:wrap;gap:16px 8px}
+.pill .prods .lb{font-size:14px;height:38px}
+.pill .scope{position:absolute;left:840px;top:590px;width:688px;background:#fff;border-radius:14px;padding:18px 24px}
+.pill .scope b{display:block;font:800 15px Manrope;color:var(--k2);margin:4px 0 4px}
+.pill .scope p{font-size:16px;line-height:1.4;color:var(--ink2);margin-bottom:8px}
+.pill .flow{position:absolute;left:96px;right:72px;top:252px;height:330px}
+.pill .belt{position:absolute;left:0;right:0;top:118px;height:14px;border-radius:7px;background:repeating-linear-gradient(90deg,#D8D1C1 0 18px,#CBC3B1 18px 36px);
+  background-size:72px 14px;animation:belt 1.2s linear infinite paused}
+.pill.on .belt{animation-play-state:running}
+@keyframes belt{to{background-position:72px 0}}
+.pill .steps{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between}
+.pill .st{width:calc((100% - 14px*var(--n))/var(--n));display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateY(20px);transition:all .5s}
+.pill.on .st{opacity:1;transform:none}
+.pill .st .lb{width:100%;justify-content:center;font-size:15px;height:auto;min-height:66px;white-space:normal;line-height:1.15;padding:8px 8px 4px;text-align:center}
+.pill .st .lb.opt{background:transparent;color:var(--ink2);box-shadow:inset 0 0 0 2px #B9B2A2;--c:#B9B2A2}
+.pill .st small{font:700 11px Manrope;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:0 0 8px;height:14px}
+.pill .figs{display:flex;flex-direction:column;gap:8px;align-items:flex-start;margin-top:42px}
+.fig{display:flex;align-items:center;gap:7px;font:600 14px Raleway;color:var(--ink);white-space:nowrap}
+.fig i{width:15px;height:22px;position:relative;flex:none}
+.fig i:before{content:"";position:absolute;left:3px;top:0;width:9px;height:9px;border-radius:50%;background:var(--amarelo);box-shadow:inset 0 -2px 0 #0002}
+.fig i:after{content:"";position:absolute;left:0;top:10px;width:15px;height:12px;border-radius:3px 3px 1px 1px;background:var(--k)}
+.pill .runner{position:absolute;top:96px;left:0;width:44px;height:22px;border-radius:4px;background:var(--k);opacity:0;box-shadow:inset 0 -4px 0 #0002}
+.pill.on .runner{opacity:1;animation:run 7s linear 1s infinite}
+@keyframes run{0%{left:0;opacity:0}5%{opacity:1}95%{opacity:1}100%{left:calc(100% - 44px);opacity:0}}
+.pill .note{position:absolute;left:620px;right:72px;bottom:44px;display:flex;gap:14px}
+.pill .note div{flex:1;border-radius:12px;padding:14px 18px;font:500 16px Raleway;color:var(--ink2);background:#fff}
+.pill .note div b{font-family:Manrope;color:var(--ink)}
+
+/* ───── comuns 10 a 16 ───── */
+.std{background:var(--bege)}
+.std .txt{position:absolute;left:96px;top:96px;width:1350px}
+.std h1{font-size:56px;margin:14px 0 10px}
+.std h1 em{font-style:normal;color:var(--rosa)}
+.std p.sub{font-size:22px;color:var(--ink2);max-width:1200px}
+.blk{font:800 13px Manrope;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+
+/* ───── 10 · montagem vira proposta ───── */
+#s10 .pipe{position:absolute;left:96px;right:72px;top:290px;height:420px;display:flex;align-items:flex-start;justify-content:space-between}
+#s10 .stp{width:262px;flex:none;text-align:center;opacity:0;transform:translateY(24px);transition:all .6s}
+#s10.on .stp{opacity:1;transform:none}
+#s10 .stp .box{height:280px;border-radius:14px;background:#fff;box-shadow:0 12px 30px #0001;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+#s10 .stp .box img{width:100%;height:100%;object-fit:cover;object-position:top left}
+#s10 .stp b{display:block;font:800 21px Manrope;margin:16px 0 4px}
+#s10 .stp span{font:500 15px Raleway;color:var(--ink2)}
+#s10 .mini{display:flex;flex-direction:column-reverse;gap:9px;align-items:center}
+#s10 .mini .lb{height:34px;font-size:13px}
+#s10 .win{font:800 30px Manrope;color:#1a1a1a;background:var(--os-lar);width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 14px #F5A52433}
+#s10 .ek{width:200px;background:#fff;border:2px solid #E3DDCF;border-radius:10px;padding:12px;text-align:left}
+#s10 .ek small{font:700 11px Manrope;color:var(--mut);letter-spacing:.08em}
+#s10 .ek p{font:700 15px Manrope;margin:4px 0 10px}
+#s10 .ek .chip{position:static;opacity:1;animation:none;box-shadow:none;display:inline-block;font-size:12px;padding:6px 10px;background:var(--ciano);color:#06323b}
+#s10 .ek .chip:after{display:none}
+#s10 .arr{font:800 34px Manrope;color:var(--line);margin-top:118px}
+#s10 .flylink{position:absolute;top:610px;left:96px;font:800 14px Manrope;background:var(--ciano);color:#06323b;padding:8px 14px;border-radius:20px;opacity:0;box-shadow:0 8px 18px #0002}
+#s10.on .flylink{animation:fly 4.5s cubic-bezier(.5,0,.3,1) 2.6s forwards}
+@keyframes fly{0%{opacity:0;left:420px}10%{opacity:1}85%{opacity:1;left:1300px}100%{opacity:0;left:1340px}}
+#s10 .rule{position:absolute;left:96px;right:72px;bottom:60px;background:var(--ink);color:var(--bege);border-radius:14px;padding:22px 30px;font:500 21px Raleway}
+#s10 .rule b{color:var(--amarelo);font-family:Manrope}
+
+/* ───── 11 · painel ───── */
+#s11 .tri{position:absolute;left:96px;right:72px;top:300px;display:flex;gap:24px}
+#s11 .pane{flex:1;transition:flex .7s cubic-bezier(.3,1.2,.4,1)}
+#s11 .pane.act{flex:1.9}
+#s11 .pane .shot{position:relative;height:400px;border-radius:12px;background:var(--os-bg)}
+#s11 .pane .shot img{width:100%;height:100%;object-fit:cover;object-position:top left}
+#s11 .pane h3{font:800 24px Manrope;margin:18px 0 4px;transition:color .3s}
+#s11 .pane p{font:500 17px Raleway;color:var(--ink2)}
+#s11 .pane.act h3{color:var(--k)}
+#s11 .pane .shot:after{content:"";position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 4px var(--k);opacity:0;transition:opacity .3s}
+#s11 .pane.act .shot:after{opacity:1}
+
+/* ───── 12 · ler a conta ───── */
+#s12 .lights{position:absolute;left:96px;top:300px;width:640px}
+#s12 .lights .row{display:flex;gap:6px;margin:10px 0 26px}
+#s12 .lights .row div{flex:1;border-radius:10px;padding:12px 6px;text-align:center;font:700 13px Manrope;opacity:0;transform:scale(.8);transition:all .4s}
+#s12.on .lights .row div{opacity:1;transform:none}
+#s12 .lights .row div b{display:block;font-size:15px}
+#s12 .mx{position:absolute;left:820px;top:300px;width:700px}
+#s12 .mx .grid{display:grid;grid-template-columns:150px 1fr 1fr;grid-template-rows:40px 1fr 1fr;gap:10px;height:470px;margin-top:12px}
+#s12 .mx .ax{font:800 14px Manrope;color:var(--ink2);display:flex;align-items:center;justify-content:center;text-align:center}
+#s12 .mx .q{border-radius:14px;padding:18px;opacity:0;transform:scale(.9);transition:all .5s}
+#s12.on .mx .q{opacity:1;transform:none}
+#s12 .mx .q b{display:block;font:800 19px Manrope;margin-bottom:6px}
+#s12 .mx .q span{font:500 15px Raleway;color:var(--ink2);line-height:1.35}
+#s12 .warn{position:absolute;left:96px;bottom:70px;width:640px;font:800 26px Manrope}
+#s12 .warn em{font-style:normal;background:linear-gradient(transparent 60%,var(--amarelo) 60%)}
+
+/* ───── 13 · corrente ───── */
+#s13 .chain{position:absolute;left:96px;right:72px;top:330px;height:250px;display:flex;align-items:center;justify-content:space-between}
+#s13 .link{width:190px;height:150px;border-radius:75px;border:12px solid var(--k);display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;
+  position:relative;opacity:0;transform:translateY(-40px);transition:all .5s cubic-bezier(.3,1.4,.5,1)}
+#s13.on .link{opacity:1;transform:none}
+#s13 .link b{font:800 20px Manrope}
+#s13 .link span{font:700 12px Manrope;color:var(--mut);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+#s13 .link small{font:500 13px Raleway;color:var(--ink2);margin-top:4px;text-align:center;padding:0 10px}
+#s13 .link.weak{animation:quebra 7s ease 3s infinite}
+@keyframes quebra{0%,30%{transform:none;opacity:1}36%{transform:rotate(-6deg)}40%{transform:rotate(6deg)}44%{transform:translateY(90px) rotate(18deg);opacity:.35}
+  80%{transform:translateY(90px) rotate(18deg);opacity:.35}88%,100%{transform:none;opacity:1}}
+#s13 .drip{position:absolute;left:0;top:560px;width:100%;height:120px;pointer-events:none}
+#s13 .drop2{position:absolute;font:800 15px Manrope;background:var(--rosa);color:#fff;padding:7px 12px;border-radius:16px;opacity:0}
+#s13.on .drop2{animation:pinga 7s ease 3s infinite}
+@keyframes pinga{0%,42%{opacity:0;transform:translateY(-60px)}48%{opacity:1;transform:translateY(0)}78%{opacity:1;transform:translateY(40px)}86%,100%{opacity:0;transform:translateY(40px)}}
+#s13 .cap{position:absolute;left:96px;right:72px;bottom:70px;display:flex;gap:20px}
+#s13 .cap div{flex:1;border-radius:14px;padding:20px 26px;font:500 19px Raleway}
+#s13 .cap .a{background:var(--ink);color:var(--bege)} #s13 .cap .a b{color:var(--amarelo);font-family:Manrope}
+#s13 .cap .b{background:#fff;color:var(--ink2)} #s13 .cap .b b{color:var(--ink);font-family:Manrope}
+
+/* ───── 14 · fluxo único ───── */
+#s14 .phases{position:absolute;left:96px;right:72px;top:290px;display:flex;gap:6px}
+#s14 .ph{flex:1;opacity:0;transform:translateY(16px);transition:all .4s}
+#s14.on .ph{opacity:1;transform:none}
+#s14 .ph b{display:block;border-radius:8px 8px 0 0;color:#fff;font:800 14px Manrope;padding:8px 10px;background:var(--k)}
+#s14 .ph span{display:block;background:#fff;border-radius:0 0 8px 8px;padding:8px 10px;font:600 12.5px Raleway;color:var(--ink2);min-height:52px}
+#s14 .tabs{position:absolute;left:96px;top:430px;display:flex;gap:10px}
+#s14 .tabs button{font:800 16px Manrope;padding:10px 20px;border-radius:30px;border:2px solid var(--ink);background:transparent;cursor:pointer}
+#s14 .tabs button.on{background:var(--ink);color:var(--bege)}
+#s14 .tpl{position:absolute;left:96px;top:500px;width:860px;display:flex;flex-wrap:wrap;gap:16px 8px}
+#s14 .tpl .lb{font-size:14px;height:38px}
+#s14 .tpl .lb sup{font:800 10px Manrope;background:var(--amarelo);color:var(--ink);border-radius:8px;padding:2px 6px;margin-left:8px;vertical-align:2px}
+#s14 .rules{position:absolute;left:1010px;right:72px;top:430px;background:#fff;border-radius:14px;padding:20px 24px}
+#s14 .rules li{list-style:none;font:500 16px Raleway;color:var(--ink2);margin:0 0 11px;padding-left:34px;position:relative}
+#s14 .rules li i{position:absolute;left:0;top:-1px;font:800 15px Manrope;font-style:normal;color:var(--rosa)}
+#s14 .rules li b{color:var(--ink);font-family:Manrope}
+
+/* ───── 15 · o que muda ───── */
+#s15 .mtx{position:absolute;left:96px;right:72px;top:290px;display:grid;grid-template-columns:200px repeat(3,1fr);gap:10px}
+#s15 .mtx .h{font:800 15px Manrope;color:#fff;border-radius:10px;padding:14px 18px;letter-spacing:.04em}
+#s15 .mtx .r{font:800 22px Manrope;display:flex;align-items:center;padding-left:6px}
+#s15 .mtx .c{background:#fff;border-radius:10px;padding:16px 18px;font:500 17px Raleway;color:var(--ink);min-height:96px;display:flex;align-items:center;opacity:0;transform:translateX(-14px);transition:all .45s}
+#s15.on .mtx .c{opacity:1;transform:none}
+#s15 .elo{position:absolute;left:96px;bottom:60px;font:800 28px Manrope}
+#s15 .elo em{font-style:normal;background:linear-gradient(transparent 60%,var(--amarelo) 60%)}
+
+/* ───── 16 · combinados ───── */
+#s16 table{position:absolute;left:96px;top:280px;width:880px;border-collapse:separate;border-spacing:0 8px}
+#s16 th{font:800 13px Manrope;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-align:left;padding:0 14px}
+#s16 td{background:#fff;padding:13px 14px;font:500 16px Raleway;color:var(--ink);opacity:0;transition:opacity .4s}
+#s16.on td{opacity:1}
+#s16 td:first-child{border-radius:10px 0 0 10px;font-weight:600} #s16 td:last-child{border-radius:0 10px 10px 0;white-space:nowrap}
+#s16 td.ac{color:var(--vinho);font-weight:700}
+#s16 .dec{position:absolute;left:1020px;right:72px;top:290px;background:var(--ink);color:var(--bege);border-radius:16px;padding:24px 28px}
+#s16 .dec h4{font:800 14px Manrope;letter-spacing:.12em;color:var(--amarelo);margin-bottom:14px}
+#s16 .dec li{list-style:none;font:500 17px Raleway;margin-bottom:12px;padding-left:20px;position:relative}
+#s16 .dec li:before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px;background:var(--rosa)}
+#s16 .dec p{font:700 16px Manrope;color:var(--amarelo);margin-top:14px}
+#s16 .edipo{position:absolute;left:1020px;right:72px;top:300px;height:200px;border-radius:16px;background:var(--rosa);color:#fff;padding:24px 28px;
+  opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.3,1.3,.5,1) 2s}
+#s16.on .edipo{opacity:1;transform:none}
+#s16 .edipo small{font:800 14px Manrope;letter-spacing:.12em}
+#s16 .edipo b{display:block;font:800 30px Manrope;margin:6px 0}
+#s16 .edipo span{font:500 18px Raleway}
+
+/* ───── Ekyte · projetos ───── */
+#sp .ctr{position:absolute;left:96px;top:330px;width:360px;background:var(--rosa);color:#fff;border-radius:14px;padding:20px 24px;box-shadow:inset 0 -6px 0 #0002}
+#sp .ctr small,#sp .other small{font:800 12px Manrope;letter-spacing:.12em;opacity:.85}
+#sp .ctr b{display:block;font:800 25px Manrope;margin:6px 0 2px}
+#sp .ctr span{font:500 16px Raleway}
+#sp .tree{position:absolute;left:520px;right:72px;top:330px;display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+#sp .pj{display:block;background:#fff;border-left:8px solid var(--ciano-esc);border-radius:10px;padding:9px 30px 9px 14px;font:700 16px Manrope;
+  opacity:0;transform:translateX(-30px);transition:all .5s cubic-bezier(.3,1.3,.5,1)}
+#sp.on .pj{opacity:1;transform:none}
+#sp .pj em{display:block;font:500 14px Raleway;font-style:normal;color:var(--ink2);margin-top:2px}
+#sp .pj.fee{grid-column:1/3;border-left-color:var(--amarelo)}
+#sp .other{position:absolute;left:96px;top:560px;width:360px;background:#fff;border-radius:14px;padding:16px 20px}
+#sp .other small{color:var(--mut);display:block;margin-bottom:8px}
+#sp .other .pj{border-left-color:var(--vinho);padding:10px 12px;font-size:15px}
+#sp .why{position:absolute;left:96px;right:72px;bottom:36px;display:flex;gap:20px}
+#sp .why div{flex:1;border-radius:14px;padding:18px 24px;font:500 18px Raleway;background:var(--ink);color:var(--bege)}
+#sp .why b{color:var(--amarelo);font-family:Manrope}
+#sp svg.lines{position:absolute;left:456px;top:300px;width:64px;height:400px;overflow:visible}
+
+/* ───── Ekyte · tarefa ───── */
+#stk .tkshot{position:absolute;left:96px;top:250px;width:930px;border-radius:12px;overflow:hidden;box-shadow:0 20px 40px #0002,0 0 0 1px #0001;background:#fff}
+#stk .tkshot img{display:block;width:100%}
+#stk .mk{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:var(--amarelo);font:800 15px Manrope;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 4px #FCD56755;transform:scale(0);transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+#stk.on .mk{transform:scale(1)}
+#stk.on .mk:nth-of-type(1){transition-delay:.9s}#stk.on .mk:nth-of-type(2){transition-delay:1.1s}#stk.on .mk:nth-of-type(3){transition-delay:1.3s}#stk.on .mk:nth-of-type(4){transition-delay:1.5s}
+#stk .strike{position:absolute;height:4px;background:var(--rosa);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .5s 1.8s}
+#stk.on .strike{transform:scaleX(1)}
+#stk .tkrules{position:absolute;left:1066px;right:72px;top:250px;display:flex;flex-direction:column;gap:14px}
+#stk .tkrules>div{display:flex;gap:14px;background:#fff;border-radius:12px;padding:16px 18px}
+#stk .tkrules i{font-style:normal;flex:none;width:30px;height:30px;border-radius:50%;background:var(--amarelo);font:800 15px Manrope;display:flex;align-items:center;justify-content:center}
+#stk .tkrules b{display:block;font:800 18px Manrope;margin-bottom:3px}
+#stk .tkrules span{font:500 15px Raleway;color:var(--ink2);line-height:1.35}
+#stk .tkrules u{text-decoration:none;background:linear-gradient(transparent 60%,var(--amarelo) 60%);color:var(--ink);font-weight:600}
+#stk .tkrules .off{background:#F1EDE4}
+#stk .tkrules .off i{background:var(--rosa);color:#fff}
+
+/* ───── Ekyte · links ───── */
+a.pj{text-decoration:none;color:inherit;cursor:pointer}
+a.pj:hover{box-shadow:0 0 0 2px var(--ciano-esc)}
+a.pj{position:relative}
+a.pj:after{content:"↗";position:absolute;right:12px;top:10px;color:var(--ciano-esc);font-weight:800}
+#sp .mv{position:absolute;left:520px;right:72px;top:654px}
+#sp .mv small{font:800 12px Manrope;letter-spacing:.12em;color:var(--mut);display:block;margin-bottom:8px}
+#sp .mv .row{display:flex;gap:10px}
+#sp .mv .pj{flex:1;border-left-color:var(--rosa);font-size:14px;padding:9px 12px}
+#stk a.mk{text-decoration:none;color:var(--ink);cursor:pointer}
+#stk .golink{position:absolute;left:96px;top:700px;font:700 16px Manrope;color:var(--ciano-esc);text-decoration:none}
+
+/* ───── Ekyte · como abrir a tarefa ───── */
+#sgp .gsteps{position:absolute;left:96px;top:230px;width:820px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#sgp .gsteps>div{display:flex;gap:14px;background:#fff;border-radius:12px;padding:16px 18px}
+#sgp .gsteps i{font-style:normal;flex:none;width:32px;height:32px;border-radius:50%;background:var(--ciano-esc);color:#fff;font:800 15px Manrope;display:flex;align-items:center;justify-content:center}
+#sgp .gsteps b{display:block;font:800 18px Manrope;margin-bottom:4px}
+#sgp .gsteps span{font:500 15px Raleway;color:var(--ink2);line-height:1.35}
+#sgp .gsteps u{text-decoration:none;background:linear-gradient(transparent 60%,var(--amarelo) 60%)}
+#sgp .ckshot{position:absolute;left:960px;right:72px;top:160px;border-radius:12px;overflow:hidden;box-shadow:0 20px 40px #0002,0 0 0 1px #0001;background:#fff}
+#sgp .ckshot img{display:block;width:100%}
+#sgp .cklbl{position:absolute;right:12px;top:12px;font:800 12px Manrope;background:var(--ink);color:var(--bege);padding:6px 10px;border-radius:14px}
+#sgp .force{position:absolute;left:96px;width:820px;top:750px;background:var(--ink);color:var(--bege);border-radius:14px;padding:18px 24px;font:500 18px Raleway}
+#sgp .force b{color:var(--amarelo);font-family:Manrope}
+
+/* ───── Ekyte · kanban ───── */
+#skb .kb{position:absolute;left:96px;right:72px;top:300px;height:440px;display:flex;gap:8px}
+#skb .kc{flex:1;background:#E9E3D6;border-radius:10px;padding:8px;position:relative}
+#skb .kc h6{font:800 12px Manrope;color:var(--ink2);padding:4px 4px 8px;text-transform:uppercase;letter-spacing:.04em;min-height:42px;line-height:1.25}
+#skb .card{position:absolute;left:8px;right:8px;height:64px;background:#fff;border-radius:8px;padding:7px 9px;border-left:5px solid var(--k);
+  font:600 12px Raleway;color:var(--ink);box-shadow:0 3px 8px #0001;transition:left .9s cubic-bezier(.5,0,.3,1),top .9s cubic-bezier(.5,0,.3,1)}
+#skb .card b{display:block;font:800 12px Manrope;color:var(--k);margin-bottom:2px}
+#skb .card small{display:block;font:500 11px Raleway;color:var(--mut);margin-top:2px}
+
+/* ───── nada engessado + calendário ───── */
+#stl .free{position:absolute;left:96px;top:270px;width:640px;background:#fff;border-radius:16px;padding:28px 32px}
+#stl .free p{font:500 22px Raleway;line-height:1.4;color:var(--ink2);margin-bottom:16px}
+#stl .free p.b{font:800 24px Manrope;color:var(--ink);margin:0}
+#stl .cal{position:absolute;left:820px;right:72px;top:270px}
+#stl .mile{position:relative;padding:0 0 26px 40px;border-left:4px solid var(--line);margin-left:12px}
+#stl .mile:before{content:"";position:absolute;left:-14px;top:0;width:24px;height:24px;border-radius:50%;background:var(--bege);border:4px solid var(--ink)}
+#stl .mile b{display:block;font:800 26px Manrope;margin-bottom:4px}
+#stl .mile span{font:500 19px Raleway;color:var(--ink2);line-height:1.4}
+#stl .mile.hot:before{background:var(--rosa);border-color:var(--rosa)}
+#stl .mile.hot b{color:var(--rosa)}
+#stl .mile:last-child{border-left-color:transparent}
+#stl .cal .blk{margin-bottom:18px}
+
+#sp .allp{position:absolute;left:96px;width:360px;font:800 15px Manrope;color:var(--ciano-esc);text-decoration:none;background:#fff;border-radius:10px;padding:12px 16px}
+#sp .allp2{color:var(--ciano-esc);text-decoration:none}
+#sp .other{top:560px}
+#sgp .tasklink{position:absolute;left:960px;right:72px;top:670px;display:block;text-decoration:none;background:var(--ciano-esc);color:#fff;border-radius:14px;padding:16px 22px;box-shadow:inset 0 -6px 0 #0002}
+#sgp .tasklink small{font:800 12px Manrope;letter-spacing:.12em;opacity:.85}
+#sgp .tasklink b{display:block;font:800 20px Manrope;margin:4px 0}
+#sgp .tasklink span{font:500 15px Raleway}
+#sgp .ckshot{max-height:480px}
+
+/* ───── 0 · cadeia única ───── */
+#s0 .map3{position:absolute;left:96px;right:72px;top:330px;display:flex;align-items:stretch;gap:14px}
+#s0 .mc{flex:1;background:#fff;border-radius:16px;padding:28px 30px;border-top:10px solid var(--k);display:flex;flex-direction:column;gap:8px}
+#s0 .mc i{font-style:normal;font:800 18px Manrope;color:var(--k)}
+#s0 .mc small{font:800 14px Manrope;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+#s0 .mc b{font:800 40px Manrope;color:var(--ink)}
+#s0 .mc span{font:500 20px Raleway;line-height:1.4;color:var(--ink2)}
+#s0 .arw{font:800 44px Manrope;color:var(--line);align-self:center}
+#s0 .mapfoot{position:absolute;left:96px;right:72px;bottom:70px;background:var(--ink);color:var(--bege);border-radius:14px;padding:20px 28px;font:500 20px Raleway}
+#s0 .mapfoot b{color:var(--amarelo);font-family:Manrope}
+
+
+#s4 .grid4{position:absolute;left:96px;right:72px;top:270px;display:grid;grid-template-columns:230px repeat(3,1fr);gap:14px 14px;align-items:start}
+#s4 .g-h{color:#fff;font:800 17px Manrope;border-radius:10px;padding:12px 16px;text-align:center}
+#s4 .g-l i{font-style:normal;font:800 13px Manrope;color:var(--rosa);letter-spacing:.1em;display:block}
+#s4 .g-l b{display:block;font:800 21px Manrope}
+#s4 .g-l span{font:500 14px Raleway;color:var(--ink2)}
+#s4 .grid4 .lb{width:100%;justify-content:center;height:40px;font-size:15px;margin-top:8px}
+#s4 .g-span{grid-column:2/5}
+#s4 .g-col{display:flex;flex-direction:column;gap:12px}
+#s4 .g-col .lb{margin-top:8px}
+
+@media print{
+  @page{size:1600px 900px;margin:0}
+  html,body{overflow:visible;background:#fff}
+  #stage{position:static;transform:none !important}
+  .slide{position:relative;opacity:1 !important;page-break-after:always;width:1600px;height:900px}
+  .dots,.hint,.cursor,.btns{display:none}
+  .rv{opacity:1;transform:none}
+}
+
+.navb{position:fixed;z-index:40;bottom:calc(14px + env(safe-area-inset-bottom,0px));right:16px;display:flex;gap:8px}
+.navb button{width:44px;height:44px;border-radius:50%;border:1px solid #ffffff55;background:#1F1F1Fcc;color:#F6F3EC;font:800 20px Manrope,sans-serif;cursor:pointer}
+.navb button:focus-visible{outline:2px solid #EB4D87;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+/* ───── camada de revisão (só na versão de revisão) ───── */
+[hidden]{display:none!important}
+:root{--rv:#EB4D87;--rv-ink:#1F1F1F;--rv-paper:#FFFFFF;--rv-mut:#6E6A63;--rv-line:#E3DDCF;--rv-ok:#1E8A5A}
+.rvbar{position:fixed;left:0;right:0;top:0;z-index:50;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:8px 16px;padding-top:calc(8px + env(safe-area-inset-top,0px));background:#1F1F1Fee;color:#F6F3EC;font:600 13px Raleway,sans-serif;backdrop-filter:blur(6px)}
+.rvbar .pill{font:800 12px Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;background:var(--rv);color:#fff;border-radius:20px;padding:4px 10px}
+.rvbar .hintx{color:#CFC9BD;min-width:0}
+.rvbar .sp{flex:1}
+.rvbar button{font:700 13px Manrope,sans-serif;border:1px solid #ffffff44;background:transparent;color:#F6F3EC;border-radius:20px;padding:7px 12px;cursor:pointer}
+.rvbar button:hover,.rvbar button:focus-visible{background:#ffffff22;outline:none}
+.rvbar button.on{background:#F6F3EC;color:#1F1F1F}
+.rvbar .count{font-variant-numeric:tabular-nums}
+.dots{top:58px}.hint{display:none}
+body.rv-on .slide.on [data-rvok]:hover{outline:2px solid var(--rv);outline-offset:3px;cursor:copy}
+.tem-ajuste{outline:2px dashed var(--rv)!important;outline-offset:3px}
+.rvpop{position:fixed;z-index:60;width:min(380px,calc(100vw - 32px));background:var(--rv-paper);color:var(--rv-ink);border-radius:14px;padding:16px;
+  box-shadow:0 20px 50px #0006;font:500 14px Raleway,sans-serif}
+.rvpop small{display:block;font:800 11px Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--rv)}
+.rvpop .alvo{margin:6px 0 10px;color:var(--rv-mut);font-size:13px;max-height:60px;overflow:auto}
+.rvpop textarea{width:100%;min-height:96px;border:1px solid var(--rv-line);border-radius:10px;padding:10px;font:500 15px Raleway,sans-serif;color:var(--rv-ink);background:#fff;resize:vertical}
+.rvpop textarea:focus{outline:2px solid var(--rv);border-color:transparent}
+.rvpop .acts{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+.rvpop button{font:800 14px Manrope,sans-serif;border-radius:20px;padding:8px 16px;cursor:pointer;border:1px solid var(--rv-ink);background:transparent;color:var(--rv-ink)}
+.rvpop button.pri{background:var(--rv);border-color:var(--rv);color:#fff}
+.rvpop .msg{font-size:13px;color:var(--rv-mut);margin-top:8px}
+.rvpanel{position:fixed;z-index:55;top:0;right:0;bottom:0;width:min(420px,100vw);background:var(--rv-paper);color:var(--rv-ink);box-shadow:-20px 0 50px #0005;
+  display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.rvpanel header{display:flex;align-items:center;gap:8px;padding:16px;border-bottom:1px solid var(--rv-line)}
+.rvpanel header b{font:800 18px Manrope,sans-serif;flex:1}
+.rvpanel header button{font:700 13px Manrope,sans-serif;border:1px solid var(--rv-ink);background:transparent;border-radius:20px;padding:6px 12px;cursor:pointer;color:var(--rv-ink)}
+.rvpanel .lst{flex:1;overflow:auto;padding:12px 16px 24px}
+.rvpanel h4{font:800 12px Manrope,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--rv-mut);margin:14px 0 8px}
+.rvpanel .it{border:1px solid var(--rv-line);border-radius:12px;padding:12px;margin-bottom:8px}
+.rvpanel .it.feito{opacity:.55}
+.rvpanel .it .alvo{font-size:12px;color:var(--rv-mut);margin-bottom:6px}
+.rvpanel .it .tx{font:500 15px Raleway,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}
+.rvpanel .it .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--rv-mut)}
+.rvpanel .it .meta button{font:700 12px Manrope,sans-serif;border:none;background:#F1EDE4;border-radius:14px;padding:4px 10px;cursor:pointer;color:var(--rv-ink)}
+.rvpanel .empty{color:var(--rv-mut);font-size:15px;line-height:1.5;padding:12px 0}
+.rvtoast{position:fixed;z-index:70;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--rv-ink);color:#fff;font:700 14px Manrope,sans-serif;padding:10px 18px;border-radius:20px}
+</style>
+</head>
+<body>
+<div class="rvbar" id="rvbar">
+  <span class="pill">Revisão</span>
+  <span class="hintx" id="rvhint">Clique em qualquer trecho para pedir um ajuste.</span>
+  <span class="sp"></span>
+  <button type="button" id="rvMode" class="on">Modo revisão</button>
+  <button type="button" id="rvGeral">Ajuste geral da tela</button>
+  <button type="button" id="rvVer">Ver ajustes <span class="count" id="rvCount">0</span></button>
+  <button type="button" id="rvBaixar">Baixar ajustes</button>
+  <button type="button" id="rvCopiar">Copiar tudo</button>
+</div>
+<div class="rvpop" id="rvpop" hidden>
+  <small id="rvpopTela">Tela</small>
+  <div class="alvo" id="rvpopAlvo"></div>
+  <label for="rvtxt" class="alvo" style="margin:0 0 4px;display:block">O que mudar</label>
+  <textarea id="rvtxt" placeholder="Escreva o ajuste. Ex.: trocar este texto por..."></textarea>
+  <div class="acts"><button type="button" id="rvCancel">Cancelar</button><button type="button" class="pri" id="rvSave">Salvar ajuste</button></div>
+  <div class="msg" id="rvmsg" hidden></div>
+</div>
+<aside class="rvpanel" id="rvpanel" hidden>
+  <header><b>Ajustes pedidos</b><button type="button" id="rvBaixar2">Baixar</button><button type="button" id="rvCopiar2">Copiar</button><button type="button" id="rvFechar">Fechar</button></header>
+  <div class="lst" id="rvlst"></div>
+</aside>
+<div class="rvtoast" id="rvtoast" hidden></div>
+<div class="rvpop" id="rvNome" hidden style="left:50%;top:120px;transform:translateX(-50%)">
+  <small>Antes de começar</small>
+  <label for="rvNomeIn" class="alvo" style="display:block;margin:6px 0">Seu nome, para os ajustes saírem assinados</label>
+  <textarea id="rvNomeIn" style="min-height:44px" placeholder="Ex.: Fabi"></textarea>
+  <div class="acts"><button type="button" class="pri" id="rvNomeOk">Começar</button></div>
+</div>
+<div class="navb"><button type="button" aria-label="Tela anterior" id="navPrev">‹</button><button type="button" aria-label="Próxima tela" id="navNext">›</button></div>
+
+<div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="hint">← → para navegar</div>
+<div id="stage">
+
+
+<!-- 0 · A CADEIA ÚNICA -->
+<section class="slide std" id="s0">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Antes de começar</div>
+    <h1 class="rv" style="transition-delay:.15s">Organizamos a agência numa <em>cadeia única</em>.</h1>
+    <p class="sub rv" style="transition-delay:.3s">Do que a gente vende até como opera o que foi vendido. Hoje a gente abre cada etapa, nesta ordem.</p>
+  </div>
+  <div class="map3">
+    <div class="mc rv" style="--k:var(--rosa);transition-delay:.5s"><i>1</i><small>O que fazemos</small><b>Serviços</b><span>Ofertas Mkt: três pilares, cada serviço com escopo e tamanhos definidos.</span></div>
+    <div class="arw rv" style="transition-delay:.7s">›</div>
+    <div class="mc rv" style="--k:var(--vinho);transition-delay:.8s"><i>2</i><small>Como precificamos</small><b>Propostas</b><span>Mkt OS: catálogo, cotação, contrato e a leitura de rentabilidade.</span></div>
+    <div class="arw rv" style="transition-delay:1s">›</div>
+    <div class="mc rv" style="--k:var(--ciano-esc);transition-delay:1.1s"><i>3</i><small>Como operamos o que foi vendido</small><b>Operação</b><span>Ekyte: projetos, tarefas e o Fluxo Único Mkt Virtual.</span></div>
+  </div>
+  <div class="mapfoot rv" style="transition-delay:1.4s"><b>11h</b> · Papéis e responsabilidades de GPs e GCs, com o Édipo</div>
+</section>
+
+<!-- 1 · O DESAFIO -->
+<section class="slide" id="s1">
+  <img class="logo" src="img/logo-offwhite.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Lá atrás, o desafio</div>
+    <h1 class="rv" style="transition-delay:.15s">Cada proposta <em>saía de um jeito</em>.</h1>
+    <ul>
+      <li class="rv" style="transition-delay:.6s">Vários fluxos diferentes</li>
+      <li class="rv" style="transition-delay:.9s">Uma memória de cálculo para cada escopo</li>
+      <li class="rv" style="transition-delay:1.2s">Discussão no detalhe que não agregava à conversa</li>
+    </ul>
+  </div>
+  <div class="pile">
+    <div class="shot a"><img src="img/mc-quadro.jpg" alt="MC antiga, quadro geral"></div>
+    <div class="shot b"><img src="img/mc-antes.jpg" alt="MC antiga, aba de gestão de campanha"></div>
+    <div class="tag">Uma MC de verdade, aba por aba</div>
+    <div class="chip" style="left:480px;top:-10px;transition-delay:1.8s;animation-delay:0s">Quantas horas tem esse item?</div>
+    <div class="chip r" style="left:600px;top:190px;transition-delay:2.2s;animation-delay:-2s">Quanto custa só isso?</div>
+    <div class="chip" style="left:-10px;top:110px;transition-delay:2.6s;animation-delay:-4s">Qual fluxo esse cliente usa?</div>
+    <div class="chip r" style="left:520px;top:600px;transition-delay:3s;animation-delay:-1s">Essa é a versão final?</div>
+    <div class="chip" style="left:20px;top:620px;transition-delay:3.4s;animation-delay:-3s">Qual aba vale?</div>
+  </div>
+</section>
+
+<!-- 2 · A VIRADA -->
+<section class="slide" id="s2">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">A virada</div>
+    <h1 class="rv" style="transition-delay:.15s">A gente criou um padrão: as <em>Ofertas Mkt</em>.</h1>
+    <p class="sub rv" style="transition-delay:.4s"><b>Menos</b> discutir quantas horas e quanto custa cada item.<br><b>Mais</b> conversa sobre o que o cliente precisa.</p>
+  </div>
+  <div class="oldmc rv" style="transition-delay:.6s">
+    <div class="lbl">Antes: a MC</div>
+    <div class="shot"><img src="img/mc-antes.jpg" alt=""></div>
+    <svg class="x" viewBox="0 0 300 145"><line class="l1" x1="8" y1="8" x2="292" y2="137"/><line class="l2" x1="292" y1="8" x2="8" y2="137"/></svg>
+  </div>
+  <div class="arrow-big">→</div>
+
+  <div class="os" id="os">
+    <div class="bar"><i></i><i></i><i></i><span>Mkt OS · Deal · Cotação</span></div>
+    <div class="crumb">Novo deal · Cotação 1<b>Escolhendo os serviços no catálogo</b></div>
+    <div class="cols">
+      <div class="left">
+        <div class="pil" data-p="c"><div class="hd"><span class="dot" style="background:var(--rosa)"></span>Conteúdo &amp; Social<span class="cnt">0 ativos</span></div>
+          <div class="items">
+            <div class="it" data-k="c1"><span class="tg"></span>Planejamento de Social / Conteúdo</div>
+            <div class="it" data-k="c2"><span class="tg"></span>Direção Editorial de Conteúdo</div>
+            <div class="it" data-k="c3"><span class="tg"></span>Estático (Social)</div>
+            <div class="it" data-k="c4"><span class="tg"></span>Publicação de Feed (Always On)</div>
+            <div class="it" data-k="c5"><span class="tg"></span>SAC Operacional</div>
+          </div></div>
+        <div class="pil" data-p="m"><div class="hd"><span class="dot" style="background:var(--ciano)"></span>Mídia &amp; Performance<span class="cnt">0 ativos</span></div>
+          <div class="items">
+            <div class="it" data-k="m1"><span class="tg"></span>Planejamento de Campanha de Mídia</div>
+            <div class="it" data-k="m2"><span class="tg"></span>Gestão de Mídia</div>
+            <div class="it" data-k="m3"><span class="tg"></span>Peças de Mídia</div>
+          </div></div>
+        <div class="pil" data-p="r"><div class="hd"><span class="dot" style="background:var(--vinho)"></span>Inbound &amp; CRM<span class="cnt">0 ativos</span></div>
+          <div class="items">
+            <div class="it" data-k="r1"><span class="tg"></span>Implantação de Automação de Marketing</div>
+            <div class="it" data-k="r2"><span class="tg"></span>Lead Scoring</div>
+            <div class="it" data-k="r3"><span class="tg"></span>Gestão e Evolução de Fluxos e Réguas</div>
+          </div></div>
+      </div>
+      <div class="right"><h4>Resumo da cotação</h4><div id="resumo"></div></div>
+    </div>
+    <div class="cursor" id="cur"><div class="ring"></div><svg width="26" height="26" viewBox="0 0 24 24"><path d="M3 2l7 19 2.5-8L21 10z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="realthumb" id="real"><img src="img/mktos-orcar.jpg" alt=""><span>Recriação da tela de orçar. Na tela real, cada item traz escopo, não escopo e horas por cargo.</span></div>
+  <div class="track" id="track">
+    <span class="st" style="background:var(--rosa)">Oferta</span><span class="ln"></span>
+    <span class="st" style="background:var(--vinho)">Mkt OS</span><span class="ln"></span>
+    <span class="st" style="background:var(--ciano-esc)">Ekyte</span>
+    <span class="end">e daqui o ponta a ponta fica organizado</span>
+  </div>
+</section>
+
+
+<!-- 3 · ADVISORY -->
+<section class="slide" id="s3">
+  <img class="logo" src="img/logo-offwhite.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Por que mudar</div>
+    <h1 class="rv" style="transition-delay:.15s">De fornecedor de entregas para <em>parceiro estratégico</em>.</h1>
+    <p class="sub rv" style="transition-delay:.35s">A gente não vende peça solta. Vende estratégia: o caminho que leva o cliente aonde ele quer chegar.</p>
+  </div>
+  <div class="side a rv" style="transition-delay:.5s">
+    <h3>Peça solta</h3>
+    <ul><li>Entrega avulsa, contada por volume</li><li>Métrica de vaidade</li><li>Operação reativa, pedido a pedido</li><li>Fácil de trocar por outro fornecedor</li></ul>
+    <div class="stage-a"><div class="lb g" style="width:120px">post avulso</div><span>vira commodity</span></div>
+  </div>
+  <div class="side b rv" style="transition-delay:.7s">
+    <h3>Estratégia</h3>
+    <ul><li>Começa no negócio do cliente</li><li>Planejamento antes da execução</li><li>Escopo claro e resultado acompanhado</li><li>Peças que se encaixam e crescem com ele</li></ul>
+    <div class="stage-b" id="tower"></div>
+  </div>
+  <div class="quote rv" style="transition-delay:1s">Como a Fabi colocou no Conteúdo 2.0: <b>“de fazedores de post para estrategistas de conteúdo”</b>.</div>
+</section>
+
+<!-- 4 · PILARES SOBRE A BASE -->
+<section class="slide" id="s4">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Como as ofertas foram desenhadas</div>
+    <h1 class="rv" style="transition-delay:.15s">Três pilares sobre a mesma base.</h1>
+    <p class="sub rv" style="transition-delay:.3s">Todo serviço segue a mesma lógica: imergir, planejar, executar e acompanhar.</p>
+  </div>
+  <div class="grid4" id="grid4"></div>
+</section>
+
+<!-- 5 · TRÊS TAMANHOS -->
+<section class="slide" id="s5">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Baixa, média e alta complexidade</div>
+    <h1 class="rv" style="transition-delay:.15s">Cada serviço tem três tamanhos.</h1>
+    <p class="sub rv" style="transition-delay:.3s">Os tamanhos são balizadores: o que o cliente já tem e onde ele quer chegar definem o ponto de partida.</p>
+  </div>
+  <div class="lvl" id="lvl"><button data-l="baixa">Baixa</button><button data-l="media">Média</button><button data-l="alta">Alta</button></div>
+  <div class="cols3" id="sizes"></div>
+  <div class="foot rv" style="transition-delay:.6s"><b>O pacote pode variar.</b> O que não muda é o escopo de cada serviço e de cada etapa, com horas por cargo e fluxo definidos.</div>
+</section>
+
+<!-- 6 · CONTEÚDO -->
+<section class="slide pill" id="s6" style="--k:var(--rosa);--k2:var(--rosa)">
+  <div class="band"></div><img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Pilar 1</div>
+    <h1 class="rv" style="transition-delay:.15s">Conteúdo &amp; Social</h1>
+    <p class="sub rv" style="transition-delay:.3s">Da estratégia de conteúdo ao report, com a mesma esteira para todo cliente.</p>
+  </div>
+  <div class="prods rv" style="transition-delay:.4s"><h5>Os produtos</h5><div class="wrap">
+    <span class="lb c">Planejamento de Social</span><span class="lb c">Direção Editorial</span><span class="lb c">Estático</span><span class="lb c">Carrossel</span>
+    <span class="lb c">Motion</span><span class="lb c">Diária de Captação</span><span class="lb c">Publicação de Feed</span><span class="lb c">Publicação de Stories</span>
+    <span class="lb c">SAC Operacional</span><span class="lb c">Report de Resultados</span><span class="lb c">Revisão Editorial</span><span class="lb c">Impulsionamento</span></div></div>
+  <div class="scope rv" style="transition-delay:.6s"><h5>Escopo no nível médio, resumido</h5>
+    <b>Planejamento de Social</b><p>Pilares editoriais, tom de voz e estudo de persona.</p>
+    <b>Direção Editorial</b><p>Mote do período, pauta por pilar e briefing peça a peça.</p>
+    <b>Report de Resultados</b><p>Resultado do mês, análise de formatos, insights e plano de ação.</p>
+    <b>Impulsionamento + Report de Mídia (add-on)</b><p>Verba nos posts aprovados, ajuste de segmentação e report do período.</p></div>
+  <div class="flow"><h5>A esteira e quem entra em cada etapa</h5>
+    <div class="belt" style="top:146px"></div><div class="runner" style="top:142px"></div>
+    <div class="steps" style="top:30px;--n:8">
+      <div class="st" style="transition-delay:.6s"><small>Imergir</small><span class="lb t opt">Imersão</span><div class="figs"><span class="fig"><i style="--k:var(--amarelo)"></i>Head de Estratégia</span><span class="fig" style="color:var(--mut)">quando faz sentido</span></div></div>
+      <div class="st" style="transition-delay:.8s"><small>Planejar</small><span class="lb c">Planejamento de Social</span><div class="figs"><span class="fig"><i></i>Head de Estratégia</span><span class="fig"><i></i>Redator</span><span class="fig"><i></i>Designer</span></div></div>
+      <div class="st" style="transition-delay:1s"><small>Planejar</small><span class="lb c">Direção editorial</span><div class="figs"><span class="fig"><i></i>Coord. de Conteúdo</span></div></div>
+      <div class="st" style="transition-delay:1.2s"><small>Executar</small><span class="lb c">Redação e criação</span><div class="figs"><span class="fig"><i></i>Redator</span><span class="fig"><i></i>Designer</span><span class="fig"><i></i>Coord. de Criação</span></div></div>
+      <div class="st" style="transition-delay:1.4s"><small>Executar</small><span class="lb c opt">Captação e edição</span><div class="figs"><span class="fig"><i></i>Videomaker</span><span class="fig"><i></i>Editora</span><span class="fig" style="color:var(--mut)">quando contratado</span></div></div>
+      <div class="st" style="transition-delay:1.6s"><small>Executar</small><span class="lb c">Gestão do feed e SAC</span><div class="figs"><span class="fig"><i></i>Social Media</span></div></div>
+      <div class="st" style="transition-delay:1.7s"><small>Executar</small><span class="lb c opt">Impulsionamento</span><div class="figs"><span class="fig"><i style="--k:var(--ciano-esc)"></i>Analista de Performance</span><span class="fig"><i style="--k:var(--ciano-esc)"></i>Coord. de Growth</span><span class="fig" style="color:var(--mut)">quando contratado</span></div></div>
+      <div class="st" style="transition-delay:1.9s"><small>Acompanhar</small><span class="lb c">Report</span><div class="figs"><span class="fig"><i></i>Head de Estratégia</span><span class="fig"><i></i>Coord. de Conteúdo</span></div></div>
+    </div></div>
+</section>
+
+<!-- 7 · MÍDIA -->
+<section class="slide pill" id="s7" style="--k:var(--ciano-esc);--k2:var(--ciano-esc)">
+  <div class="band"></div><img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Pilar 2</div>
+    <h1 class="rv" style="transition-delay:.15s">Mídia &amp; Performance</h1>
+    <p class="sub rv" style="transition-delay:.3s">Poucos produtos, mas a Gestão de Mídia é grande: quatro blocos de escopo, um time inteiro.</p>
+  </div>
+  <div class="prods rv" style="transition-delay:.4s"><h5>Os produtos</h5><div class="wrap">
+    <span class="lb m">Planejamento de Campanha</span><span class="lb m">Gestão de Mídia</span><span class="lb m">Estático</span><span class="lb m">Carrossel</span><span class="lb m">Motion</span></div></div>
+  <div class="scope rv" style="transition-delay:.6s"><h5>Escopo no nível médio, resumido</h5>
+    <b>Planejamento de Campanha</b><p>Até 3 concorrentes, 3 a 4 canais, 2 ofertas, já com camada de CRM.</p>
+    <b>Gestão de Mídia</b><p>3 a 4 plataformas, sprints quinzenais e leitura estratégica integrada.</p>
+    <b>Peças de Mídia</b><p>Arte e copy do anúncio, adaptadas aos formatos das plataformas.</p></div>
+  <div class="flow"><h5>A esteira e quem entra em cada etapa</h5>
+    <div class="belt" style="top:146px"></div><div class="runner" style="top:142px"></div>
+    <div class="steps" style="top:30px;--n:6">
+      <div class="st" style="transition-delay:.6s"><small>Imergir</small><span class="lb t opt">Imersão</span><div class="figs"><span class="fig"><i style="--k:var(--amarelo)"></i>Head de Estratégia</span><span class="fig" style="color:var(--mut)">quando faz sentido</span></div></div>
+      <div class="st" style="transition-delay:.8s"><small>Planejar</small><span class="lb m">Planejamento de campanha</span><div class="figs"><span class="fig"><i></i>Head de Estratégia</span><span class="fig"><i></i>Analista de Performance</span><span class="fig"><i></i>Coord. de Mídia</span><span class="fig"><i style="--k:var(--vinho)"></i>Inbound e CRM</span></div></div>
+      <div class="st" style="transition-delay:1s"><small>Executar</small><span class="lb m">Engenharia técnica e testes</span><div class="figs"><span class="fig"><i></i>Analista de Performance</span></div></div>
+      <div class="st" style="transition-delay:1.2s"><small>Executar</small><span class="lb m">Criativos de mídia</span><div class="figs"><span class="fig"><i style="--k:var(--rosa)"></i>Redator</span><span class="fig"><i style="--k:var(--rosa)"></i>Designer</span><span class="fig"><i style="--k:var(--rosa)"></i>Coord. de Criação</span></div></div>
+      <div class="st" style="transition-delay:1.4s"><small>Executar</small><span class="lb m">Operação e otimização</span><div class="figs"><span class="fig"><i></i>Analista de Performance</span><span class="fig"><i></i>Coord. de Mídia</span></div></div>
+      <div class="st" style="transition-delay:1.6s"><small>Acompanhar</small><span class="lb m">Relatórios e reuniões</span><div class="figs"><span class="fig"><i></i>Analista de Performance</span><span class="fig"><i></i>Coord. de Mídia</span><span class="fig"><i></i>Head de Estratégia</span></div></div>
+    </div></div>
+</section>
+
+<!-- 8 · CRM -->
+<section class="slide pill" id="s8" style="--k:var(--vinho);--k2:var(--vinho)">
+  <div class="band"></div><img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Pilar 3</div>
+    <h1 class="rv" style="transition-delay:.15s">Inbound &amp; CRM</h1>
+    <p class="sub rv" style="transition-delay:.3s">Do diagnóstico do funil à régua no ar, com lead scoring e evolução todo mês.</p>
+  </div>
+  <div class="prods rv" style="transition-delay:.4s"><h5>Os produtos</h5><div class="wrap">
+    <span class="lb r">Planejamento de CRM</span><span class="lb r">Implantação de Automação</span><span class="lb r">Lead Scoring</span><span class="lb r">Gestão de Fluxos e Réguas</span>
+    <span class="lb r">Régua Adicional</span><span class="lb r">Newsletter / E-mail</span><span class="lb r">Relatório de CRM</span></div></div>
+  <div class="scope rv" style="transition-delay:.6s"><h5>Escopo no nível médio, resumido</h5>
+    <b>Implantação de Automação</b><p>3 a 5 réguas em e-mail e canal adicional, templates redigidos e 1 integração com o CRM.</p>
+    <b>Lead Scoring</b><p>Pontuação por perfil, faixas de temperatura e critério de MQL.</p>
+    <b>Gestão de Fluxos e Réguas</b><p>Fluxos no ar, base higienizada e entregabilidade monitorada.</p></div>
+  <div class="flow"><h5>A esteira e quem entra em cada etapa</h5>
+    <div class="belt" style="top:146px"></div><div class="runner" style="top:142px"></div>
+    <div class="steps" style="top:30px;--n:6">
+      <div class="st" style="transition-delay:.6s"><small>Imergir</small><span class="lb t opt">Imersão</span><div class="figs"><span class="fig"><i style="--k:var(--amarelo)"></i>Head de Estratégia</span><span class="fig" style="color:var(--mut)">quando faz sentido</span></div></div>
+      <div class="st" style="transition-delay:.8s"><small>Planejar</small><span class="lb r">Planejamento de CRM</span><div class="figs"><span class="fig"><i></i>Coord. de Inbound</span><span class="fig"><i></i>Analista de Inbound</span></div></div>
+      <div class="st" style="transition-delay:1s"><small>Executar</small><span class="lb r">Implantação de automação</span><div class="figs"><span class="fig"><i></i>Analista de Inbound</span><span class="fig"><i></i>Coord. de Inbound</span><span class="fig"><i style="--k:var(--rosa)"></i>Redator</span></div></div>
+      <div class="st" style="transition-delay:1.2s"><small>Executar</small><span class="lb r">Lead scoring</span><div class="figs"><span class="fig"><i></i>Coord. de Inbound</span><span class="fig"><i></i>Analista de Inbound</span></div></div>
+      <div class="st" style="transition-delay:1.4s"><small>Executar</small><span class="lb r">Gestão de fluxos e réguas</span><div class="figs"><span class="fig"><i></i>Analista de Inbound</span><span class="fig"><i></i>Coord. de Inbound</span></div></div>
+      <div class="st" style="transition-delay:1.6s"><small>Acompanhar</small><span class="lb r">Relatório de CRM</span><div class="figs"><span class="fig"><i></i>Analista de Inbound</span><span class="fig"><i></i>Coord. de Inbound</span></div></div>
+    </div></div>
+</section>
+
+<!-- 9 · LEGO -->
+<section class="slide" id="s9">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Como a gente monta</div>
+    <h1 class="rv" style="transition-delay:.15s">Cada cliente tem seu desafio e seu objetivo. A gente monta como <em>Lego</em>.</h1>
+    <p class="sub rv" style="transition-delay:.35s">Mesmas peças, montagens diferentes. Cada peça já vem com escopo, não escopo e horas.</p>
+  </div>
+  <div class="shelf rv" style="transition-delay:.5s">
+    <h5>As peças: catálogo do Mkt OS</h5>
+    <div class="row" id="row-t"></div>
+    <div class="row" id="row-c"></div>
+    <div class="row" id="row-m"></div>
+    <div class="row" id="row-r"></div>
+  </div>
+  <div class="plate-wrap rv" style="transition-delay:.5s">
+    <h5>O resultado: um contrato</h5>
+    <div class="plate" id="plate"><div class="name" id="pname"></div></div>
+  </div>
+  <div class="btns" id="btns">
+    <button data-b="0" class="on">Contrato 001, o nosso</button>
+    <button data-b="1">Só Conteúdo, porte P</button>
+    <button data-b="2">Conteúdo + CRM</button>
+  </div>
+  <div class="legend">
+    <span style="--k:var(--rosa)">Conteúdo &amp; Social</span>
+    <span style="--k:var(--ciano-esc)">Mídia &amp; Performance</span>
+    <span style="--k:var(--vinho)">Inbound &amp; CRM</span>
+    <span style="--k:var(--amarelo)">Estratégia</span>
+  </div>
+</section>
+
+<!-- 10 · A MONTAGEM VIRA PROPOSTA -->
+<section class="slide std" id="s10">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Bloco 2 · Mkt OS</div>
+    <h1 class="rv" style="transition-delay:.15s">Os serviços escolhidos viram proposta. <em>O link é a nova MC.</em></h1>
+    <p class="sub rv" style="transition-delay:.3s">As peças escolhidas viram cotação, o ganho vira contrato e o link do contrato desce para o Ekyte.</p>
+  </div>
+  <div class="pipe">
+    <div class="stp" style="transition-delay:.5s"><div class="box"><div class="mini"><span class="lb t">Imersão</span><span class="lb c">Planejamento de Social</span><span class="lb m">Gestão de Mídia</span><span class="lb r">Lead Scoring</span></div></div><b>1 · As peças</b><span>escolhidas no catálogo</span></div>
+    <div class="arr rv" style="transition-delay:.8s">›</div>
+    <div class="stp" style="transition-delay:1s"><div class="box"><img src="img/mktos-orcar.jpg" alt=""></div><b>2 · Cotação</b><span>o motor calcula horas e preço</span></div>
+    <div class="arr rv" style="transition-delay:1.3s">›</div>
+    <div class="stp" style="transition-delay:1.5s"><div class="box"><div class="win">Win</div></div><b>3 · Ganho</b><span>com escopo e preço aprovados</span></div>
+    <div class="arr rv" style="transition-delay:1.8s">›</div>
+    <div class="stp" style="transition-delay:2s"><div class="box"><img src="img/mktos-depois.jpg" alt=""></div><b>4 · Contrato</b><span>cada linha com escopo e horas por cargo</span></div>
+    <div class="arr rv" style="transition-delay:2.3s">›</div>
+    <div class="stp" style="transition-delay:2.5s"><div class="box"><div class="ek"><small>EKYTE · TAREFA</small><p>Nova venda</p><span class="chip">↗ link do contrato</span></div></div><b>5 · Ekyte</b><span>a venda é lançada e o projeto nasce</span></div>
+  </div>
+  <div class="flylink">↗ link</div>
+  <div class="rule rv" style="transition-delay:.6s"><b>Desde 23/09:</b> não circula planilha. O orçamento nasce no Mkt OS, o comercial recebe o link da cotação e, no fechamento, o PDF comercial do Mkt OS vai anexado à tarefa "Nova venda" no Ekyte.</div>
+</section>
+
+<!-- 11 · VENDA, ALOCAÇÃO, RENTABILIDADE -->
+<section class="slide std" id="s11">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">O painel de controle</div>
+    <h1 class="rv" style="transition-delay:.15s">Venda, alocação e rentabilidade num lugar só.</h1>
+  </div>
+  <div class="tri" id="tri">
+    <div class="pane act rv" style="--k:var(--rosa);transition-delay:.4s"><div class="shot"><img src="img/mktos-depois.jpg" alt=""></div><h3>Venda</h3><p>O que foi vendido, peça por peça: escopo, não escopo e horas.</p></div>
+    <div class="pane rv" style="--k:var(--vinho);transition-delay:.6s"><div class="shot"><img src="img/mktos-alocacao.jpg" alt=""></div><h3>Alocação</h3><p>As horas vendidas por cargo, mês a mês, contra o que o time tem.</p></div>
+    <div class="pane rv" style="--k:var(--ciano-esc);transition-delay:.8s"><div class="shot"><img src="img/mktos-rentabilidade.jpg" alt=""></div><h3>Rentabilidade</h3><p>A hora apontada contra a vendida, em consumo e margem.</p></div>
+  </div>
+</section>
+
+<!-- 12 · COMO LER A CONTA -->
+<section class="slide std" id="s12">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Como ler a conta</div>
+    <h1 class="rv" style="transition-delay:.15s">Consumo e margem: leia os dois juntos.</h1>
+  </div>
+  <div class="lights">
+    <div class="blk rv">Consumo de horas (pacing)</div>
+    <div class="row">
+      <div style="background:#C9C4B4;transition-delay:.5s"><b>&lt; 60%</b>Subconsumo</div><div style="background:#BFE6EE;transition-delay:.6s"><b>60 a 90%</b>Otimizado</div>
+      <div style="background:#9ED9C4;transition-delay:.7s"><b>90 a 100%</b>Eficiente</div><div style="background:#FCE7A6;transition-delay:.8s"><b>100 a 110%</b>Alerta</div>
+      <div style="background:#F7B6CB;transition-delay:.9s"><b>110 a 120%</b>Crítico</div><div style="background:#E46D93;color:#fff;transition-delay:1s"><b>&gt; 120%</b>Estouro</div></div>
+    <div class="blk rv" style="transition-delay:1.1s">Margem</div>
+    <div class="row">
+      <div style="background:#E46D93;color:#fff;transition-delay:1.3s"><b>&lt; 0%</b>Prejuízo</div><div style="background:#F7B6CB;transition-delay:1.4s"><b>0 a 10%</b>Crítica</div>
+      <div style="background:#FCE7A6;transition-delay:1.5s"><b>10 a 20%</b>Atenção</div><div style="background:#9ED9C4;transition-delay:1.6s"><b>20 a 35%</b>Saudável</div>
+      <div style="background:#BFE6EE;transition-delay:1.7s"><b>&gt; 35%</b>Alta</div></div>
+  </div>
+  <div class="warn rv" style="transition-delay:1.8s">Um semáforo sozinho <em>engana</em>. Leia consumo e margem juntos antes de concluir.</div>
+  <div class="mx">
+    <div class="blk rv" style="transition-delay:2s">Leitura cruzada · exemplo ilustrativo</div>
+    <div class="grid">
+      <div></div><div class="ax rv" style="transition-delay:2s">Margem baixa</div><div class="ax rv" style="transition-delay:2s">Margem saudável ou alta</div>
+      <div class="ax rv" style="transition-delay:2.1s">Consumo acima do ritmo</div>
+      <div class="q" style="background:#F7B6CB;transition-delay:2.3s"><b>Estouro de verdade</b><span>Escopo cresceu ou a execução pesou. Se for escopo novo, vira "Orçar".</span></div>
+      <div class="q" style="background:#FCE7A6;transition-delay:2.6s"><b>Estouro absorvido</b><span>Preço com folga. Registrar o motivo antes de repetir no próximo orçamento.</span></div>
+      <div class="ax rv" style="transition-delay:2.1s">Consumo abaixo do ritmo</div>
+      <div class="q" style="background:#FCE7A6;transition-delay:2.9s"><b>Receita menor do que parece</b><span>Conferir vigência e composição do contrato na tela.</span></div>
+      <div class="q" style="background:#BFE6EE;transition-delay:3.2s"><b>Desconfie da folga</b><span>Hora fora do projeto ligado ou entrega atrasada. Conferir onde o time aponta.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 · CADA PEÇA VIRA TAREFA -->
+<section class="slide std" id="s13">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv" style="color:var(--ciano-esc)">Bloco 3 · Ekyte</div>
+    <h1 class="rv" style="transition-delay:.15s">Toda tarefa dentro de um projeto. Todo projeto ligado a um contrato.</h1>
+  </div>
+  <div class="chain">
+    <div class="link" style="--k:var(--rosa);transition-delay:.4s"><b>Contrato</b><span>Mkt OS</span><small>linhas com horas por cargo</small></div>
+    <div class="link" style="--k:var(--ciano-esc);transition-delay:.6s"><b>Projeto</b><span>Ekyte</span><small>um ou mais, com o mesmo ID</small></div>
+    <div class="link weak" style="--k:var(--rosa);transition-delay:.8s"><b>Ligação</b><span>Mkt OS</span><small>pelo ID do projeto</small></div>
+    <div class="link" style="--k:var(--ciano-esc);transition-delay:1s"><b>Modelo</b><span>Ekyte</span><small>o porte vendido traz as tarefas</small></div>
+    <div class="link" style="--k:var(--ciano-esc);transition-delay:1.2s"><b>Tarefa</b><span>Ekyte</span><small>sempre de um template</small></div>
+    <div class="link" style="--k:var(--vinho);transition-delay:1.4s"><b>Hora</b><span>volta ao Mkt OS</span><small>apontada na etapa</small></div>
+  </div>
+  <div class="drip"><span class="drop2" style="left:560px">hora apontada</span><span class="drop2" style="left:700px;animation-delay:3.4s">hora apontada</span></div>
+  <div class="cap">
+    <div class="a"><b>Se um elo se solta,</b> a hora cai fora da conta: o trabalho aconteceu, mas ninguém consegue mapear.</div>
+    <div class="b"><b>Por isso a regra:</b> tarefa nunca solta no workspace, projeto sempre ligado a um contrato no Mkt OS.</div>
+  </div>
+</section>
+
+
+<!-- EKYTE · COMO DIVIDIR OS PROJETOS -->
+<section class="slide std" id="sp">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv" style="color:var(--ciano-esc)">Ekyte · projetos</div>
+    <h1 class="rv" style="transition-delay:.15s">Um projeto por campanha. <em>O ID do contrato não muda.</em></h1>
+    <p class="sub rv" style="transition-delay:.3s">O GP organiza como fizer sentido para a conta. Cliente com várias campanhas rodando: um projeto para cada uma, com as tarefas lá dentro.</p>
+  </div>
+  <div class="ctr rv" style="transition-delay:.5s"><small>CONTRATO NO MKT OS</small><b>18982 · FIA Business School</b><span>o fee da conta</span></div>
+  <a class="allp rv" style="top:500px;transition-delay:.7s" target="_blank" href="https://app.ekyte.com/#/projects?isModel=0&preset=110&workspaceId=0%2C137046">Ver todos os projetos da FIA no Ekyte ↗</a>
+  <div class="tree" id="tree"></div>
+  <div class="other rv" style="transition-delay:2.6s"><small>OUTRO CONTRATO, OUTRO ID</small><a class="pj" target="_blank" href="https://app.ekyte.com/#/projects/330932/edit">19345 · Influenciadores para Graduação</a></div>
+  <div class="mv rv" style="transition-delay:2s"><small>NA MKT VIRTUAL É IGUAL: CONTRATO 001, QUATRO PROJETOS · <a class="allp2" target="_blank" href="https://app.ekyte.com/#/projects?isModel=0&preset=110&workspaceId=0%2C153718">ver todos no Ekyte ↗</a></small><div class="row"><a class="pj" target="_blank" href="https://app.ekyte.com/#/projects/337188/edit">001 · Campanhas Mkt Virtual</a><a class="pj" target="_blank" href="https://app.ekyte.com/#/projects/337191/edit">001 · Campanhas Mokotó</a><a class="pj" target="_blank" href="https://app.ekyte.com/#/projects/337189/edit">001 · Campanhas Mukutu</a><a class="pj" target="_blank" href="https://app.ekyte.com/#/projects/337192/edit">001 · Social Grupo Mkt Virtual</a></div></div>
+  <div class="why">
+    <div class="rv" style="transition-delay:2.2s"><b>Por que separar:</b> cada campanha com seu cronograma e suas tarefas. Fica fácil de ver o que está andando.</div>
+    <div class="rv" style="transition-delay:2.4s"><b>Por que o mesmo ID:</b> é ele que liga as horas de todos esses projetos ao contrato no Mkt OS.</div>
+  </div>
+</section>
+
+
+<!-- EKYTE · COMO O GP ABRE A TAREFA -->
+<section class="slide std" id="sgp">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv" style="color:var(--ciano-esc)">Ekyte · passo a passo do GP</div>
+    <h1 class="rv" style="transition-delay:.15s">Como abrir uma tarefa.</h1>
+  </div>
+  <div class="gsteps">
+    <div class="rv" style="transition-delay:.4s"><i>1</i><div><b>Entre no projeto da campanha</b><span>De preferência, abra a tarefa de dentro do projeto.</span></div></div>
+    <div class="rv" style="transition-delay:.6s"><i>2</i><div><b>Fluxo: <u>Fluxo Único Mkt Virtual</u></b><span>É ele que tem todos os templates.</span></div></div>
+    <div class="rv" style="transition-delay:.8s"><i>3</i><div><b>Busque o template</b><span>Digite o nome da entrega (ex.: Direção Editorial) e escolha.</span></div></div>
+    <div class="rv" style="transition-delay:1s"><i>4</i><div><b>Fase e número de peças</b><span>Fase: o mês ou o estágio. Peças: quantas, se for criação.</span></div></div>
+    <div class="rv" style="transition-delay:1.2s"><i>5</i><div><b>Briefing</b><span>O template já traz o direcional. Complete com o briefing, o contexto do cliente e do momento, e os links de referência do entregável.</span></div></div>
+    <div class="rv" style="transition-delay:1.4s"><i>6</i><div><b>Checklist</b><span>Em detalhe, o que cada um faz em cada etapa: dono, o que faz e quando fecha.</span></div></div>
+  </div>
+  <div class="ckshot rv" style="transition-delay:.9s"><img src="img/ekyte-checklist.jpg" alt="Checklist de um template no Ekyte"><span class="cklbl">Checklist do template 1 · Direção Editorial</span></div>
+  <a class="tasklink rv" style="transition-delay:1.6s" target="_blank" href="https://app.ekyte.com/#/tasks/list/10775123/edit"><small>VER NO EKYTE · TAREFA EXEMPLO</small><b>2A · Criação Gráfica de Peça · Posts de novembro</b><span>Projeto 001 · Social · fase Novembro · 8 peças · briefing simulado ↗</span></a>
+  <div class="force rv" style="transition-delay:1.7s"><b>Nos próximos dias:</b> uma força-tarefa vai eleger os modelos padrão de documento de cada entrega. Sugestões são bem-vindas e entram nos templates.</div>
+</section>
+
+<!-- EKYTE · COMO PREENCHER A TAREFA -->
+<section class="slide std" id="stk">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv" style="color:var(--ciano-esc)">Ekyte · tarefas</div>
+    <h1 class="rv" style="transition-delay:.15s">Como preencher a tarefa.</h1>
+  </div>
+  <div class="tkshot rv" style="transition-delay:.4s"><img src="img/ekyte-cronograma.jpg" alt="Cronograma de um projeto no Ekyte">
+    <a class="mk" target="_blank" href="https://app.ekyte.com/#/projects/337192/edit" style="left:2.6%;top:29%">1</a>
+    <a class="mk" target="_blank" href="https://app.ekyte.com/#/projects/337192/edit" style="left:3.3%;top:41.5%">2</a>
+    <a class="mk" target="_blank" href="https://app.ekyte.com/#/projects/337192/edit" style="left:36.4%;top:42.5%">3</a>
+    <a class="mk" target="_blank" href="https://app.ekyte.com/#/projects/337192/edit" style="left:70.6%;top:42.6%">4</a>
+    <span class="strike" style="left:72.0%;top:42.3%;width:3.4%"></span>
+  </div>
+  <a class="golink rv" style="transition-delay:1.5s" target="_blank" href="https://app.ekyte.com/#/projects/337192/edit">Abrir o projeto 001 · Social Grupo Mkt Virtual no Ekyte ↗</a>
+  <div class="tkrules">
+    <div class="rv" style="transition-delay:.7s"><i>1</i><div><b>Fase</b><span>Recorrente: o <u>mês</u> (Outubro, Novembro). Projeto: o <u>estágio</u> da campanha (Lote 1 de peças, Relatório do mês).</span></div></div>
+    <div class="rv" style="transition-delay:.9s"><i>2</i><div><b>Template do Fluxo Único</b><span>A tarefa nasce do template certo e já vem com as 3 tags: Fluxo Único, momento e pilar.</span></div></div>
+    <div class="rv" style="transition-delay:1.1s"><i>3</i><div><b>Número de peças</b><span>Em tarefa de criação, informar quantas peças ela tem.</span></div></div>
+    <div class="rv off" style="transition-delay:1.3s"><i>4</i><div><b>Horas previstas</b><span>Por enquanto, ignorar. A régua é a hora apontada contra o contrato.</span></div></div>
+  </div>
+</section>
+
+<!-- 14 · UM FLUXO SÓ -->
+<section class="slide std" id="s14">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv" style="color:var(--ciano-esc)">O Fluxo Único</div>
+    <h1 class="rv" style="transition-delay:.15s">34 etapas, 27 templates: um padrão para tudo.</h1>
+    <p class="sub rv" style="transition-delay:.3s">No Ekyte, o fluxo se chama <b>Fluxo Único Mkt Virtual</b>.</p>
+  </div>
+  <div class="phases" id="phases"></div>
+  <div class="tabs" id="tabs"><button data-p="c" class="on">Conteúdo · 13</button><button data-p="m">Mídia · 6</button><button data-p="r">CRM · 8</button></div>
+  <div class="tpl" id="tpl"></div>
+  <div class="rules rv" style="transition-delay:.8s"><div class="blk" style="margin-bottom:12px">Regras de uso</div><ul>
+    <li><i>1</i><b>A etapa diz o tipo de trabalho,</b> nunca o assunto.</li>
+            <li><i>2</i><b>Aprovação é ida e volta</b> na mesma etapa, sem tarefa nova.</li>
+    <li><i>3</i><b>Uso contínuo:</b> tarefa mensal, etapa apontada todo dia.</li></ul></div>
+</section>
+
+
+<!-- EKYTE · KANBAN SIMULADO -->
+<section class="slide std" id="skb">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv" style="color:var(--ciano-esc)">Ekyte · o que a gente ganha</div>
+    <h1 class="rv" style="transition-delay:.15s">Todo mundo no mesmo fluxo: <em>a gente vê onde cada tarefa está.</em></h1>
+    <p class="sub rv" style="transition-delay:.3s">Um kanban só para a casa inteira, com as mesmas colunas para post, campanha e régua. Simulação.</p>
+  </div>
+  <div class="kb" id="kb"></div>
+</section>
+
+<!-- NADA ENGESSADO + VIRADA DE CALENDÁRIO -->
+<section class="slide std" id="stl">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Como a gente chega lá</div>
+    <h1 class="rv" style="transition-delay:.15s">Nada engessado. <em>Mas todo mundo do mesmo jeito.</em></h1>
+  </div>
+  <div class="free rv" style="transition-delay:.4s">
+    <p>Etapas e templates podem mudar com a sugestão do time: é só direcionar ao Douglas.</p>
+    <p>A gente está fazendo isso para ajudar o time, os GPs e a gestão. Tudo evolui, e com a contribuição de todos.</p>
+    <p class="b">O que não muda: todo mundo seguindo da mesma forma.</p>
+  </div>
+  <div class="cal">
+    <div class="blk rv" style="transition-delay:.6s">Proposta de virada</div>
+    <div class="mile rv" style="transition-delay:.8s"><b>16/10</b><span>Treinamento. O fluxo e os templates já estão no ar.</span></div>
+    <div class="mile rv hot" style="transition-delay:1.1s"><b>Novembro</b><span>Toda tarefa criada nos templates e no Fluxo Único Mkt Virtual, inclusive as antigas. GPs organizam os projetos por campanha, com o ID do contrato.</span></div>
+    <div class="mile rv" style="transition-delay:1.4s"><b>Janeiro</b><span>Só existem tarefas nesses moldes.</span></div>
+  </div>
+</section>
+
+<!-- 15 · O QUE MUDA PARA CADA UM -->
+<section class="slide std" id="s15">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Fechamento</div>
+    <h1 class="rv" style="transition-delay:.15s">O que muda no dia a dia de cada um.</h1>
+  </div>
+  <div class="mtx">
+    <div></div><div class="h rv" style="background:var(--rosa)">ANTES DE VENDER</div><div class="h rv" style="background:var(--vinho)">DURANTE A CONTA</div><div class="h rv" style="background:var(--ciano-esc)">PARA LER A CONTA</div>
+    <div class="r rv">Comercial</div>
+    <div class="c" style="transition-delay:.6s">Abre a tarefa "Orçar" com briefing completo e já com uma ideia dos serviços que o cliente precisa</div><div class="c" style="transition-delay:.7s">Anexa na tarefa "Nova venda" do Ekyte o material comercial, as infos do fechamento e o PDF do Mkt OS</div><div class="c" style="transition-delay:.8s">Puxa aditivo quando o escopo cresce</div>
+    <div class="r rv">GP</div>
+    <div class="c" style="transition-delay:1.1s">Confere o escopo vendido antes de começar</div><div class="c" style="transition-delay:1.2s">Abre tarefa pelo template e aponta no projeto certo</div><div class="c" style="transition-delay:1.3s">Acompanha consumo e margem no Mkt OS</div>
+    <div class="r rv">Operação</div>
+    <div class="c" style="transition-delay:1.6s">Aprova produto, escopo e preço</div><div class="c" style="transition-delay:1.7s">Decide o que é escopo novo</div><div class="c" style="transition-delay:1.8s">Acompanha a rentabilidade das contas</div>
+  </div>
+  <div class="elo rv" style="transition-delay:2.1s">Se um elo quebra, a gente <em>não consegue ler a conta</em>.</div>
+</section>
+
+<!-- 16 · COMBINADOS E PASSAGEM -->
+<section class="slide std" id="s16">
+  <img class="logo" src="img/logo-color.png" alt="Mkt Virtual">
+  <div class="txt">
+    <div class="eyebrow rv">Para sair daqui com dono</div>
+    <h1 class="rv" style="transition-delay:.15s">Combinados.</h1>
+  </div>
+  <table>
+    <tr><th>Combinado</th><th>Quem</th><th>A partir de</th></tr>
+    <tr><td style="transition-delay:.5s">Todo orçamento entra por tarefa "Orçar" com briefing</td><td style="transition-delay:.5s">Comercial</td><td class="ac" style="transition-delay:.5s">a combinar</td></tr>
+    <tr><td style="transition-delay:.7s">Orçamento e contrato circulam por link do Mkt OS</td><td style="transition-delay:.7s">Operação e comercial</td><td style="transition-delay:.7s">já vale (23/09)</td></tr>
+    <tr><td style="transition-delay:.9s">Toda tarefa nova nasce de um template do Fluxo Único</td><td style="transition-delay:.9s">GPs</td><td class="ac" style="transition-delay:.9s">novembro (proposta)</td></tr>
+    <tr><td style="transition-delay:1.1s">Todo projeto ativo ligado a um contrato</td><td style="transition-delay:1.1s">GPs e Operação</td><td class="ac" style="transition-delay:1.1s">novembro (proposta)</td></tr>
+    <tr><td style="transition-delay:1.3s">Ler consumo e margem de cada conta</td><td style="transition-delay:1.3s">GPs e gestores</td><td class="ac" style="transition-delay:1.3s">cadência a combinar</td></tr>
+  </table>
+  <div class="edipo"><small>11H · COM O ÉDIPO</small><b>Quem responde por cada passo</b><span>Papéis e responsabilidades de GPs e GCs</span></div>
+</section>
+
+</div>
+
+<script>
+/* escala do palco */
+const stage=document.getElementById('stage');
+function fit(){const w=document.documentElement.clientWidth||innerWidth,h=document.documentElement.clientHeight||innerHeight;
+  const s=Math.min(w/1600,h/900)||1;stage.style.transform=`translate(-50%,-50%) scale(${s})`}
+addEventListener('resize',fit);fit();
+try{new ResizeObserver(fit).observe(document.documentElement)}catch(e){}
+
+/* navegação */
+const slides=[...document.querySelectorAll('.slide')];const dots=[...document.querySelectorAll('.dots i')];
+let cur=-1;const timers=[];
+function clearT(){while(timers.length)clearTimeout(timers.pop())}
+function at(ms,fn){timers.push(setTimeout(fn,ms))}
+function go(i){
+  if(i<0||i>=slides.length||i===cur)return;
+  clearT();slides.forEach(s=>s.classList.remove('on'));
+  void slides[i].offsetWidth; slides[i].classList.add('on');
+  dots.forEach((d,k)=>d.classList.toggle('on',k===i));cur=i;
+  try{history.replaceState(null,'','#'+(i+1))}catch(e){}
+  const id=slides[i].id; if(id==='s2')playBuilder(); if(id==='s5')playSizes(); if(id==='s9')build(activeBuild); if(id==='s11')playTri(); if(id==='s14')playTpl(); if(id==='skb')playKb();
+}
+addEventListener('keydown',e=>{if(e.target&&e.target.closest&&e.target.closest('textarea,input'))return;if(['ArrowRight','PageDown',' '].includes(e.key))go(cur+1);if(['ArrowLeft','PageUp'].includes(e.key))go(cur-1)});
+
+/* ── slide 2: recriação da tela de orçar ── */
+const os=document.getElementById('os'),cursor=document.getElementById('cur'),resumo=document.getElementById('resumo');
+const info={c1:['Planejamento de Social / Conteúdo','Pontual'],c3:['Estático (Social)','Mensal'],c4:['Publicação de Feed','Mensal'],
+  m2:['Gestão de Mídia','Mensal'],r2:['Lead Scoring','Pontual'],r3:['Gestão de Fluxos e Réguas','Mensal']};
+function pos(el){const a=os.getBoundingClientRect(),b=el.getBoundingClientRect(),s=a.width/860;return[(b.left-a.left)/s+40,(b.top-a.top)/s+(b.height/s)/2-4]}
+function moveTo(el){const[x,y]=pos(el);cursor.style.transform=`translate(${x}px,${y}px)`}
+function click(){cursor.classList.remove('click');void cursor.offsetWidth;cursor.classList.add('click')}
+function resetBuilder(){
+  os.querySelectorAll('.pil').forEach(p=>{p.classList.remove('open');const c=p.querySelector('.cnt');c.textContent='0 ativos';c.classList.remove('act')});
+  os.querySelectorAll('.it').forEach(i=>i.classList.remove('sel'));resumo.innerHTML='';
+  cursor.style.transition='none';cursor.style.transform='translate(700px,520px)';void cursor.offsetWidth;cursor.style.transition='';
+  document.getElementById('real').classList.remove('in');document.getElementById('track').classList.remove('in');
+}
+function openP(p){const el=os.querySelector(`.pil[data-p="${p}"]`);moveTo(el.querySelector('.hd'));return el}
+function playBuilder(){
+  resetBuilder();let t=1200;const step=(ms,fn)=>{t+=ms;at(t,fn)};
+  const seq=[['c',['c1','c3','c4']],['m',['m2']],['r',['r2','r3']]];
+  seq.forEach(([p,ks])=>{
+    let pil;step(700,()=>{pil=openP(p)});step(700,()=>{click();pil.classList.add('open')});
+    os.querySelector(`.pil[data-p="${p}"]`);
+    ks.forEach(k=>{
+      step(650,()=>moveTo(os.querySelector(`.it[data-k="${k}"] .tg`)));
+      step(550,()=>{click();const it=os.querySelector(`.it[data-k="${k}"]`);it.classList.add('sel');
+        const n=os.querySelectorAll(`.pil[data-p="${p}"] .it.sel`).length;const c=os.querySelector(`.pil[data-p="${p}"] .cnt`);c.textContent=n+(n>1?' ativos':' ativo');c.classList.add('act');
+        const d=document.createElement('div');d.className='ri';d.innerHTML=`<b>${info[k][0]}</b><div class="pl"><span class="hh">${info[k][1]}</span><span class="ok">✓ Escopo</span><span class="no">✕ Não escopo</span><span class="hh">Horas por cargo</span></div>`;
+        resumo.appendChild(d);requestAnimationFrame(()=>{d.classList.add('in');resumo.scrollTop=resumo.scrollHeight})});
+    });
+    step(400,()=>{os.querySelector(`.pil[data-p="${p}"]`).classList.remove('open')});
+  });
+  step(600,()=>{cursor.style.transform='translate(700px,520px)';document.getElementById('real').classList.add('in')});
+  step(900,()=>document.getElementById('track').classList.add('in'));
+}
+
+/* ── slide 3: lego ── */
+const P={t:[['imersao','Imersão & Planejamento Geral',4]],
+ c:[['plan','Planejamento de Social',3],['dir','Direção Editorial',3],['est','Estático',2],['car','Carrossel',2],['mot','Motion',2],['feed','Publicação de Feed',3],['sac','SAC Operacional',3],['rep','Report de Resultados',3],['imp','Impulsionamento',3],['dia','Diária de Captação',3]],
+ m:[['pmid','Planejamento de Mídia',3],['gmid','Gestão de Mídia',3],['pecm','Peças de Mídia',2]],
+ r:[['pcrm','Planejamento de CRM',3],['impl','Implantação de Automação',4],['ls','Lead Scoring',2],['flux','Gestão de Fluxos e Réguas',4],['regua','Régua Adicional',3],['news','Newsletter / E-mail',3],['rel','Relatório de CRM',3]]};
+const UNIT=48;
+const builds=[
+  {name:'Contrato 001 · Gestão de Social Grupo Mkt Virtual',ids:['imersao','plan','dir','est','car','mot','feed','sac','rep','imp','dia','pmid','pcrm','impl','ls','flux','regua']},
+  {name:'Exemplo: cliente só de Conteúdo, porte P',ids:['plan','dir','est','feed','rep']},
+  {name:'Exemplo: Conteúdo + CRM',ids:['imersao','plan','est','car','feed','rep','pcrm','impl','ls','news','rel']}];
+let activeBuild=0,row=0;const bricks={};
+const plate=document.getElementById('plate');
+for(const k of ['t','c','m','r']){
+  const row=document.getElementById('row-'+k);
+  for(const[id,label,w] of P[k]){
+    const g=document.createElement('div');g.className='brick ghost '+k;g.textContent=label;row.appendChild(g);
+    const b=document.createElement('div');b.className='brick '+k;b.textContent=label;b.style.opacity=0;plate.appendChild(b);
+    bricks[id]={el:b,ghost:g,w,k};
+  }
+}
+function ghostPos(g){const a=plate.getBoundingClientRect(),b=g.getBoundingClientRect(),s=a.width/800;return[(b.left-a.left)/s,(b.top-a.top)/s]}
+function build(n){
+  clearT();activeBuild=n;document.querySelectorAll('#btns button').forEach(x=>x.classList.toggle('on',+x.dataset.b===n));
+  const pn=document.getElementById('pname');pn.classList.remove('in');
+  Object.values(bricks).forEach(b=>{const[x,y]=ghostPos(b.ghost);b.el.style.transition='none';b.el.style.opacity=0;b.el.style.transform=`translate(${x}px,${y}px)`});
+  void plate.offsetWidth;
+  // layout em camadas: estratégia na base, depois Conteúdo, Mídia, CRM, empilhando de baixo para cima
+  const order=['t','c','m','r'];const ids=builds[n].ids.slice().sort((a,b)=>{const ka=Object.keys(bricks).indexOf(a),kb=Object.keys(bricks).indexOf(b);return order.indexOf(bricks[a].k)-order.indexOf(bricks[b].k)||ka-kb});
+  let x=20,y=375-20-36,maxW=780-40;let t=500;row=0;
+  ids.forEach(id=>{
+    const b=bricks[id];const w=b.ghost.offsetWidth;
+    if(x+w>20+maxW){row++;x=20+(row%2?22:0);y-=46}
+    const tx=x,ty=y;x+=w+6;
+    at(t,()=>{b.el.style.transition='';b.el.style.opacity=1;b.el.style.transform=`translate(${tx}px,${ty}px)`;
+      at(700,()=>{b.el.classList.remove('snap');void b.el.offsetWidth;b.el.classList.add('snap')})});
+    t+=170;
+  });
+  at(t+600,()=>{pn.textContent=builds[n].name;pn.classList.add('in')});
+}
+document.querySelectorAll('#btns button').forEach(x=>x.onclick=()=>build(+x.dataset.b));
+
+
+/* ── 3: torre da construção ── */
+(function(){const t=document.getElementById('tower');
+ const L=[['t','Imersão',300,0],['c','Planejamento',96,1],['m','Planejamento',96,1],['r','Planejamento',96,1],
+          ['c','Conteúdo',96,2],['m','Mídia',96,2],['r','CRM',96,2],['c','Report',300,3]];
+ const x0={t:0,c:0,m:102,r:204};
+ L.forEach(([k,txt,w,row],i)=>{const b=document.createElement('div');b.className='lb drop '+k;b.textContent=txt;
+   b.style.width=w+'px';b.style.justifyContent='center';b.style.left=(w>200?0:x0[k])+'px';b.style.bottom=(row*48)+'px';
+   b.style.transitionDelay=(1.0+i*.22)+'s';t.appendChild(b)});})();
+
+/* ── 4: pilares lidos de cima para baixo ── */
+(function(){const G=document.getElementById('grid4');let d=.4;const add=(html,cls,style)=>{const e=document.createElement('div');e.className=cls||'';e.innerHTML=html;
+  if(style)e.style.cssText=style;e.style.transitionDelay=(d+=.12)+'s';G.appendChild(e);return e};
+ add('','g-h0 rv');
+ [['Conteúdo &amp; Social','var(--rosa)'],['Mídia &amp; Performance','var(--ciano-esc)'],['Inbound &amp; CRM','var(--vinho)']].forEach(([n,c])=>add(n,'g-h rv','background:'+c));
+ const lab=(n,t,s)=>add(`<i>${n}</i><b>${t}</b><span>${s}</span>`,'g-l rv');
+ lab('01','Imergir','Imersão da Rose, quando faz sentido');
+ add('Imersão &amp; Planejamento Geral · Head de Estratégia · quando faz sentido','lb t g-span drop');
+ lab('02','Planejar','O gestor da área, antes da execução');
+ ['c:Planejamento de Social','m:Planejamento de Campanha','r:Planejamento de CRM'].forEach(x=>{const[k,n]=x.split(':');add(n,'lb drop '+k)});
+ lab('03','Executar','Os serviços do dia a dia');
+ [['c',['Direção Editorial','Redação e criação de peças','Captação e edição','Gestão do feed e SAC','Impulsionamento']],
+  ['m',['Engenharia técnica e testes','Criativos de mídia','Operação e otimização']],
+  ['r',['Implantação de automação','Lead scoring','Fluxos e réguas']]].forEach(([k,its])=>add(its.map(n=>`<span class="lb ${k}">${n}</span>`).join(''),'g-col drop'));
+ lab('04','Acompanhar','Report e leitura todo mês');
+ ['c:Report de Resultados','m:Relatórios e reuniões','r:Relatório de CRM'].forEach(x=>{const[k,n]=x.split(':');add(n,'lb drop '+k)});
+})();
+
+/* ── 5: três tamanhos (dados do catálogo do Mkt OS, horas do time por nível) ── */
+const SZ=[
+ {k:'c',cor:'var(--rosa)',pil:'Conteúdo & Social',nome:'Planejamento de Social',tipo:'Serviço de planejamento · pontual',
+  h:{baixa:15.8,media:30.5,alta:51.0},
+  d:{baixa:'Fundamentos, benchmark, KPIs e linhas criativas',media:'Tudo do baixo + estudo de persona',alta:'+ persona, jornada, comunidade e plano trimestral'},
+  t:{baixa:['Head de Estratégia','Redator','Coord. de Conteúdo'],media:['Head de Estratégia','Redator','Coord. de Conteúdo','Designer','Coord. de Criação'],alta:['Head de Estratégia','Redator','Coord. de Conteúdo','Designer','Coord. de Criação']}},
+ {k:'m',cor:'var(--ciano-esc)',pil:'Mídia & Performance',nome:'Gestão de Mídia',tipo:'Serviço de gestão · mensal',
+  h:{baixa:29.0,media:56.3,alta:106.3},
+  d:{baixa:'Até 2 plataformas, sprints mensais',media:'3 a 4 plataformas, sprints quinzenais e leitura estratégica',alta:'5 ou mais plataformas, com programática e OOH, sprints semanais'},
+  t:{baixa:['Analista de Performance','Coord. de Mídia','Head de Estratégia'],media:['Analista de Performance','Coord. de Mídia','Head de Estratégia'],alta:['Analista de Performance','Coord. de Mídia','Head de Estratégia']}},
+ {k:'r',cor:'var(--vinho)',pil:'Inbound & CRM',nome:'Implantação de Automação',tipo:'Serviço de implantação · pontual',
+  h:{baixa:31.0,media:74.0,alta:152.0},
+  d:{baixa:'1 canal (e-mail), até 2 fluxos, templates adaptados',media:'E-mail + 1 canal, 3 a 5 fluxos, 1 integração direta',alta:'Multicanal, 6 ou mais fluxos, integrações e lead scoring'},
+  t:{baixa:['Analista de Inbound','Coord. de Inbound'],media:['Analista de Inbound','Coord. de Inbound','Redator','Coord. de Conteúdo'],alta:['Analista de Inbound','Coord. de Inbound','Redator','Coord. de Conteúdo']}}];
+const sizesEl=document.getElementById('sizes');
+SZ.forEach((s,i)=>{const d=document.createElement('div');d.className='sz rv';d.style.transitionDelay=(.4+i*.15)+'s';
+  d.innerHTML=`<h4 style="color:${s.cor}">${s.pil}</h4><h3>${s.nome}</h3><div class="tipo">${s.tipo}</div><div class="bk" style="background:${s.cor};--c:${s.cor}"><span></span></div><div class="desc"></div><div class="team"></div>`;
+  sizesEl.appendChild(d)});
+let lvlNow='baixa',lvlAuto=true;
+function setLvl(l){lvlNow=l;document.querySelectorAll('#lvl button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
+  const prev={baixa:null,media:'baixa',alta:'media'}[l];
+  [...sizesEl.children].forEach((el,i)=>{const s=SZ[i];
+    el.querySelector('.bk').style.width=Math.round(50+s.h[l]*1.9)+'px';
+    el.querySelector('.bk span').textContent={baixa:'B',media:'M',alta:'A'}[l];
+    el.querySelector('.desc').textContent=s.d[l];
+    const old=prev?s.t[prev]:[];
+    el.querySelector('.team').innerHTML=s.t[l].map(r=>`<em class="${prev&&!old.includes(r)?'new':''}">${r}</em>`).join('')})}
+document.querySelectorAll('#lvl button').forEach(b=>b.onclick=()=>{lvlAuto=false;clearT();setLvl(b.dataset.l)});
+function playSizes(){lvlAuto=true;setLvl('baixa');at(2600,()=>setLvl('media'));at(5200,()=>setLvl('alta'))}
+
+
+/* ── 11: destaca uma aba por vez ── */
+function playTri(){const ps=[...document.querySelectorAll('#tri .pane')];let k=0;
+  const f=()=>{ps.forEach((p,i)=>p.classList.toggle('act',i===k));k=(k+1)%3;at(3200,f)};f()}
+
+/* ── 14: fases do Fluxo Único e templates por pilar (Ekyte, workflow 23101, 15/10/2026) ── */
+(function(){const F=[['A','Entrada','Briefing · coleta de acessos'],['B','Entendimento','Diagnóstico · benchmark'],['C','Planejamento','Workshop · plano · consolidação'],
+ ['D','Direcionamento','QA e aprovação do plano'],['E','Preparação','Configuração · tracking'],['F','Produção','Redação · criação · edição'],
+ ['G','Validação','QA · aprovação da entrega'],['H','Ativação','Publicação · otimização'],['I','Leitura','Dados · leitura · handoff']];
+ const cols=['var(--rosa)','var(--rosa)','var(--vinho)','var(--vinho)','var(--ciano-esc)','var(--ciano-esc)','var(--vinho)','var(--rosa)','var(--ciano-esc)'];
+ document.getElementById('phases').innerHTML=F.map(([l,n,s],i)=>`<div class="ph" style="--k:${cols[i]};transition-delay:${.4+i*.08}s"><b>${l} · ${n}</b><span>${s}</span></div>`).join('')})();
+const TPL={c:[['0A','Imersão & Planejamento Geral'],['0B','Planejamento de Social'],['1','Direção Editorial'],['2A','Criação Gráfica de Peça'],['2B','Produção Audiovisual'],
+  ['3A','Publicação de Feed'],['3B','Publicação de Stories'],['4','Report de Resultados'],['5','Moderação e SAC'],['6','Revisão Editorial'],['7','Acompanhamento Estratégico'],
+  ['8','Report Integrado'],['9','Impulsionamento + Report',1]],
+ m:[['0C','Planejamento de Campanha'],['M1','Engenharia Técnica & Ativos'],['M2','Criativos de Mídia'],['M3','Ativação e Gestão'],['M4','Report e Reunião'],['M5','Dashboard / BI']],
+ r:[['0D','Planejamento de Inbound/CRM'],['C1','Implantação de Automação'],['C2','Produção e Envio de E-mail'],['C3','Governança da Base'],
+  ['C4','Lead Scoring',1],['C5','Gestão de Fluxos e Réguas',1],['C6','Régua ou Fluxo Adicional',1],['C7','Relatório de CRM',1]]};
+function showTpl(p){document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
+  const el=document.getElementById('tpl');el.innerHTML='';
+  TPL[p].forEach(([cod,n,novo],i)=>{const s=document.createElement('span');s.className='lb drop '+p;s.innerHTML=`${cod} · ${n}`;
+    s.style.transitionDelay=(i*.06)+'s';el.appendChild(s)});
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.querySelectorAll('.drop').forEach(d=>{d.style.opacity=1;d.style.transform='none';d.style.transition='transform .5s cubic-bezier(.3,1.45,.5,1),opacity .3s'})))}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{clearT();showTpl(b.dataset.p)});
+function playTpl(){showTpl('c');at(4500,()=>showTpl('m'));at(8000,()=>showTpl('r'))}
+
+
+/* ── Ekyte · projetos da FIA (workspace 137046, projetos ativos lidos em 15/10/2026) ── */
+(function(){const P=[['18982 · Fee','relatórios e tarefas que valem para todas as campanhas','fee',287755],['18982 · Institucional','demandas institucionais da marca','',293317],
+ ['18982 · B2B','governo e setor privado','',293263],['18982 · Mestrado & Doutorado','processo seletivo','',304604],['18982 · Graduação','todas as demandas da Graduação','',320509],
+ ['18982 · MBAs','todos os MBAs','',334324],['18982 · Landing Pages','desenvolvimento das LPs','',322788]];
+ document.getElementById('tree').innerHTML=P.map(([n,d,c,id],i)=>`<a class="pj ${c||''}" target="_blank" href="https://app.ekyte.com/#/projects/${id}/edit" style="transition-delay:${.8+i*.18}s">${n}<em>${d}</em></a>`).join('')})();
+
+
+/* ── Ekyte · kanban simulado (colunas do Fluxo Único; cartões ilustrativos) ── */
+const KB_COLS=['Briefing','Planejamento','Aprovação do plano','Redação e criação','QA de entrega','Aprovação de entrega','Publicação / Ativação','Leitura e report'];
+const KB_CARDS=[
+ ['var(--rosa)','Conteúdo','Direção Editorial','Outubro',[1,2,3]],
+ ['var(--rosa)','Conteúdo','Criação Gráfica · 8 peças','Lote 1',[3,4,5]],
+ ['var(--ciano-esc)','Mídia','Planejamento de Campanha','Etapa: plano',[0,1,2]],
+ ['var(--ciano-esc)','Mídia','Ativação e Gestão','Outubro',[5,6,6]],
+ ['var(--vinho)','CRM','Implantação de Automação','Régua 1',[1,3,4]],
+ ['var(--vinho)','CRM','Relatório de CRM','Outubro',[6,7,7]],
+ ['var(--rosa)','Conteúdo','Report de Resultados','Setembro',[7,7,7]],
+ ['var(--ciano-esc)','Mídia','Criativos de Mídia · 6 peças','Lote 2',[2,3,4]]];
+(function(){const kb=document.getElementById('kb');
+  kb.innerHTML=KB_COLS.map(c=>`<div class="kc"><h6>${c}</h6></div>`).join('');
+  KB_CARDS.forEach((c,i)=>{const d=document.createElement('div');d.className='card';d.style.setProperty('--k',c[0]);
+    d.innerHTML=`<b>${c[1]}</b>${c[2]}<small>Fase: ${c[3]}</small>`;kb.appendChild(d)})})();
+function kbPlace(step){const kb=document.getElementById('kb');const cols=[...kb.querySelectorAll('.kc')];const cards=[...kb.querySelectorAll('.card')];
+  const count={};cards.forEach((el,i)=>{const col=KB_CARDS[i][4][step];const n=count[col]=(count[col]||0)+1;
+    el.style.left=(cols[col].offsetLeft+8)+'px';el.style.width=(cols[col].offsetWidth-16)+'px';el.style.top=(54+(n-1)*74)+'px'})}
+function playKb(){kbPlace(0);at(2600,()=>kbPlace(1));at(5200,()=>kbPlace(2))}
+
+/* início */
+const start=Math.max(0,Math.min(slides.length-1,(parseInt(location.hash.slice(1))||1)-1));
+document.fonts.ready.then(()=>go(start));setTimeout(()=>{if(cur<0)go(start)},1500);
+document.addEventListener('click',e=>{if(e.target.closest('button,a'))return;if(!['s5','s9'].includes(slides[cur].id))go(cur+1)});
+</script>
+
+<script>document.getElementById('navPrev').onclick=()=>go(cur-1);document.getElementById('navNext').onclick=()=>go(cur+1);</script>
+<script>
+/* ── camada de revisão: ajustes salvos no db compartilhado do artifact ── */
+(function(){
+const RVSEL='h1,.sub,.eyebrow,li,.lb,.c,.q,.card,a.pj,.pj,.stp,.pane,.mile,.sz,.scope,.rule,.force,.gsteps>div,.tkrules>div,.rules,.why>div,.cap>div,.edipo,td,.chip,.tag,.shot,.os,.ctr,.other,.mv,.tasklink,.free,.elo,.warn,.link,.mtx .h,.mtx .r,.ph,.tpl,.lights .row,.plate-wrap,.shelf,.side,.quote,.ckshot,.tkshot,.kb,.lvl,.legend,.track,.realthumb,.oldmc,.st,.prods,.flow,.rail div,.mx,.pipe,.blk,.txt';
+let reviewOn=true, items=[], alvoAtual=null;
+const $=id=>document.getElementById(id);
+const bar=$('rvbar'), pop=$('rvpop'), panel=$('rvpanel'), toast=$('rvtoast');
+document.body.classList.add('rv-on');
+
+function toastMsg(t){toast.textContent=t;toast.hidden=false;clearTimeout(toastMsg.t);toastMsg.t=setTimeout(()=>toast.hidden=true,2600)}
+function telaInfo(sec){const n=slides.indexOf(sec)+1;const h=sec.querySelector('h1');return {n,titulo:(h?h.textContent:'').replace(/\s+/g,' ').trim()}}
+function caminho(el,sec){const p=[];let e=el;while(e&&e!==sec){const pa=e.parentElement;if(!pa)break;p.unshift([...pa.children].indexOf(e));e=pa}return p.join('.')}
+function porCaminho(sec,c){if(!c)return null;let e=sec;for(const i of c.split('.')){e=e&&e.children[+i];}return e||null}
+function snippet(el){return (el.textContent||el.getAttribute('alt')||'').replace(/\s+/g,' ').trim().slice(0,160)||(el.querySelector('img')?'(imagem)':'(elemento visual)')}
+
+/* marca os elementos clicáveis */
+slides.forEach(sec=>sec.querySelectorAll(RVSEL).forEach(el=>el.setAttribute('data-rvok','')));
+
+/* abre o formulário */
+function abrir(alvo,x,y){
+  alvoAtual=alvo;const t=telaInfo(alvo.sec);
+  $('rvpopTela').textContent='Tela '+t.n+(t.titulo?' · '+t.titulo:'');
+  $('rvpopAlvo').textContent=alvo.geral?'Ajuste geral da tela':'Trecho: '+alvo.texto;
+  $('rvtxt').value='';$('rvmsg').hidden=true;pop.hidden=false;
+  const w=pop.offsetWidth,h=pop.offsetHeight;
+  pop.style.left=Math.max(16,Math.min(x,innerWidth-w-16))+'px';pop.style.top=Math.max(60,Math.min(y,innerHeight-h-16))+'px';
+  $('rvtxt').focus();
+}
+document.addEventListener('click',e=>{
+  if(!reviewOn)return;
+  if(e.target.closest('#rvbar,#rvpop,#rvpanel,.navb,button,a'))return;
+  const sec=slides[cur];if(!sec||!sec.contains(e.target))return;
+  const el=e.target.closest('[data-rvok]')||e.target;
+  e.stopPropagation();
+  abrir({sec,el,texto:snippet(el),caminho:caminho(el,sec)},e.clientX+12,e.clientY+12);
+},true);
+$('rvGeral').onclick=()=>{const sec=slides[cur];abrir({sec,el:null,geral:true,texto:'',caminho:''},innerWidth/2-190,120)};
+$('rvCancel').onclick=()=>{pop.hidden=true};
+$('rvMode').onclick=()=>{reviewOn=!reviewOn;$('rvMode').classList.toggle('on',reviewOn);document.body.classList.toggle('rv-on',reviewOn);
+  $('rvhint').textContent=reviewOn?'Clique em qualquer trecho para pedir um ajuste.':'Modo apresentação: clique para avançar.';pop.hidden=true};
+
+/* salvar (no navegador de quem revisa) */
+const KEY='rv-treinamento-ofertas-mkt';
+function ler(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function gravar(){try{localStorage.setItem(KEY,JSON.stringify(items));return true}catch(e){return false}}
+function nome(){try{return localStorage.getItem(KEY+'-nome')||''}catch(e){return ''}}
+$('rvSave').onclick=()=>{
+  const txt=$('rvtxt').value.trim();const m=$('rvmsg');
+  if(!txt){m.textContent='Escreva o ajuste antes de salvar.';m.hidden=false;return}
+  const t=telaInfo(alvoAtual.sec);
+  items.push({id:'a'+Date.now(),tela:t.n,slideId:alvoAtual.sec.id,titulo:t.titulo,alvo:alvoAtual.geral?'Ajuste geral da tela':alvoAtual.texto,
+    caminho:alvoAtual.caminho,texto:txt,autor:nome(),criadoEm:new Date().toISOString(),status:'aberto'});
+  items.sort((x,y)=>x.tela-y.tela||x.criadoEm.localeCompare(y.criadoEm));
+  if(!gravar()){m.textContent='Seu navegador não deixou guardar. Use "Copiar tudo" antes de fechar a página.';m.hidden=false}
+  else pop.hidden=true;
+  render();marcar();toastMsg('Ajuste salvo neste navegador');
+};
+
+/* lista */
+function marcar(){document.querySelectorAll('.tem-ajuste').forEach(e=>e.classList.remove('tem-ajuste'));
+  items.forEach(it=>{if(it.status==='feito')return;const sec=document.getElementById(it.slideId);const el=sec&&porCaminho(sec,it.caminho);if(el&&el!==sec)el.classList.add('tem-ajuste')})}
+function dataBr(s){try{const d=new Date(s);return d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}catch(e){return ''}}
+function render(){
+  $('rvCount').textContent=items.filter(i=>i.status!=='feito').length;
+  const lst=$('rvlst');lst.innerHTML='';
+  if(!items.length){const p=document.createElement('p');p.className='empty';
+    p.textContent='Nenhum ajuste ainda. Clique num trecho de qualquer tela, escreva o que mudar e salve: ele aparece aqui. Os ajustes ficam guardados neste navegador até você baixar ou copiar.';lst.appendChild(p);return}
+  const porTela={};items.forEach(i=>{(porTela[i.tela]=porTela[i.tela]||[]).push(i)});
+  Object.keys(porTela).map(Number).sort((a,b)=>a-b).forEach(n=>{
+    const h=document.createElement('h4');h.textContent='Tela '+n+(porTela[n][0].titulo?' · '+porTela[n][0].titulo:'');lst.appendChild(h);
+    porTela[n].forEach(i=>{const d=document.createElement('div');d.className='it'+(i.status==='feito'?' feito':'');
+      const a=document.createElement('div');a.className='alvo';a.textContent=i.alvo;
+      const tx=document.createElement('div');tx.className='tx';tx.textContent=i.texto;
+      const meta=document.createElement('div');meta.className='meta';
+      const quem=document.createElement('span');quem.textContent=(i.autor||'Você')+' · '+dataBr(i.criadoEm);
+      const ir=document.createElement('button');ir.type='button';ir.textContent='Ir para a tela';ir.onclick=()=>{go(n-1);panel.hidden=true};
+      meta.append(quem,ir);
+      const ed=document.createElement('button');ed.type='button';ed.textContent='Editar';
+      ed.onclick=()=>{const nv=document.createElement('textarea');nv.value=i.texto;nv.style.cssText='width:100%;min-height:70px;margin-top:6px';tx.replaceWith(nv);
+        ed.textContent='Salvar';ed.onclick=()=>{i.texto=nv.value.trim()||i.texto;gravar();render();marcar()}};
+      const del=document.createElement('button');del.type='button';del.textContent='Apagar';
+      del.onclick=()=>{if(del.dataset.c!=='1'){del.dataset.c='1';del.textContent='Confirmar apagar';return}items=items.filter(x=>x!==i);gravar();render();marcar()};
+      meta.append(ed,del);
+      d.append(a,tx,meta);lst.appendChild(d)})});
+}
+$('rvVer').onclick=()=>{panel.hidden=!panel.hidden};$('rvFechar').onclick=()=>{panel.hidden=true};
+
+/* baixar */
+function markdown(){const L=['# Ajustes no Treinamento Ofertas Mkt','',`Gerado em ${dataBr(new Date().toISOString())}. ${items.length} ajuste(s).`,''];
+  const porTela={};items.forEach(i=>{(porTela[i.tela]=porTela[i.tela]||[]).push(i)});
+  Object.keys(porTela).map(Number).sort((a,b)=>a-b).forEach(n=>{L.push(`## Tela ${n}${porTela[n][0].titulo?' · '+porTela[n][0].titulo:''}`,'');
+    porTela[n].forEach(i=>{L.push(`- [${i.status==='feito'?'x':' '}] **${i.alvo}**`,`  Ajuste: ${i.texto.replace(/\n/g,'\n  ')}`,`  (${i.autor||'Revisão'}, ${dataBr(i.criadoEm)})`,'')})});
+  return L.join('\n')}
+function baixar(){
+  if(!items.length){toastMsg('Ainda não há ajustes para baixar.');return}
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([markdown()],{type:'text/plain;charset=utf-8'}));
+  a.download='ajustes-treinamento-ofertas-mkt.txt';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+  toastMsg('Arquivo baixado. É só mandar para o Douglas.')}
+function copiar(){
+  if(!items.length){toastMsg('Ainda não há ajustes para copiar.');return}
+  const md=markdown();
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(md).then(()=>toastMsg('Copiado. Cole numa mensagem para o Douglas.'),()=>toastMsg('Não deu para copiar. Use Baixar.'))}
+  else toastMsg('Não deu para copiar. Use Baixar.')}
+$('rvBaixar').onclick=baixar;$('rvBaixar2').onclick=baixar;$('rvCopiar').onclick=copiar;$('rvCopiar2').onclick=copiar;
+
+/* carrega o que já foi salvo neste navegador */
+items=ler();
+if(!nome()){const n=document.getElementById('rvNome');if(n)n.hidden=false}
+const nb=document.getElementById('rvNomeOk');if(nb)nb.onclick=()=>{const v=document.getElementById('rvNomeIn').value.trim();if(v){try{localStorage.setItem(KEY+'-nome',v)}catch(e){}items.forEach(i=>{if(!i.autor)i.autor=v});gravar()}document.getElementById('rvNome').hidden=true;render()};
+marcar();
+render();
+})();
+</script>
+
+</body>
+</html>
